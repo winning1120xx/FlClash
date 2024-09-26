@@ -69,7 +69,6 @@ class AutoLaunch {
       '/RL',
       'HIGHEST',
       '/F',
-      "/V1"
     ].join(" ");
     return windows?.runas(
           'schtasks',
