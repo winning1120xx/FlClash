@@ -7,7 +7,6 @@ import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:fl_clash/common/archive.dart';
 import 'package:fl_clash/enum/enum.dart';
-import 'package:fl_clash/plugins/app.dart';
 import 'package:fl_clash/state.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
