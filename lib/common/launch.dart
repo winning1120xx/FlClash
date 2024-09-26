@@ -58,20 +58,22 @@ class AutoLaunch {
 
   Future<bool> windowsEnable() async {
     await disable();
+    final commandLine = [
+      '/Create',
+      '/SC',
+      'ONLOGON',
+      '/TN',
+      appName,
+      '/TR',
+      "%s",
+      '/RL',
+      'HIGHEST',
+      '/F',
+      "/V1"
+    ].join(" ");
     return windows?.runas(
           'schtasks',
-          [
-            '/Create',
-            '/SC',
-            'ONLOGON',
-            '/TN',
-            appName,
-            '/TR',
-            "'${Platform.resolvedExecutable}'",
-            '/RL',
-            'HIGHEST',
-            '/F'
-          ].join(" "),
+          commandLine.replaceFirst("%s", "'${Platform.resolvedExecutable}'"),
         ) ??
         false;
   }
