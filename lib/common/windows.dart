@@ -67,7 +67,9 @@ class Windows {
       <RunLevel>HighestAvailable</RunLevel>
     </Principal>
   </Principals>
-  <Triggers />
+  <Triggers>
+    <LogonTrigger/>
+  </Triggers>
   <Settings>
     <MultipleInstancesPolicy>Parallel</MultipleInstancesPolicy>
     <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
