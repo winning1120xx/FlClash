@@ -188,32 +188,34 @@ class _LogsFragmentState extends State<LogsFragment> {
               Expanded(
                 child: LayoutBuilder(
                   builder: (_, constraints) {
-                    return ListView.builder(
-                      controller: scrollController,
-                      itemExtentBuilder: (index, __) {
-                        final widget = logWidgets[index];
-                        if (widget.runtimeType == Divider) {
-                          return 0;
-                        }
-                        final measure = globalState.measure;
-                        final bodyLargeSize = measure.bodyLargeSize;
-                        final bodySmallHeight = measure.bodySmallHeight;
-                        final bodyMediumHeight = measure.bodyMediumHeight;
-                        final log = reversedLogs[(index / 2).floor()];
-                        final width =
-                            (log.payload?.length ?? 0) * bodyLargeSize.width;
-                        final lines = (width / constraints.maxWidth).ceil();
-                        return lines * bodyLargeSize.height +
-                            bodySmallHeight +
-                            8 +
-                            bodyMediumHeight +
-                            36;
-                      },
-                      itemBuilder: (_, index) {
-                        return logWidgets[index];
-                      },
-                      itemCount: logWidgets.length,
-                    );
+                    return ScrollConfiguration(
+                        behavior: ShowBarScrollBehavior(),
+                        child: ListView.builder(
+                          controller: scrollController,
+                          itemExtentBuilder: (index, __) {
+                            final widget = logWidgets[index];
+                            if (widget.runtimeType == Divider) {
+                              return 0;
+                            }
+                            final measure = globalState.measure;
+                            final bodyLargeSize = measure.bodyLargeSize;
+                            final bodySmallHeight = measure.bodySmallHeight;
+                            final bodyMediumHeight = measure.bodyMediumHeight;
+                            final log = reversedLogs[(index / 2).floor()];
+                            final width = (log.payload?.length ?? 0) *
+                                bodyLargeSize.width;
+                            final lines = (width / constraints.maxWidth).ceil();
+                            return lines * bodyLargeSize.height +
+                                bodySmallHeight +
+                                8 +
+                                bodyMediumHeight +
+                                40;
+                          },
+                          itemBuilder: (_, index) {
+                            return logWidgets[index];
+                          },
+                          itemCount: logWidgets.length,
+                        ));
                   },
                 ),
               )
