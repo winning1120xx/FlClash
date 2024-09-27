@@ -198,14 +198,19 @@ class _LogsFragmentState extends State<LogsFragment> {
                               return 0;
                             }
                             final measure = globalState.measure;
-                            final bodyLargeSize = measure.bodyLargeSize;
                             final bodySmallHeight = measure.bodySmallHeight;
                             final bodyMediumHeight = measure.bodyMediumHeight;
                             final log = reversedLogs[(index / 2).floor()];
-                            final width = (log.payload?.length ?? 0) *
-                                bodyLargeSize.width;
+                            final size = measure.computeTextSize(
+                              Text(
+                                log.payload ?? "",
+                                style: context.textTheme.bodyLarge,
+                                maxLines: 1,
+                              ),
+                            );
+                            final width = size.width;
                             final lines = (width / constraints.maxWidth).ceil();
-                            return lines * bodyLargeSize.height +
+                            return lines * size.height +
                                 bodySmallHeight +
                                 8 +
                                 bodyMediumHeight +
