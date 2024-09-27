@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
 import 'package:ffi/ffi.dart';
@@ -68,6 +67,7 @@ class Windows {
       <RunLevel>HighestAvailable</RunLevel>
     </Principal>
   </Principals>
+  <Triggers />
   <Settings>
     <MultipleInstancesPolicy>Parallel</MultipleInstancesPolicy>
     <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>
@@ -93,9 +93,10 @@ class Windows {
     </Exec>
   </Actions>
 </Task>''';
-    final taskPath = join(appPath.cachePath, "task.xml");
+    final taskPath = join(await appPath.tempPath, "task.xml");
     await File(taskPath).create(recursive: true);
-    await File(taskPath).writeAsBytes(taskXml.encodeUtf16LeWithBom);
+    await File(taskPath)
+        .writeAsBytes(taskXml.encodeUtf16LeWithBom, flush: true);
     final commandLine = [
       '/Create',
       '/TN',
@@ -106,7 +107,7 @@ class Windows {
     ].join(" ");
     return runas(
       'schtasks',
-      commandLine.replaceFirst("%s", "\"'$taskPath'\""),
+      commandLine.replaceFirst("%s", taskPath),
     );
   }
 }

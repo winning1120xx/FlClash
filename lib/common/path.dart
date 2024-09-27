@@ -8,8 +8,9 @@ import 'constant.dart';
 
 class AppPath {
   static AppPath? _instance;
-  Completer<Directory> cacheDir = Completer();
+  Completer<Directory> dataDir = Completer();
   Completer<Directory> downloadDir = Completer();
+  Completer<Directory> tempDir = Completer();
   late String appDirPath;
 
   // Future<Directory> _createDesktopCacheDir() async {
@@ -23,7 +24,10 @@ class AppPath {
   AppPath._internal() {
     appDirPath = join(dirname(Platform.resolvedExecutable));
     getApplicationSupportDirectory().then((value) {
-      cacheDir.complete(value);
+      dataDir.complete(value);
+    });
+    getTemporaryDirectory().then((value){
+     tempDir.complete(value);
     });
     getDownloadsDirectory().then((value) {
       downloadDir.complete(value);
@@ -50,12 +54,12 @@ class AppPath {
   }
 
   Future<String> getHomeDirPath() async {
-    final directory = await cacheDir.future;
+    final directory = await dataDir.future;
     return directory.path;
   }
 
   Future<String> getProfilesPath() async {
-    final directory = await cacheDir.future;
+    final directory = await dataDir.future;
     return join(directory.path, profilesDirectoryName);
   }
 
@@ -65,8 +69,9 @@ class AppPath {
     return join(directory, "$id.yaml");
   }
 
-  String get cachePath {
-    return join(appDirPath, "cache");
+  Future<String> get tempPath async {
+    final directory = await tempDir.future;
+    return directory.path;
   }
 }
 
