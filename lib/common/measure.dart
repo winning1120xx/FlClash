@@ -31,7 +31,7 @@ class Measure {
   double get bodyMediumHeight {
     _bodyMediumHeight ??= computeTextSize(
       Text(
-        " ",
+        "X",
         style: context.textTheme.bodyMedium,
       ),
     ).height;
@@ -42,7 +42,7 @@ class Measure {
   Size get bodyLargeSize {
     _bodyLargeSize ??= computeTextSize(
       Text(
-        "测",
+        "X",
         style: context.textTheme.bodyLarge,
       ),
     );
@@ -52,7 +52,7 @@ class Measure {
   double get bodySmallHeight {
     _bodySmallHeight ??= computeTextSize(
       Text(
-        " ",
+        "X",
         style: context.textTheme.bodySmall,
       ),
     ).height;
@@ -62,7 +62,7 @@ class Measure {
   double get labelSmallHeight {
     _labelSmallHeight ??= computeTextSize(
       Text(
-        " ",
+        "X",
         style: context.textTheme.labelSmall,
       ),
     ).height;
@@ -72,7 +72,7 @@ class Measure {
   double get labelMediumHeight {
     _labelMediumHeight ??= computeTextSize(
       Text(
-        " ",
+        "X",
         style: context.textTheme.labelMedium,
       ),
     ).height;
@@ -82,7 +82,7 @@ class Measure {
   double get titleLargeHeight {
     _titleLargeHeight ??= computeTextSize(
       Text(
-        " ",
+        "X",
         style: context.textTheme.titleLarge,
       ),
     ).height;
@@ -92,7 +92,7 @@ class Measure {
   double get titleMediumHeight {
     _titleMediumHeight ??= computeTextSize(
       Text(
-        " ",
+        "X",
         style: context.textTheme.titleMedium,
       ),
     ).height;
