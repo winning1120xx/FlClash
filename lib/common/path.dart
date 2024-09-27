@@ -10,9 +10,9 @@ class AppPath {
   static AppPath? _instance;
   Completer<Directory> cacheDir = Completer();
   Completer<Directory> downloadDir = Completer();
+  late String appDirPath;
 
   // Future<Directory> _createDesktopCacheDir() async {
-  //   final path = join(dirname(Platform.resolvedExecutable), 'cache');
   //   final dir = Directory(path);
   //   if (await dir.exists()) {
   //     await dir.create(recursive: true);
@@ -21,6 +21,7 @@ class AppPath {
   // }
 
   AppPath._internal() {
+    appDirPath = join(dirname(Platform.resolvedExecutable));
     getApplicationSupportDirectory().then((value) {
       cacheDir.complete(value);
     });
@@ -62,6 +63,10 @@ class AppPath {
     if (id == null) return null;
     final directory = await getProfilesPath();
     return join(directory, "$id.yaml");
+  }
+
+  String get cachePath {
+    return join(appDirPath, "cache");
   }
 }
 
