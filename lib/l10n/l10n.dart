@@ -3149,6 +3149,36 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Icon style`
+  String get iconStyle {
+    return Intl.message(
+      'Icon style',
+      name: 'iconStyle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Icon`
+  String get onlyIcon {
+    return Intl.message(
+      'Icon',
+      name: 'onlyIcon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `None`
+  String get noIcon {
+    return Intl.message(
+      'None',
+      name: 'noIcon',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

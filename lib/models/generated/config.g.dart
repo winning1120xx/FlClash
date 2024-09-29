@@ -263,7 +263,7 @@ const _$ProxiesLayoutEnumMap = {
 const _$ProxiesIconStyleEnumMap = {
   ProxiesIconStyle.standard: 'standard',
   ProxiesIconStyle.none: 'none',
-  ProxiesIconStyle.prue: 'prue',
+  ProxiesIconStyle.icon: 'icon',
 };
 
 const _$ProxyCardTypeEnumMap = {

@@ -168,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hotkeyManagementDesc":
             MessageLookupByLibrary.simpleMessage("使用键盘控制应用程序"),
         "hours": MessageLookupByLibrary.simpleMessage("小时"),
+        "iconStyle": MessageLookupByLibrary.simpleMessage("图标样式"),
         "importFromURL": MessageLookupByLibrary.simpleMessage("从URL导入"),
         "infiniteTime": MessageLookupByLibrary.simpleMessage("长期有效"),
         "init": MessageLookupByLibrary.simpleMessage("初始化"),
@@ -215,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "networkDetection": MessageLookupByLibrary.simpleMessage("网络检测"),
         "networkSpeed": MessageLookupByLibrary.simpleMessage("网络速度"),
         "noHotKey": MessageLookupByLibrary.simpleMessage("暂无快捷键"),
+        "noIcon": MessageLookupByLibrary.simpleMessage("无图标"),
         "noInfo": MessageLookupByLibrary.simpleMessage("暂无信息"),
         "noMoreInfoDesc": MessageLookupByLibrary.simpleMessage("暂无更多信息"),
         "noNetwork": MessageLookupByLibrary.simpleMessage("无网络"),
@@ -229,6 +231,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("没有配置文件,请先添加配置文件"),
         "nullRequestsDesc": MessageLookupByLibrary.simpleMessage("暂无请求"),
         "oneColumn": MessageLookupByLibrary.simpleMessage("一列"),
+        "onlyIcon": MessageLookupByLibrary.simpleMessage("仅图标"),
         "onlyOtherApps": MessageLookupByLibrary.simpleMessage("仅第三方应用"),
         "onlyStatisticsProxy": MessageLookupByLibrary.simpleMessage("仅统计代理"),
         "onlyStatisticsProxyDesc":

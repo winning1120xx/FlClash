@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -263,7 +264,6 @@ class _ProxiesListFragmentState extends State<ProxiesListFragment> {
         return prev != next;
       },
       builder: (_, state, __) {
-
         final items = _buildItems(
           groupNames: state.groupNames,
           currentUnfoldSet: state.currentUnfoldSet,
@@ -301,9 +301,9 @@ class _ProxiesListFragmentState extends State<ProxiesListFragment> {
                   valueListenable: _headerStateNotifier,
                   builder: (_, headerState, ___) {
                     final index =
-                    headerState.currentIndex > state.groupNames.length - 1
-                        ? 0
-                        : headerState.currentIndex;
+                        headerState.currentIndex > state.groupNames.length - 1
+                            ? 0
+                            : headerState.currentIndex;
                     return Stack(
                       children: [
                         Positioned(
@@ -377,11 +377,6 @@ class _ListHeaderState extends State<ListHeader>
   }
 
   _handleChange(String groupName) {
-    if (isExpand) {
-      _animationController.reverse();
-    } else {
-      _animationController.forward();
-    }
     widget.onChange(groupName);
   }
 
@@ -411,11 +406,48 @@ class _ListHeaderState extends State<ListHeader>
     super.didUpdateWidget(oldWidget);
     if (oldWidget.isExpand != widget.isExpand) {
       if (isExpand) {
-        _animationController.value = 1.0;
+        _animationController.forward();
       } else {
-        _animationController.value = 0.0;
+        _animationController.reverse();
       }
     }
+  }
+
+  Widget _buildIcon() {
+    return Selector<Config, ProxiesIconStyle>(
+      selector: (_, config) => config.proxiesStyle.iconStyle,
+      builder: (_, iconStyle, child) {
+        return switch (iconStyle) {
+          ProxiesIconStyle.standard => Container(
+              height: 48,
+              width: 48,
+              margin: const EdgeInsets.only(
+                right: 16,
+              ),
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: context.colorScheme.secondaryContainer,
+                borderRadius: BorderRadius.circular(16),
+              ),
+              clipBehavior: Clip.antiAlias,
+              child: GroupIcon(
+                src: icon,
+                size: 32,
+              ),
+            ),
+          ProxiesIconStyle.icon => Container(
+              margin: const EdgeInsets.only(
+                right: 16,
+              ),
+            child: GroupIcon(
+              src: icon,
+              size: 48,
+            ),
+            ),
+          ProxiesIconStyle.none => Container(),
+        };
+      },
+    );
   }
 
   @override
@@ -425,41 +457,17 @@ class _ListHeaderState extends State<ListHeader>
       radius: 24,
       type: CommonCardType.filled,
       child: Container(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 12,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Flexible(
               child: Row(
                 children: [
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Container(
-                    height: 48,
-                    width: 48,
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.secondaryContainer,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: icon.isNotEmpty
-                        ? CachedNetworkImage(
-                            imageUrl: icon,
-                            errorWidget: (_, __, ___) => const Icon(
-                              IconsExt.target,
-                              size: 32,
-                            ),
-                          )
-                        : const Icon(
-                            IconsExt.target,
-                            size: 32,
-                          ),
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
+                  _buildIcon(),
                   Flexible(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -570,6 +578,41 @@ class _ListHeaderState extends State<ListHeader>
       onPressed: () {
         _handleChange(groupName);
       },
+    );
+  }
+}
+
+class GroupIcon extends StatelessWidget {
+  final String src;
+  final double size;
+
+  const GroupIcon({
+    super.key,
+    required this.src,
+    required this.size,
+  });
+
+  Widget _defaultIcon() {
+    return Icon(
+      IconsExt.target,
+      size: size,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (src.isEmpty) {
+      return _defaultIcon();
+    }
+    if (src.isBase64) {
+      Image.asset(
+        src,
+        errorBuilder: (_, __, ___) => _defaultIcon(),
+      );
+    }
+    return CachedNetworkImage(
+      imageUrl: src,
+      errorWidget: (_, __, ___) => _defaultIcon(),
     );
   }
 }

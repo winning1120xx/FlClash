@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 extension StringExtension on String {
@@ -20,5 +21,13 @@ extension StringExtension on String {
     }
     return bom + byteData.buffer.asUint8List();
   }
-}
 
+  bool get isBase64 {
+    try {
+      base64.decode(this);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+}

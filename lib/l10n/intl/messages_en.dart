@@ -208,6 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hotkeyManagementDesc": MessageLookupByLibrary.simpleMessage(
             "Use keyboard to control applications"),
         "hours": MessageLookupByLibrary.simpleMessage("Hours"),
+        "iconStyle": MessageLookupByLibrary.simpleMessage("Icon style"),
         "importFromURL":
             MessageLookupByLibrary.simpleMessage("Import from URL"),
         "infiniteTime":
@@ -271,6 +272,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Network detection"),
         "networkSpeed": MessageLookupByLibrary.simpleMessage("Network speed"),
         "noHotKey": MessageLookupByLibrary.simpleMessage("No HotKey"),
+        "noIcon": MessageLookupByLibrary.simpleMessage("None"),
         "noInfo": MessageLookupByLibrary.simpleMessage("No info"),
         "noMoreInfoDesc": MessageLookupByLibrary.simpleMessage("No more info"),
         "noNetwork": MessageLookupByLibrary.simpleMessage("No network"),
@@ -288,6 +290,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "No profile, Please add a profile"),
         "nullRequestsDesc": MessageLookupByLibrary.simpleMessage("No requests"),
         "oneColumn": MessageLookupByLibrary.simpleMessage("One column"),
+        "onlyIcon": MessageLookupByLibrary.simpleMessage("Icon"),
         "onlyOtherApps":
             MessageLookupByLibrary.simpleMessage("Only third-party apps"),
         "onlyStatisticsProxy":

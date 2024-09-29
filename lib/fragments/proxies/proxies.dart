@@ -6,7 +6,6 @@ import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'list_style_setting.dart';
 import 'providers.dart';
 import 'setting.dart';
 import 'tab.dart';
@@ -58,23 +57,23 @@ class _ProxiesFragmentState extends State<ProxiesFragment> {
             width: 8,
           )
         ] else ...[
-          IconButton(
-            onPressed: () {
-              showSheet(
-                title: appLocalizations.style,
-                context: context,
-                builder: (context) {
-                  return const ListStyleSetting();
-                },
-              );
-            },
-            icon: const Icon(
-              Icons.style_outlined,
-            ),
-          ),
-          const SizedBox(
-            width: 8,
-          )
+          // IconButton(
+          //   onPressed: () {
+          //     showSheet(
+          //       title: appLocalizations.style,
+          //       context: context,
+          //       builder: (context) {
+          //         return const ListStyleSetting();
+          //       },
+          //     );
+          //   },
+          //   icon: const Icon(
+          //     Icons.style_outlined,
+          //   ),
+          // ),
+          // const SizedBox(
+          //   width: 8,
+          // )
         ],
         IconButton(
           onPressed: () {

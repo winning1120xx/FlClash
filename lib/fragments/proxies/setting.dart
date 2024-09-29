@@ -44,8 +44,8 @@ class ProxiesSettingWidget extends StatelessWidget {
   String _getTextWithProxiesIconStyle(ProxiesIconStyle style) {
     return switch (style) {
       ProxiesIconStyle.standard => appLocalizations.standard,
-      ProxiesIconStyle.none => "无图标",
-      ProxiesIconStyle.prue => "仅图标",
+      ProxiesIconStyle.none => appLocalizations.noIcon,
+      ProxiesIconStyle.icon => appLocalizations.onlyIcon,
     };
   }
 

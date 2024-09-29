@@ -308,5 +308,8 @@
   "noNetwork": "No network",
   "ipv6InboundDesc": "Allow IPv6 inbound",
   "exportLogs": "Export logs",
-  "exportSuccess": "Export Success"
+  "exportSuccess": "Export Success",
+  "iconStyle": "Icon style",
+  "onlyIcon": "Icon",
+  "noIcon": "None"
 }

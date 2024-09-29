@@ -160,5 +160,5 @@ enum HotAction {
 enum ProxiesIconStyle {
   standard,
   none,
-  prue,
+  icon,
 }
