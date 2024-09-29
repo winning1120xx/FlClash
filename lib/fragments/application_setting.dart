@@ -62,6 +62,33 @@ class UsageSwitch extends StatelessWidget {
   }
 }
 
+// class AdminAutoLaunchItem extends StatelessWidget {
+//   const AdminAutoLaunchItem({super.key});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Selector<Config, bool>(
+//       selector: (_, config) => config.appSetting.adminAutoLaunch,
+//       builder: (_, adminAutoLaunch, __) {
+//         return ListItem.switchItem(
+//           leading: const Icon(Icons.rocket_launch),
+//           title: Text(appLocalizations.onlyStatisticsProxy),
+//           subtitle: Text(appLocalizations.onlyStatisticsProxyDesc),
+//           delegate: SwitchDelegate(
+//             value: adminAutoLaunch,
+//             onChanged: (bool value) async {
+//               final config = globalState.appController.config;
+//               config.appSetting = config.appSetting.copyWith(
+//                 adminAutoLaunch: value,
+//               );
+//             },
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }
+
 class ApplicationSettingFragment extends StatelessWidget {
   const ApplicationSettingFragment({super.key});
 

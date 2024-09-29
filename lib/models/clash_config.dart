@@ -14,6 +14,8 @@ part 'generated/clash_config.g.dart';
 
 part 'generated/clash_config.freezed.dart';
 
+const defaultTun = Tun();
+
 @freezed
 class Tun with _$Tun {
   const factory Tun({
@@ -24,6 +26,10 @@ class Tun with _$Tun {
   }) = _Tun;
 
   factory Tun.fromJson(Map<String, Object?> json) => _$TunFromJson(json);
+
+  factory Tun.realFromJson(Map<String, Object?>? json) {
+    return json == null ? defaultTun : Tun.fromJson(json);
+  }
 }
 
 @freezed

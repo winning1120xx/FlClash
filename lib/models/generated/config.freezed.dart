@@ -23,6 +23,7 @@ mixin _$AppSetting {
   String? get locale => throw _privateConstructorUsedError;
   bool get onlyProxy => throw _privateConstructorUsedError;
   bool get autoLaunch => throw _privateConstructorUsedError;
+  bool get adminAutoLaunch => throw _privateConstructorUsedError;
   bool get silentLaunch => throw _privateConstructorUsedError;
   bool get autoRun => throw _privateConstructorUsedError;
   bool get openLogs => throw _privateConstructorUsedError;
@@ -51,6 +52,7 @@ abstract class $AppSettingCopyWith<$Res> {
       {String? locale,
       bool onlyProxy,
       bool autoLaunch,
+      bool adminAutoLaunch,
       bool silentLaunch,
       bool autoRun,
       bool openLogs,
@@ -80,6 +82,7 @@ class _$AppSettingCopyWithImpl<$Res, $Val extends AppSetting>
     Object? locale = freezed,
     Object? onlyProxy = null,
     Object? autoLaunch = null,
+    Object? adminAutoLaunch = null,
     Object? silentLaunch = null,
     Object? autoRun = null,
     Object? openLogs = null,
@@ -104,6 +107,10 @@ class _$AppSettingCopyWithImpl<$Res, $Val extends AppSetting>
       autoLaunch: null == autoLaunch
           ? _value.autoLaunch
           : autoLaunch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      adminAutoLaunch: null == adminAutoLaunch
+          ? _value.adminAutoLaunch
+          : adminAutoLaunch // ignore: cast_nullable_to_non_nullable
               as bool,
       silentLaunch: null == silentLaunch
           ? _value.silentLaunch
@@ -165,6 +172,7 @@ abstract class _$$AppSettingImplCopyWith<$Res>
       {String? locale,
       bool onlyProxy,
       bool autoLaunch,
+      bool adminAutoLaunch,
       bool silentLaunch,
       bool autoRun,
       bool openLogs,
@@ -192,6 +200,7 @@ class __$$AppSettingImplCopyWithImpl<$Res>
     Object? locale = freezed,
     Object? onlyProxy = null,
     Object? autoLaunch = null,
+    Object? adminAutoLaunch = null,
     Object? silentLaunch = null,
     Object? autoRun = null,
     Object? openLogs = null,
@@ -216,6 +225,10 @@ class __$$AppSettingImplCopyWithImpl<$Res>
       autoLaunch: null == autoLaunch
           ? _value.autoLaunch
           : autoLaunch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      adminAutoLaunch: null == adminAutoLaunch
+          ? _value.adminAutoLaunch
+          : adminAutoLaunch // ignore: cast_nullable_to_non_nullable
               as bool,
       silentLaunch: null == silentLaunch
           ? _value.silentLaunch
@@ -272,6 +285,7 @@ class _$AppSettingImpl implements _AppSetting {
       {this.locale,
       this.onlyProxy = false,
       this.autoLaunch = false,
+      this.adminAutoLaunch = false,
       this.silentLaunch = false,
       this.autoRun = false,
       this.openLogs = false,
@@ -295,6 +309,9 @@ class _$AppSettingImpl implements _AppSetting {
   @override
   @JsonKey()
   final bool autoLaunch;
+  @override
+  @JsonKey()
+  final bool adminAutoLaunch;
   @override
   @JsonKey()
   final bool silentLaunch;
@@ -331,7 +348,7 @@ class _$AppSettingImpl implements _AppSetting {
 
   @override
   String toString() {
-    return 'AppSetting(locale: $locale, onlyProxy: $onlyProxy, autoLaunch: $autoLaunch, silentLaunch: $silentLaunch, autoRun: $autoRun, openLogs: $openLogs, closeConnections: $closeConnections, testUrl: $testUrl, isAnimateToPage: $isAnimateToPage, autoCheckUpdate: $autoCheckUpdate, showLabel: $showLabel, disclaimerAccepted: $disclaimerAccepted, minimizeOnExit: $minimizeOnExit, hidden: $hidden)';
+    return 'AppSetting(locale: $locale, onlyProxy: $onlyProxy, autoLaunch: $autoLaunch, adminAutoLaunch: $adminAutoLaunch, silentLaunch: $silentLaunch, autoRun: $autoRun, openLogs: $openLogs, closeConnections: $closeConnections, testUrl: $testUrl, isAnimateToPage: $isAnimateToPage, autoCheckUpdate: $autoCheckUpdate, showLabel: $showLabel, disclaimerAccepted: $disclaimerAccepted, minimizeOnExit: $minimizeOnExit, hidden: $hidden)';
   }
 
   @override
@@ -344,6 +361,8 @@ class _$AppSettingImpl implements _AppSetting {
                 other.onlyProxy == onlyProxy) &&
             (identical(other.autoLaunch, autoLaunch) ||
                 other.autoLaunch == autoLaunch) &&
+            (identical(other.adminAutoLaunch, adminAutoLaunch) ||
+                other.adminAutoLaunch == adminAutoLaunch) &&
             (identical(other.silentLaunch, silentLaunch) ||
                 other.silentLaunch == silentLaunch) &&
             (identical(other.autoRun, autoRun) || other.autoRun == autoRun) &&
@@ -372,6 +391,7 @@ class _$AppSettingImpl implements _AppSetting {
       locale,
       onlyProxy,
       autoLaunch,
+      adminAutoLaunch,
       silentLaunch,
       autoRun,
       openLogs,
@@ -403,6 +423,7 @@ abstract class _AppSetting implements AppSetting {
       {final String? locale,
       final bool onlyProxy,
       final bool autoLaunch,
+      final bool adminAutoLaunch,
       final bool silentLaunch,
       final bool autoRun,
       final bool openLogs,
@@ -424,6 +445,8 @@ abstract class _AppSetting implements AppSetting {
   bool get onlyProxy;
   @override
   bool get autoLaunch;
+  @override
+  bool get adminAutoLaunch;
   @override
   bool get silentLaunch;
   @override
