@@ -18,7 +18,6 @@ class AppState with ChangeNotifier {
   Mode _mode;
   DelayMap _delayMap;
   SelectedMap _selectedMap;
-  bool _isCompatible;
   List<Group> _groups;
   double _viewWidth;
   List<Connection> _requests;
@@ -30,7 +29,6 @@ class AppState with ChangeNotifier {
 
   AppState({
     required Mode mode,
-    required bool isCompatible,
     required SelectedMap selectedMap,
     required int version,
   })  : _navigationItems = [],
@@ -47,7 +45,6 @@ class AppState with ChangeNotifier {
         _groups = [],
         _providers = [],
         _packages = [],
-        _isCompatible = isCompatible,
         _systemColorSchemes = const SystemColorSchemes(),
         _version = version;
 
@@ -195,17 +192,6 @@ class AppState with ChangeNotifier {
   set mode(Mode value) {
     if (_mode != value) {
       _mode = value;
-      notifyListeners();
-    }
-  }
-
-  bool get isCompatible {
-    return _isCompatible;
-  }
-
-  set isCompatible(bool value) {
-    if (_isCompatible != value) {
-      _isCompatible = value;
       notifyListeners();
     }
   }

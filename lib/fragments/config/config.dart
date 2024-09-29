@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:fl_clash/common/common.dart';
-import 'package:fl_clash/fragments/config/app.dart';
 import 'package:fl_clash/fragments/config/dns.dart';
 import 'package:fl_clash/fragments/config/general.dart';
 import 'package:fl_clash/fragments/config/vpn.dart';
@@ -19,24 +18,6 @@ class _ConfigFragmentState extends State<ConfigFragment> {
   @override
   Widget build(BuildContext context) {
     List<Widget> items = [
-      ListItem.open(
-        title: Text(appLocalizations.app),
-        subtitle: Text(appLocalizations.appDesc),
-        leading: const Icon(Icons.settings_applications),
-        delegate: OpenDelegate(
-          title: appLocalizations.app,
-          isBlur: false,
-          widget: generateListView(
-            appItems
-                .separated(
-                  const Divider(
-                    height: 0,
-                  ),
-                )
-                .toList(),
-          ),
-        ),
-      ),
       if (Platform.isAndroid)
         ListItem.open(
           title: const Text("VPN"),

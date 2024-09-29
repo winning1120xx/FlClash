@@ -8,6 +8,60 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+class CloseConnectionsSwitch extends StatelessWidget {
+  const CloseConnectionsSwitch({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Selector<Config, bool>(
+      selector: (_, config) => config.appSetting.closeConnections,
+      builder: (_, closeConnections, __) {
+        return ListItem.switchItem(
+          leading: const Icon(Icons.auto_delete),
+          title: Text(appLocalizations.autoCloseConnections),
+          subtitle: Text(appLocalizations.autoCloseConnectionsDesc),
+          delegate: SwitchDelegate(
+            value: closeConnections,
+            onChanged: (value) async {
+              final config = globalState.appController.config;
+              config.appSetting = config.appSetting.copyWith(
+                closeConnections: value,
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+class UsageSwitch extends StatelessWidget {
+  const UsageSwitch({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Selector<Config, bool>(
+      selector: (_, config) => config.appSetting.onlyProxy,
+      builder: (_, onlyProxy, __) {
+        return ListItem.switchItem(
+          leading: const Icon(Icons.data_usage_outlined),
+          title: Text(appLocalizations.onlyStatisticsProxy),
+          subtitle: Text(appLocalizations.onlyStatisticsProxyDesc),
+          delegate: SwitchDelegate(
+            value: onlyProxy,
+            onChanged: (bool value) async {
+              final config = globalState.appController.config;
+              config.appSetting = config.appSetting.copyWith(
+                onlyProxy: value,
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
 class ApplicationSettingFragment extends StatelessWidget {
   const ApplicationSettingFragment({super.key});
 
@@ -20,7 +74,7 @@ class ApplicationSettingFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> items = [
       Selector<Config, bool>(
-        selector: (_, config) => config.isMinimizeOnExit,
+        selector: (_, config) => config.appSetting.minimizeOnExit,
         builder: (_, isMinimizeOnExit, child) {
           return ListItem.switchItem(
             leading: const Icon(Icons.back_hand),
@@ -30,7 +84,9 @@ class ApplicationSettingFragment extends StatelessWidget {
               value: isMinimizeOnExit,
               onChanged: (bool value) {
                 final config = context.read<Config>();
-                config.isMinimizeOnExit = value;
+                config.appSetting = config.appSetting.copyWith(
+                  minimizeOnExit: value,
+                );
               },
             ),
           );
@@ -38,7 +94,7 @@ class ApplicationSettingFragment extends StatelessWidget {
       ),
       if (system.isDesktop)
         Selector<Config, bool>(
-          selector: (_, config) => config.autoLaunch,
+          selector: (_, config) => config.appSetting.autoLaunch,
           builder: (_, autoLaunch, child) {
             return ListItem.switchItem(
               leading: const Icon(Icons.rocket_launch),
@@ -47,8 +103,10 @@ class ApplicationSettingFragment extends StatelessWidget {
               delegate: SwitchDelegate(
                 value: autoLaunch,
                 onChanged: (bool value) {
-                  final config = context.read<Config>();
-                  config.autoLaunch = value;
+                  final config = globalState.appController.config;
+                  config.appSetting = config.appSetting.copyWith(
+                    autoLaunch: value,
+                  );
                 },
               ),
             );
@@ -56,7 +114,7 @@ class ApplicationSettingFragment extends StatelessWidget {
         ),
       if (system.isDesktop)
         Selector<Config, bool>(
-          selector: (_, config) => config.silentLaunch,
+          selector: (_, config) => config.appSetting.silentLaunch,
           builder: (_, silentLaunch, child) {
             return ListItem.switchItem(
               leading: const Icon(Icons.expand_circle_down),
@@ -65,15 +123,17 @@ class ApplicationSettingFragment extends StatelessWidget {
               delegate: SwitchDelegate(
                 value: silentLaunch,
                 onChanged: (bool value) {
-                  final config = context.read<Config>();
-                  config.silentLaunch = value;
+                  final config = globalState.appController.config;
+                  config.appSetting = config.appSetting.copyWith(
+                    silentLaunch: value,
+                  );
                 },
               ),
             );
           },
         ),
       Selector<Config, bool>(
-        selector: (_, config) => config.autoRun,
+        selector: (_, config) => config.appSetting.autoRun,
         builder: (_, autoRun, child) {
           return ListItem.switchItem(
             leading: const Icon(Icons.not_started),
@@ -82,8 +142,10 @@ class ApplicationSettingFragment extends StatelessWidget {
             delegate: SwitchDelegate(
               value: autoRun,
               onChanged: (bool value) {
-                final config = context.read<Config>();
-                config.autoRun = value;
+                final config = globalState.appController.config;
+                config.appSetting = config.appSetting.copyWith(
+                  autoRun: value,
+                );
               },
             ),
           );
@@ -91,7 +153,7 @@ class ApplicationSettingFragment extends StatelessWidget {
       ),
       if (Platform.isAndroid)
         Selector<Config, bool>(
-          selector: (_, config) => config.isExclude,
+          selector: (_, config) => config.appSetting.hidden,
           builder: (_, isExclude, child) {
             return ListItem.switchItem(
               leading: const Icon(Icons.visibility_off),
@@ -100,8 +162,10 @@ class ApplicationSettingFragment extends StatelessWidget {
               delegate: SwitchDelegate(
                 value: isExclude,
                 onChanged: (value) {
-                  final config = context.read<Config>();
-                  config.isExclude = value;
+                  final config = globalState.appController.config;
+                  config.appSetting = config.appSetting.copyWith(
+                    hidden: value,
+                  );
                 },
               ),
             );
@@ -109,7 +173,7 @@ class ApplicationSettingFragment extends StatelessWidget {
         ),
       if (Platform.isAndroid)
         Selector<Config, bool>(
-          selector: (_, config) => config.isAnimateToPage,
+          selector: (_, config) => config.appSetting.isAnimateToPage,
           builder: (_, isAnimateToPage, child) {
             return ListItem.switchItem(
               leading: const Icon(Icons.animation),
@@ -118,15 +182,17 @@ class ApplicationSettingFragment extends StatelessWidget {
               delegate: SwitchDelegate(
                 value: isAnimateToPage,
                 onChanged: (value) {
-                  final config = context.read<Config>();
-                  config.isAnimateToPage = value;
+                  final config = globalState.appController.config;
+                  config.appSetting = config.appSetting.copyWith(
+                    isAnimateToPage: value,
+                  );
                 },
               ),
             );
           },
         ),
       Selector<Config, bool>(
-        selector: (_, config) => config.openLogs,
+        selector: (_, config) => config.appSetting.openLogs,
         builder: (_, openLogs, child) {
           return ListItem.switchItem(
             leading: const Icon(Icons.bug_report),
@@ -135,16 +201,19 @@ class ApplicationSettingFragment extends StatelessWidget {
             delegate: SwitchDelegate(
               value: openLogs,
               onChanged: (bool value) {
-                final config = context.read<Config>();
-                config.openLogs = value;
-                globalState.appController.updateLogStatus();
+                final config = globalState.appController.config;
+                config.appSetting = config.appSetting.copyWith(
+                  openLogs: value,
+                );
               },
             ),
           );
         },
       ),
+      const CloseConnectionsSwitch(),
+      const UsageSwitch(),
       Selector<Config, bool>(
-        selector: (_, config) => config.autoCheckUpdate,
+        selector: (_, config) => config.appSetting.autoCheckUpdate,
         builder: (_, autoCheckUpdate, child) {
           return ListItem.switchItem(
             leading: const Icon(Icons.system_update),
@@ -153,8 +222,10 @@ class ApplicationSettingFragment extends StatelessWidget {
             delegate: SwitchDelegate(
               value: autoCheckUpdate,
               onChanged: (bool value) {
-                final config = context.read<Config>();
-                config.autoCheckUpdate = value;
+                final config = globalState.appController.config;
+                config.appSetting = config.appSetting.copyWith(
+                  autoCheckUpdate: value,
+                );
               },
             ),
           );

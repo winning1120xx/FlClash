@@ -25,9 +25,9 @@ class _AndroidContainerState extends State<AndroidManager> {
 
   Widget _excludeContainer(Widget child) {
     return Selector<Config, bool>(
-      selector: (_, config) => config.isExclude,
-      builder: (_, isExclude, child) {
-        app?.updateExcludeFromRecents(isExclude);
+      selector: (_, config) => config.appSetting.hidden,
+      builder: (_, hidden, child) {
+        app?.updateExcludeFromRecents(hidden);
         return child!;
       },
       child: child,

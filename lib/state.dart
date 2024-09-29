@@ -60,7 +60,7 @@ class GlobalState {
           isCompatible: true,
           selectedMap: config.currentSelectedMap,
           overrideDns: config.overrideDns,
-          testUrl: config.testUrl,
+          testUrl: config.appSetting.testUrl,
         ),
       ),
     );
@@ -137,7 +137,7 @@ class GlobalState {
           allowBypass: config.vpnProps.allowBypass,
           systemProxy: config.vpnProps.systemProxy,
           mixedPort: clashConfig.mixedPort,
-          onlyProxy: config.onlyProxy,
+          onlyProxy: config.appSetting.onlyProxy,
           currentProfileName:
               config.currentProfile?.label ?? config.currentProfileId ?? "",
         ),
@@ -202,7 +202,7 @@ class GlobalState {
         proxyName: proxyName,
       ),
     );
-    if (config.isCloseConnections) {
+    if (config.appSetting.closeConnections) {
       clashCore.closeConnections();
     }
   }

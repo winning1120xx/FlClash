@@ -142,9 +142,9 @@ class _TrayContainerState extends State<TrayManager> with TrayListener {
       selector: (_, appState, appFlowingState, config, clashConfig) =>
           TrayState(
         mode: clashConfig.mode,
-        autoLaunch: config.autoLaunch,
+        autoLaunch: config.appSetting.autoLaunch,
         isStart: appFlowingState.isStart,
-        locale: config.locale,
+        locale: config.appSetting.locale,
         systemProxy: config.desktopProps.systemProxy,
         tunEnable: clashConfig.tun.enable,
         brightness: appState.brightness,

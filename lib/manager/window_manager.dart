@@ -25,7 +25,9 @@ class _WindowContainerState extends State<WindowManager> with WindowListener {
   _autoLaunchContainer(Widget child) {
     return Selector2<Config, ClashConfig, AutoLaunchState>(
       selector: (_, config, clashConfig) => AutoLaunchState(
-          isAutoLaunch: config.autoLaunch, isOpenTun: clashConfig.tun.enable),
+        isAutoLaunch: config.appSetting.autoLaunch,
+        isOpenTun: clashConfig.tun.enable,
+      ),
       builder: (_, state, child) {
         updateLaunchDebounce ??= debounce((AutoLaunchState state) {
           autoLaunch?.updateStatus(state);

@@ -14,6 +14,444 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+AppSetting _$AppSettingFromJson(Map<String, dynamic> json) {
+  return _AppSetting.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AppSetting {
+  String? get locale => throw _privateConstructorUsedError;
+  bool get onlyProxy => throw _privateConstructorUsedError;
+  bool get autoLaunch => throw _privateConstructorUsedError;
+  bool get silentLaunch => throw _privateConstructorUsedError;
+  bool get autoRun => throw _privateConstructorUsedError;
+  bool get openLogs => throw _privateConstructorUsedError;
+  bool get closeConnections => throw _privateConstructorUsedError;
+  String get testUrl => throw _privateConstructorUsedError;
+  bool get isAnimateToPage => throw _privateConstructorUsedError;
+  bool get autoCheckUpdate => throw _privateConstructorUsedError;
+  bool get showLabel => throw _privateConstructorUsedError;
+  bool get disclaimerAccepted => throw _privateConstructorUsedError;
+  bool get minimizeOnExit => throw _privateConstructorUsedError;
+  bool get hidden => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AppSettingCopyWith<AppSetting> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AppSettingCopyWith<$Res> {
+  factory $AppSettingCopyWith(
+          AppSetting value, $Res Function(AppSetting) then) =
+      _$AppSettingCopyWithImpl<$Res, AppSetting>;
+  @useResult
+  $Res call(
+      {String? locale,
+      bool onlyProxy,
+      bool autoLaunch,
+      bool silentLaunch,
+      bool autoRun,
+      bool openLogs,
+      bool closeConnections,
+      String testUrl,
+      bool isAnimateToPage,
+      bool autoCheckUpdate,
+      bool showLabel,
+      bool disclaimerAccepted,
+      bool minimizeOnExit,
+      bool hidden});
+}
+
+/// @nodoc
+class _$AppSettingCopyWithImpl<$Res, $Val extends AppSetting>
+    implements $AppSettingCopyWith<$Res> {
+  _$AppSettingCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? locale = freezed,
+    Object? onlyProxy = null,
+    Object? autoLaunch = null,
+    Object? silentLaunch = null,
+    Object? autoRun = null,
+    Object? openLogs = null,
+    Object? closeConnections = null,
+    Object? testUrl = null,
+    Object? isAnimateToPage = null,
+    Object? autoCheckUpdate = null,
+    Object? showLabel = null,
+    Object? disclaimerAccepted = null,
+    Object? minimizeOnExit = null,
+    Object? hidden = null,
+  }) {
+    return _then(_value.copyWith(
+      locale: freezed == locale
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as String?,
+      onlyProxy: null == onlyProxy
+          ? _value.onlyProxy
+          : onlyProxy // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoLaunch: null == autoLaunch
+          ? _value.autoLaunch
+          : autoLaunch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      silentLaunch: null == silentLaunch
+          ? _value.silentLaunch
+          : silentLaunch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoRun: null == autoRun
+          ? _value.autoRun
+          : autoRun // ignore: cast_nullable_to_non_nullable
+              as bool,
+      openLogs: null == openLogs
+          ? _value.openLogs
+          : openLogs // ignore: cast_nullable_to_non_nullable
+              as bool,
+      closeConnections: null == closeConnections
+          ? _value.closeConnections
+          : closeConnections // ignore: cast_nullable_to_non_nullable
+              as bool,
+      testUrl: null == testUrl
+          ? _value.testUrl
+          : testUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAnimateToPage: null == isAnimateToPage
+          ? _value.isAnimateToPage
+          : isAnimateToPage // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoCheckUpdate: null == autoCheckUpdate
+          ? _value.autoCheckUpdate
+          : autoCheckUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showLabel: null == showLabel
+          ? _value.showLabel
+          : showLabel // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disclaimerAccepted: null == disclaimerAccepted
+          ? _value.disclaimerAccepted
+          : disclaimerAccepted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      minimizeOnExit: null == minimizeOnExit
+          ? _value.minimizeOnExit
+          : minimizeOnExit // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hidden: null == hidden
+          ? _value.hidden
+          : hidden // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AppSettingImplCopyWith<$Res>
+    implements $AppSettingCopyWith<$Res> {
+  factory _$$AppSettingImplCopyWith(
+          _$AppSettingImpl value, $Res Function(_$AppSettingImpl) then) =
+      __$$AppSettingImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? locale,
+      bool onlyProxy,
+      bool autoLaunch,
+      bool silentLaunch,
+      bool autoRun,
+      bool openLogs,
+      bool closeConnections,
+      String testUrl,
+      bool isAnimateToPage,
+      bool autoCheckUpdate,
+      bool showLabel,
+      bool disclaimerAccepted,
+      bool minimizeOnExit,
+      bool hidden});
+}
+
+/// @nodoc
+class __$$AppSettingImplCopyWithImpl<$Res>
+    extends _$AppSettingCopyWithImpl<$Res, _$AppSettingImpl>
+    implements _$$AppSettingImplCopyWith<$Res> {
+  __$$AppSettingImplCopyWithImpl(
+      _$AppSettingImpl _value, $Res Function(_$AppSettingImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? locale = freezed,
+    Object? onlyProxy = null,
+    Object? autoLaunch = null,
+    Object? silentLaunch = null,
+    Object? autoRun = null,
+    Object? openLogs = null,
+    Object? closeConnections = null,
+    Object? testUrl = null,
+    Object? isAnimateToPage = null,
+    Object? autoCheckUpdate = null,
+    Object? showLabel = null,
+    Object? disclaimerAccepted = null,
+    Object? minimizeOnExit = null,
+    Object? hidden = null,
+  }) {
+    return _then(_$AppSettingImpl(
+      locale: freezed == locale
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as String?,
+      onlyProxy: null == onlyProxy
+          ? _value.onlyProxy
+          : onlyProxy // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoLaunch: null == autoLaunch
+          ? _value.autoLaunch
+          : autoLaunch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      silentLaunch: null == silentLaunch
+          ? _value.silentLaunch
+          : silentLaunch // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoRun: null == autoRun
+          ? _value.autoRun
+          : autoRun // ignore: cast_nullable_to_non_nullable
+              as bool,
+      openLogs: null == openLogs
+          ? _value.openLogs
+          : openLogs // ignore: cast_nullable_to_non_nullable
+              as bool,
+      closeConnections: null == closeConnections
+          ? _value.closeConnections
+          : closeConnections // ignore: cast_nullable_to_non_nullable
+              as bool,
+      testUrl: null == testUrl
+          ? _value.testUrl
+          : testUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAnimateToPage: null == isAnimateToPage
+          ? _value.isAnimateToPage
+          : isAnimateToPage // ignore: cast_nullable_to_non_nullable
+              as bool,
+      autoCheckUpdate: null == autoCheckUpdate
+          ? _value.autoCheckUpdate
+          : autoCheckUpdate // ignore: cast_nullable_to_non_nullable
+              as bool,
+      showLabel: null == showLabel
+          ? _value.showLabel
+          : showLabel // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disclaimerAccepted: null == disclaimerAccepted
+          ? _value.disclaimerAccepted
+          : disclaimerAccepted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      minimizeOnExit: null == minimizeOnExit
+          ? _value.minimizeOnExit
+          : minimizeOnExit // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hidden: null == hidden
+          ? _value.hidden
+          : hidden // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AppSettingImpl implements _AppSetting {
+  const _$AppSettingImpl(
+      {this.locale,
+      this.onlyProxy = false,
+      this.autoLaunch = false,
+      this.silentLaunch = false,
+      this.autoRun = false,
+      this.openLogs = false,
+      this.closeConnections = true,
+      this.testUrl = defaultTestUrl,
+      this.isAnimateToPage = true,
+      this.autoCheckUpdate = true,
+      this.showLabel = false,
+      this.disclaimerAccepted = false,
+      this.minimizeOnExit = true,
+      this.hidden = false});
+
+  factory _$AppSettingImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AppSettingImplFromJson(json);
+
+  @override
+  final String? locale;
+  @override
+  @JsonKey()
+  final bool onlyProxy;
+  @override
+  @JsonKey()
+  final bool autoLaunch;
+  @override
+  @JsonKey()
+  final bool silentLaunch;
+  @override
+  @JsonKey()
+  final bool autoRun;
+  @override
+  @JsonKey()
+  final bool openLogs;
+  @override
+  @JsonKey()
+  final bool closeConnections;
+  @override
+  @JsonKey()
+  final String testUrl;
+  @override
+  @JsonKey()
+  final bool isAnimateToPage;
+  @override
+  @JsonKey()
+  final bool autoCheckUpdate;
+  @override
+  @JsonKey()
+  final bool showLabel;
+  @override
+  @JsonKey()
+  final bool disclaimerAccepted;
+  @override
+  @JsonKey()
+  final bool minimizeOnExit;
+  @override
+  @JsonKey()
+  final bool hidden;
+
+  @override
+  String toString() {
+    return 'AppSetting(locale: $locale, onlyProxy: $onlyProxy, autoLaunch: $autoLaunch, silentLaunch: $silentLaunch, autoRun: $autoRun, openLogs: $openLogs, closeConnections: $closeConnections, testUrl: $testUrl, isAnimateToPage: $isAnimateToPage, autoCheckUpdate: $autoCheckUpdate, showLabel: $showLabel, disclaimerAccepted: $disclaimerAccepted, minimizeOnExit: $minimizeOnExit, hidden: $hidden)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AppSettingImpl &&
+            (identical(other.locale, locale) || other.locale == locale) &&
+            (identical(other.onlyProxy, onlyProxy) ||
+                other.onlyProxy == onlyProxy) &&
+            (identical(other.autoLaunch, autoLaunch) ||
+                other.autoLaunch == autoLaunch) &&
+            (identical(other.silentLaunch, silentLaunch) ||
+                other.silentLaunch == silentLaunch) &&
+            (identical(other.autoRun, autoRun) || other.autoRun == autoRun) &&
+            (identical(other.openLogs, openLogs) ||
+                other.openLogs == openLogs) &&
+            (identical(other.closeConnections, closeConnections) ||
+                other.closeConnections == closeConnections) &&
+            (identical(other.testUrl, testUrl) || other.testUrl == testUrl) &&
+            (identical(other.isAnimateToPage, isAnimateToPage) ||
+                other.isAnimateToPage == isAnimateToPage) &&
+            (identical(other.autoCheckUpdate, autoCheckUpdate) ||
+                other.autoCheckUpdate == autoCheckUpdate) &&
+            (identical(other.showLabel, showLabel) ||
+                other.showLabel == showLabel) &&
+            (identical(other.disclaimerAccepted, disclaimerAccepted) ||
+                other.disclaimerAccepted == disclaimerAccepted) &&
+            (identical(other.minimizeOnExit, minimizeOnExit) ||
+                other.minimizeOnExit == minimizeOnExit) &&
+            (identical(other.hidden, hidden) || other.hidden == hidden));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      locale,
+      onlyProxy,
+      autoLaunch,
+      silentLaunch,
+      autoRun,
+      openLogs,
+      closeConnections,
+      testUrl,
+      isAnimateToPage,
+      autoCheckUpdate,
+      showLabel,
+      disclaimerAccepted,
+      minimizeOnExit,
+      hidden);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AppSettingImplCopyWith<_$AppSettingImpl> get copyWith =>
+      __$$AppSettingImplCopyWithImpl<_$AppSettingImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AppSettingImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AppSetting implements AppSetting {
+  const factory _AppSetting(
+      {final String? locale,
+      final bool onlyProxy,
+      final bool autoLaunch,
+      final bool silentLaunch,
+      final bool autoRun,
+      final bool openLogs,
+      final bool closeConnections,
+      final String testUrl,
+      final bool isAnimateToPage,
+      final bool autoCheckUpdate,
+      final bool showLabel,
+      final bool disclaimerAccepted,
+      final bool minimizeOnExit,
+      final bool hidden}) = _$AppSettingImpl;
+
+  factory _AppSetting.fromJson(Map<String, dynamic> json) =
+      _$AppSettingImpl.fromJson;
+
+  @override
+  String? get locale;
+  @override
+  bool get onlyProxy;
+  @override
+  bool get autoLaunch;
+  @override
+  bool get silentLaunch;
+  @override
+  bool get autoRun;
+  @override
+  bool get openLogs;
+  @override
+  bool get closeConnections;
+  @override
+  String get testUrl;
+  @override
+  bool get isAnimateToPage;
+  @override
+  bool get autoCheckUpdate;
+  @override
+  bool get showLabel;
+  @override
+  bool get disclaimerAccepted;
+  @override
+  bool get minimizeOnExit;
+  @override
+  bool get hidden;
+  @override
+  @JsonKey(ignore: true)
+  _$$AppSettingImplCopyWith<_$AppSettingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 AccessControl _$AccessControlFromJson(Map<String, dynamic> json) {
   return _AccessControl.fromJson(json);
 }
@@ -1283,34 +1721,42 @@ abstract class _DesktopProps implements DesktopProps {
       throw _privateConstructorUsedError;
 }
 
-ScaleProps _$ScalePropsFromJson(Map<String, dynamic> json) {
-  return _ScaleProps.fromJson(json);
+ProxiesStyle _$ProxiesStyleFromJson(Map<String, dynamic> json) {
+  return _ProxiesStyle.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ScaleProps {
-  bool get custom => throw _privateConstructorUsedError;
-  double get scale => throw _privateConstructorUsedError;
+mixin _$ProxiesStyle {
+  ProxiesType get type => throw _privateConstructorUsedError;
+  ProxiesSortType get sortType => throw _privateConstructorUsedError;
+  ProxiesLayout get layout => throw _privateConstructorUsedError;
+  ProxiesIconStyle get iconStyle => throw _privateConstructorUsedError;
+  ProxyCardType get cardType => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ScalePropsCopyWith<ScaleProps> get copyWith =>
+  $ProxiesStyleCopyWith<ProxiesStyle> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ScalePropsCopyWith<$Res> {
-  factory $ScalePropsCopyWith(
-          ScaleProps value, $Res Function(ScaleProps) then) =
-      _$ScalePropsCopyWithImpl<$Res, ScaleProps>;
+abstract class $ProxiesStyleCopyWith<$Res> {
+  factory $ProxiesStyleCopyWith(
+          ProxiesStyle value, $Res Function(ProxiesStyle) then) =
+      _$ProxiesStyleCopyWithImpl<$Res, ProxiesStyle>;
   @useResult
-  $Res call({bool custom, double scale});
+  $Res call(
+      {ProxiesType type,
+      ProxiesSortType sortType,
+      ProxiesLayout layout,
+      ProxiesIconStyle iconStyle,
+      ProxyCardType cardType});
 }
 
 /// @nodoc
-class _$ScalePropsCopyWithImpl<$Res, $Val extends ScaleProps>
-    implements $ScalePropsCopyWith<$Res> {
-  _$ScalePropsCopyWithImpl(this._value, this._then);
+class _$ProxiesStyleCopyWithImpl<$Res, $Val extends ProxiesStyle>
+    implements $ProxiesStyleCopyWith<$Res> {
+  _$ProxiesStyleCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -1320,121 +1766,186 @@ class _$ScalePropsCopyWithImpl<$Res, $Val extends ScaleProps>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? custom = null,
-    Object? scale = null,
+    Object? type = null,
+    Object? sortType = null,
+    Object? layout = null,
+    Object? iconStyle = null,
+    Object? cardType = null,
   }) {
     return _then(_value.copyWith(
-      custom: null == custom
-          ? _value.custom
-          : custom // ignore: cast_nullable_to_non_nullable
-              as bool,
-      scale: null == scale
-          ? _value.scale
-          : scale // ignore: cast_nullable_to_non_nullable
-              as double,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ProxiesType,
+      sortType: null == sortType
+          ? _value.sortType
+          : sortType // ignore: cast_nullable_to_non_nullable
+              as ProxiesSortType,
+      layout: null == layout
+          ? _value.layout
+          : layout // ignore: cast_nullable_to_non_nullable
+              as ProxiesLayout,
+      iconStyle: null == iconStyle
+          ? _value.iconStyle
+          : iconStyle // ignore: cast_nullable_to_non_nullable
+              as ProxiesIconStyle,
+      cardType: null == cardType
+          ? _value.cardType
+          : cardType // ignore: cast_nullable_to_non_nullable
+              as ProxyCardType,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$ScalePropsImplCopyWith<$Res>
-    implements $ScalePropsCopyWith<$Res> {
-  factory _$$ScalePropsImplCopyWith(
-          _$ScalePropsImpl value, $Res Function(_$ScalePropsImpl) then) =
-      __$$ScalePropsImplCopyWithImpl<$Res>;
+abstract class _$$ProxiesStyleImplCopyWith<$Res>
+    implements $ProxiesStyleCopyWith<$Res> {
+  factory _$$ProxiesStyleImplCopyWith(
+          _$ProxiesStyleImpl value, $Res Function(_$ProxiesStyleImpl) then) =
+      __$$ProxiesStyleImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool custom, double scale});
+  $Res call(
+      {ProxiesType type,
+      ProxiesSortType sortType,
+      ProxiesLayout layout,
+      ProxiesIconStyle iconStyle,
+      ProxyCardType cardType});
 }
 
 /// @nodoc
-class __$$ScalePropsImplCopyWithImpl<$Res>
-    extends _$ScalePropsCopyWithImpl<$Res, _$ScalePropsImpl>
-    implements _$$ScalePropsImplCopyWith<$Res> {
-  __$$ScalePropsImplCopyWithImpl(
-      _$ScalePropsImpl _value, $Res Function(_$ScalePropsImpl) _then)
+class __$$ProxiesStyleImplCopyWithImpl<$Res>
+    extends _$ProxiesStyleCopyWithImpl<$Res, _$ProxiesStyleImpl>
+    implements _$$ProxiesStyleImplCopyWith<$Res> {
+  __$$ProxiesStyleImplCopyWithImpl(
+      _$ProxiesStyleImpl _value, $Res Function(_$ProxiesStyleImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? custom = null,
-    Object? scale = null,
+    Object? type = null,
+    Object? sortType = null,
+    Object? layout = null,
+    Object? iconStyle = null,
+    Object? cardType = null,
   }) {
-    return _then(_$ScalePropsImpl(
-      custom: null == custom
-          ? _value.custom
-          : custom // ignore: cast_nullable_to_non_nullable
-              as bool,
-      scale: null == scale
-          ? _value.scale
-          : scale // ignore: cast_nullable_to_non_nullable
-              as double,
+    return _then(_$ProxiesStyleImpl(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as ProxiesType,
+      sortType: null == sortType
+          ? _value.sortType
+          : sortType // ignore: cast_nullable_to_non_nullable
+              as ProxiesSortType,
+      layout: null == layout
+          ? _value.layout
+          : layout // ignore: cast_nullable_to_non_nullable
+              as ProxiesLayout,
+      iconStyle: null == iconStyle
+          ? _value.iconStyle
+          : iconStyle // ignore: cast_nullable_to_non_nullable
+              as ProxiesIconStyle,
+      cardType: null == cardType
+          ? _value.cardType
+          : cardType // ignore: cast_nullable_to_non_nullable
+              as ProxyCardType,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ScalePropsImpl implements _ScaleProps {
-  const _$ScalePropsImpl(
-      {this.custom = false, this.scale = defaultCustomFontSizeScale});
+class _$ProxiesStyleImpl implements _ProxiesStyle {
+  const _$ProxiesStyleImpl(
+      {this.type = ProxiesType.tab,
+      this.sortType = ProxiesSortType.none,
+      this.layout = ProxiesLayout.standard,
+      this.iconStyle = ProxiesIconStyle.standard,
+      this.cardType = ProxyCardType.expand});
 
-  factory _$ScalePropsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ScalePropsImplFromJson(json);
+  factory _$ProxiesStyleImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProxiesStyleImplFromJson(json);
 
   @override
   @JsonKey()
-  final bool custom;
+  final ProxiesType type;
   @override
   @JsonKey()
-  final double scale;
+  final ProxiesSortType sortType;
+  @override
+  @JsonKey()
+  final ProxiesLayout layout;
+  @override
+  @JsonKey()
+  final ProxiesIconStyle iconStyle;
+  @override
+  @JsonKey()
+  final ProxyCardType cardType;
 
   @override
   String toString() {
-    return 'ScaleProps(custom: $custom, scale: $scale)';
+    return 'ProxiesStyle(type: $type, sortType: $sortType, layout: $layout, iconStyle: $iconStyle, cardType: $cardType)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ScalePropsImpl &&
-            (identical(other.custom, custom) || other.custom == custom) &&
-            (identical(other.scale, scale) || other.scale == scale));
+            other is _$ProxiesStyleImpl &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.sortType, sortType) ||
+                other.sortType == sortType) &&
+            (identical(other.layout, layout) || other.layout == layout) &&
+            (identical(other.iconStyle, iconStyle) ||
+                other.iconStyle == iconStyle) &&
+            (identical(other.cardType, cardType) ||
+                other.cardType == cardType));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, custom, scale);
+  int get hashCode =>
+      Object.hash(runtimeType, type, sortType, layout, iconStyle, cardType);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ScalePropsImplCopyWith<_$ScalePropsImpl> get copyWith =>
-      __$$ScalePropsImplCopyWithImpl<_$ScalePropsImpl>(this, _$identity);
+  _$$ProxiesStyleImplCopyWith<_$ProxiesStyleImpl> get copyWith =>
+      __$$ProxiesStyleImplCopyWithImpl<_$ProxiesStyleImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ScalePropsImplToJson(
+    return _$$ProxiesStyleImplToJson(
       this,
     );
   }
 }
 
-abstract class _ScaleProps implements ScaleProps {
-  const factory _ScaleProps({final bool custom, final double scale}) =
-      _$ScalePropsImpl;
+abstract class _ProxiesStyle implements ProxiesStyle {
+  const factory _ProxiesStyle(
+      {final ProxiesType type,
+      final ProxiesSortType sortType,
+      final ProxiesLayout layout,
+      final ProxiesIconStyle iconStyle,
+      final ProxyCardType cardType}) = _$ProxiesStyleImpl;
 
-  factory _ScaleProps.fromJson(Map<String, dynamic> json) =
-      _$ScalePropsImpl.fromJson;
+  factory _ProxiesStyle.fromJson(Map<String, dynamic> json) =
+      _$ProxiesStyleImpl.fromJson;
 
   @override
-  bool get custom;
+  ProxiesType get type;
   @override
-  double get scale;
+  ProxiesSortType get sortType;
+  @override
+  ProxiesLayout get layout;
+  @override
+  ProxiesIconStyle get iconStyle;
+  @override
+  ProxyCardType get cardType;
   @override
   @JsonKey(ignore: true)
-  _$$ScalePropsImplCopyWith<_$ScalePropsImpl> get copyWith =>
+  _$$ProxiesStyleImplCopyWith<_$ProxiesStyleImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

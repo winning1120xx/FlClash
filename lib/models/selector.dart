@@ -241,11 +241,3 @@ class ClashConfigState with _$ClashConfigState {
   }) = _ClashConfigState;
 }
 
-@freezed
-class ThemeState with _$ThemeState {
-  const factory ThemeState({
-    required String? locale,
-    required ScaleProps scaleProps,
-  }) = _ThemeState;
-}
-

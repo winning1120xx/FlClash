@@ -70,7 +70,7 @@ class _ClashContainerState extends State<ClashManager> with AppMessageListener {
         allowBypass: config.vpnProps.allowBypass,
         systemProxy: config.vpnProps.systemProxy,
         mixedPort: clashConfig.mixedPort,
-        onlyProxy: config.onlyProxy,
+        onlyProxy: config.appSetting.onlyProxy,
         currentProfileName:
             config.currentProfile?.label ?? config.currentProfileId ?? "",
       ),

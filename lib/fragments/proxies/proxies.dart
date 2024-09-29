@@ -6,6 +6,7 @@ import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'list_style_setting.dart';
 import 'providers.dart';
 import 'setting.dart';
 import 'tab.dart';
@@ -37,7 +38,7 @@ class _ProxiesFragmentState extends State<ProxiesFragment> {
               );
             },
             icon: const Icon(
-              Icons.swap_vert_circle_outlined,
+              Icons.poll_outlined,
             ),
           ),
           const SizedBox(
@@ -51,6 +52,24 @@ class _ProxiesFragmentState extends State<ProxiesFragment> {
             },
             icon: const Icon(
               Icons.adjust_outlined,
+            ),
+          ),
+          const SizedBox(
+            width: 8,
+          )
+        ] else ...[
+          IconButton(
+            onPressed: () {
+              showSheet(
+                title: appLocalizations.style,
+                context: context,
+                builder: (context) {
+                  return const ListStyleSetting();
+                },
+              );
+            },
+            icon: const Icon(
+              Icons.style_outlined,
             ),
           ),
           const SizedBox(
@@ -78,7 +97,7 @@ class _ProxiesFragmentState extends State<ProxiesFragment> {
   @override
   Widget build(BuildContext context) {
     return Selector<Config, ProxiesType>(
-      selector: (_, config) => config.proxiesType,
+      selector: (_, config) => config.proxiesStyle.type,
       builder: (_, proxiesType, __) {
         return ProxiesActionsBuilder(
           builder: (state, child) {
