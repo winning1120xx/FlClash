@@ -65,11 +65,9 @@ class _ClashContainerState extends State<ClashManager> with AppMessageListener {
     return Selector2<Config, ClashConfig, CoreState>(
       selector: (_, config, clashConfig) => CoreState(
         accessControl: config.isAccessControl ? config.accessControl : null,
-        enable: config.vpnProps.enable,
         ipv6: config.vpnProps.ipv6,
         allowBypass: config.vpnProps.allowBypass,
         systemProxy: config.vpnProps.systemProxy,
-        mixedPort: clashConfig.mixedPort,
         onlyProxy: config.appSetting.onlyProxy,
         currentProfileName:
             config.currentProfile?.label ?? config.currentProfileId ?? "",

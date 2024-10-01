@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'generated/selector.freezed.dart';
+part 'generated/selector.g.dart';
 
 @freezed
 class StartButtonSelectorState with _$StartButtonSelectorState {
@@ -88,7 +89,6 @@ class HomeState with _$HomeState {
     required String? locale,
   }) = _HomeState;
 }
-
 
 @freezed
 class ProxiesCardSelectorState with _$ProxiesCardSelectorState {
@@ -241,3 +241,14 @@ class ClashConfigState with _$ClashConfigState {
   }) = _ClashConfigState;
 }
 
+@freezed
+class VPNState with _$VPNState {
+  const factory VPNState({
+    required AccessControl? accessControl,
+    required bool enable,
+    required VpnProps vpnProps,
+  }) = _VPNState;
+
+  factory VPNState.fromJson(Map<String, Object?> json) =>
+      _$VPNStateFromJson(json);
+}

@@ -68,34 +68,6 @@ extension AccessControlExt on AccessControl {
 }
 
 @freezed
-class CoreState with _$CoreState {
-  const factory CoreState({
-    AccessControl? accessControl,
-    required String currentProfileName,
-    required bool enable,
-    required bool allowBypass,
-    required bool systemProxy,
-    required int mixedPort,
-    required bool ipv6,
-    required bool onlyProxy,
-  }) = _CoreState;
-
-  factory CoreState.fromJson(Map<String, Object?> json) =>
-      _$CoreStateFromJson(json);
-}
-
-@freezed
-class VPNState with _$VPNState {
-  const factory VPNState({
-    required AccessControl? accessControl,
-    required VpnProps vpnProps,
-  }) = _VPNState;
-
-  factory VPNState.fromJson(Map<String, Object?> json) =>
-      _$VPNStateFromJson(json);
-}
-
-@freezed
 class WindowProps with _$WindowProps {
   const factory WindowProps({
     @Default(1000) double width,
@@ -111,7 +83,6 @@ class WindowProps with _$WindowProps {
 @freezed
 class VpnProps with _$VpnProps {
   const factory VpnProps({
-    @Default(true) bool enable,
     @Default(true) bool systemProxy,
     @Default(false) bool ipv6,
     @Default(true) bool allowBypass,

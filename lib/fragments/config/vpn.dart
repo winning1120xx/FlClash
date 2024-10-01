@@ -10,8 +10,8 @@ class VPNSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<Config, bool>(
-      selector: (_, config) => config.vpnProps.enable,
+    return Selector<ClashConfig, bool>(
+      selector: (_, clashConfig) => clashConfig.tun.enable,
       builder: (_, enable, __) {
         return ListItem.switchItem(
           leading: const Icon(Icons.stacked_line_chart),
@@ -20,41 +20,14 @@ class VPNSwitch extends StatelessWidget {
           delegate: SwitchDelegate(
             value: enable,
             onChanged: (bool value) async {
-              final config = globalState.appController.config;
-              final vpnProps = config.vpnProps;
-              config.vpnProps = vpnProps.copyWith(
+              final clashConfig = globalState.appController.clashConfig;
+              clashConfig.tun = clashConfig.tun.copyWith(
                 enable: value,
               );
             },
           ),
         );
       },
-    );
-  }
-}
-
-class VPNDisabledContainer extends StatelessWidget {
-  final Widget child;
-
-  const VPNDisabledContainer(
-    this.child, {
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Selector<Config, bool>(
-      selector: (_, config) => config.vpnProps.enable,
-      builder: (_, enable, child) {
-        return AbsorbPointer(
-          absorbing: !enable,
-          child: DisabledMask(
-            status: !enable,
-            child: child!,
-          ),
-        );
-      },
-      child: child,
     );
   }
 }
@@ -148,16 +121,14 @@ class VpnOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VPNDisabledContainer(
-      Column(
-        children: generateSection(
-          title: appLocalizations.options,
-          items: [
-            const SystemProxySwitch(),
-            const AllowBypassSwitch(),
-            const Ipv6Switch(),
-          ],
-        ),
+    return Column(
+      children: generateSection(
+        title: appLocalizations.options,
+        items: [
+          const SystemProxySwitch(),
+          const AllowBypassSwitch(),
+          const Ipv6Switch(),
+        ],
       ),
     );
   }

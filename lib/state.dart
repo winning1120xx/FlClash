@@ -131,12 +131,10 @@ class GlobalState {
       );
       clashCore.setState(
         CoreState(
-          enable: config.vpnProps.enable,
           accessControl: config.isAccessControl ? config.accessControl : null,
           ipv6: config.vpnProps.ipv6,
           allowBypass: config.vpnProps.allowBypass,
           systemProxy: config.vpnProps.systemProxy,
-          mixedPort: clashConfig.mixedPort,
           onlyProxy: config.appSetting.onlyProxy,
           currentProfileName:
               config.currentProfile?.label ?? config.currentProfileId ?? "",
@@ -228,7 +226,7 @@ class GlobalState {
     final traffic = clashCore.getTraffic();
     if (Platform.isAndroid && isVpnService == true) {
       vpn?.startForeground(
-        title: clashCore.getState().currentProfileName,
+        title: clashCore.getCurrentProfileName(),
         content: "$traffic",
       );
     } else {

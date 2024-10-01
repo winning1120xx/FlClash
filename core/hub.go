@@ -7,6 +7,7 @@ import "C"
 import (
 	"context"
 	bridge "core/dart-bridge"
+	"core/state"
 	"encoding/json"
 	"fmt"
 	"github.com/metacubex/mihomo/common/utils"
@@ -184,7 +185,7 @@ func changeProxy(s *C.char) {
 
 //export getTraffic
 func getTraffic() *C.char {
-	up, down := statistic.DefaultManager.Current(state.OnlyProxy)
+	up, down := statistic.DefaultManager.Current(state.CurrentState.OnlyProxy)
 	traffic := map[string]int64{
 		"up":   up,
 		"down": down,
@@ -199,7 +200,7 @@ func getTraffic() *C.char {
 
 //export getTotalTraffic
 func getTotalTraffic() *C.char {
-	up, down := statistic.DefaultManager.Total(state.OnlyProxy)
+	up, down := statistic.DefaultManager.Total(state.CurrentState.OnlyProxy)
 	traffic := map[string]int64{
 		"up":   up,
 		"down": down,

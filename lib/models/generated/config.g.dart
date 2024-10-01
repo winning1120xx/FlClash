@@ -136,48 +136,6 @@ const _$AccessSortTypeEnumMap = {
   AccessSortType.time: 'time',
 };
 
-_$CoreStateImpl _$$CoreStateImplFromJson(Map<String, dynamic> json) =>
-    _$CoreStateImpl(
-      accessControl: json['accessControl'] == null
-          ? null
-          : AccessControl.fromJson(
-              json['accessControl'] as Map<String, dynamic>),
-      currentProfileName: json['currentProfileName'] as String,
-      enable: json['enable'] as bool,
-      allowBypass: json['allowBypass'] as bool,
-      systemProxy: json['systemProxy'] as bool,
-      mixedPort: (json['mixedPort'] as num).toInt(),
-      ipv6: json['ipv6'] as bool,
-      onlyProxy: json['onlyProxy'] as bool,
-    );
-
-Map<String, dynamic> _$$CoreStateImplToJson(_$CoreStateImpl instance) =>
-    <String, dynamic>{
-      'accessControl': instance.accessControl,
-      'currentProfileName': instance.currentProfileName,
-      'enable': instance.enable,
-      'allowBypass': instance.allowBypass,
-      'systemProxy': instance.systemProxy,
-      'mixedPort': instance.mixedPort,
-      'ipv6': instance.ipv6,
-      'onlyProxy': instance.onlyProxy,
-    };
-
-_$VPNStateImpl _$$VPNStateImplFromJson(Map<String, dynamic> json) =>
-    _$VPNStateImpl(
-      accessControl: json['accessControl'] == null
-          ? null
-          : AccessControl.fromJson(
-              json['accessControl'] as Map<String, dynamic>),
-      vpnProps: VpnProps.fromJson(json['vpnProps'] as Map<String, dynamic>?),
-    );
-
-Map<String, dynamic> _$$VPNStateImplToJson(_$VPNStateImpl instance) =>
-    <String, dynamic>{
-      'accessControl': instance.accessControl,
-      'vpnProps': instance.vpnProps,
-    };
-
 _$WindowPropsImpl _$$WindowPropsImplFromJson(Map<String, dynamic> json) =>
     _$WindowPropsImpl(
       width: (json['width'] as num?)?.toDouble() ?? 1000,
@@ -196,7 +154,6 @@ Map<String, dynamic> _$$WindowPropsImplToJson(_$WindowPropsImpl instance) =>
 
 _$VpnPropsImpl _$$VpnPropsImplFromJson(Map<String, dynamic> json) =>
     _$VpnPropsImpl(
-      enable: json['enable'] as bool? ?? true,
       systemProxy: json['systemProxy'] as bool? ?? true,
       ipv6: json['ipv6'] as bool? ?? false,
       allowBypass: json['allowBypass'] as bool? ?? true,
@@ -204,7 +161,6 @@ _$VpnPropsImpl _$$VpnPropsImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$VpnPropsImplToJson(_$VpnPropsImpl instance) =>
     <String, dynamic>{
-      'enable': instance.enable,
       'systemProxy': instance.systemProxy,
       'ipv6': instance.ipv6,
       'allowBypass': instance.allowBypass,
