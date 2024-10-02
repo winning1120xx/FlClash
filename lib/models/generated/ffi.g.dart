@@ -15,6 +15,9 @@ _$CoreStateImpl _$$CoreStateImplFromJson(Map<String, dynamic> json) =>
       currentProfileName: json['currentProfileName'] as String,
       allowBypass: json['allowBypass'] as bool,
       systemProxy: json['systemProxy'] as bool,
+      bypassDomain: (json['bypassDomain'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       ipv6: json['ipv6'] as bool,
       onlyProxy: json['onlyProxy'] as bool,
     );
@@ -25,6 +28,7 @@ Map<String, dynamic> _$$CoreStateImplToJson(_$CoreStateImpl instance) =>
       'currentProfileName': instance.currentProfileName,
       'allowBypass': instance.allowBypass,
       'systemProxy': instance.systemProxy,
+      'bypassDomain': instance.bypassDomain,
       'ipv6': instance.ipv6,
       'onlyProxy': instance.onlyProxy,
     };

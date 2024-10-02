@@ -24,6 +24,7 @@ mixin _$CoreState {
   String get currentProfileName => throw _privateConstructorUsedError;
   bool get allowBypass => throw _privateConstructorUsedError;
   bool get systemProxy => throw _privateConstructorUsedError;
+  List<String> get bypassDomain => throw _privateConstructorUsedError;
   bool get ipv6 => throw _privateConstructorUsedError;
   bool get onlyProxy => throw _privateConstructorUsedError;
 
@@ -43,6 +44,7 @@ abstract class $CoreStateCopyWith<$Res> {
       String currentProfileName,
       bool allowBypass,
       bool systemProxy,
+      List<String> bypassDomain,
       bool ipv6,
       bool onlyProxy});
 
@@ -66,6 +68,7 @@ class _$CoreStateCopyWithImpl<$Res, $Val extends CoreState>
     Object? currentProfileName = null,
     Object? allowBypass = null,
     Object? systemProxy = null,
+    Object? bypassDomain = null,
     Object? ipv6 = null,
     Object? onlyProxy = null,
   }) {
@@ -86,6 +89,10 @@ class _$CoreStateCopyWithImpl<$Res, $Val extends CoreState>
           ? _value.systemProxy
           : systemProxy // ignore: cast_nullable_to_non_nullable
               as bool,
+      bypassDomain: null == bypassDomain
+          ? _value.bypassDomain
+          : bypassDomain // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       ipv6: null == ipv6
           ? _value.ipv6
           : ipv6 // ignore: cast_nullable_to_non_nullable
@@ -123,6 +130,7 @@ abstract class _$$CoreStateImplCopyWith<$Res>
       String currentProfileName,
       bool allowBypass,
       bool systemProxy,
+      List<String> bypassDomain,
       bool ipv6,
       bool onlyProxy});
 
@@ -145,6 +153,7 @@ class __$$CoreStateImplCopyWithImpl<$Res>
     Object? currentProfileName = null,
     Object? allowBypass = null,
     Object? systemProxy = null,
+    Object? bypassDomain = null,
     Object? ipv6 = null,
     Object? onlyProxy = null,
   }) {
@@ -165,6 +174,10 @@ class __$$CoreStateImplCopyWithImpl<$Res>
           ? _value.systemProxy
           : systemProxy // ignore: cast_nullable_to_non_nullable
               as bool,
+      bypassDomain: null == bypassDomain
+          ? _value._bypassDomain
+          : bypassDomain // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       ipv6: null == ipv6
           ? _value.ipv6
           : ipv6 // ignore: cast_nullable_to_non_nullable
@@ -185,8 +198,10 @@ class _$CoreStateImpl implements _CoreState {
       required this.currentProfileName,
       required this.allowBypass,
       required this.systemProxy,
+      required final List<String> bypassDomain,
       required this.ipv6,
-      required this.onlyProxy});
+      required this.onlyProxy})
+      : _bypassDomain = bypassDomain;
 
   factory _$CoreStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$CoreStateImplFromJson(json);
@@ -199,6 +214,14 @@ class _$CoreStateImpl implements _CoreState {
   final bool allowBypass;
   @override
   final bool systemProxy;
+  final List<String> _bypassDomain;
+  @override
+  List<String> get bypassDomain {
+    if (_bypassDomain is EqualUnmodifiableListView) return _bypassDomain;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bypassDomain);
+  }
+
   @override
   final bool ipv6;
   @override
@@ -206,7 +229,7 @@ class _$CoreStateImpl implements _CoreState {
 
   @override
   String toString() {
-    return 'CoreState(accessControl: $accessControl, currentProfileName: $currentProfileName, allowBypass: $allowBypass, systemProxy: $systemProxy, ipv6: $ipv6, onlyProxy: $onlyProxy)';
+    return 'CoreState(accessControl: $accessControl, currentProfileName: $currentProfileName, allowBypass: $allowBypass, systemProxy: $systemProxy, bypassDomain: $bypassDomain, ipv6: $ipv6, onlyProxy: $onlyProxy)';
   }
 
   @override
@@ -222,6 +245,8 @@ class _$CoreStateImpl implements _CoreState {
                 other.allowBypass == allowBypass) &&
             (identical(other.systemProxy, systemProxy) ||
                 other.systemProxy == systemProxy) &&
+            const DeepCollectionEquality()
+                .equals(other._bypassDomain, _bypassDomain) &&
             (identical(other.ipv6, ipv6) || other.ipv6 == ipv6) &&
             (identical(other.onlyProxy, onlyProxy) ||
                 other.onlyProxy == onlyProxy));
@@ -229,8 +254,15 @@ class _$CoreStateImpl implements _CoreState {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, accessControl,
-      currentProfileName, allowBypass, systemProxy, ipv6, onlyProxy);
+  int get hashCode => Object.hash(
+      runtimeType,
+      accessControl,
+      currentProfileName,
+      allowBypass,
+      systemProxy,
+      const DeepCollectionEquality().hash(_bypassDomain),
+      ipv6,
+      onlyProxy);
 
   @JsonKey(ignore: true)
   @override
@@ -252,6 +284,7 @@ abstract class _CoreState implements CoreState {
       required final String currentProfileName,
       required final bool allowBypass,
       required final bool systemProxy,
+      required final List<String> bypassDomain,
       required final bool ipv6,
       required final bool onlyProxy}) = _$CoreStateImpl;
 
@@ -266,6 +299,8 @@ abstract class _CoreState implements CoreState {
   bool get allowBypass;
   @override
   bool get systemProxy;
+  @override
+  List<String> get bypassDomain;
   @override
   bool get ipv6;
   @override

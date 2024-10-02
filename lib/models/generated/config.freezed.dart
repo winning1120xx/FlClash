@@ -923,6 +923,7 @@ mixin _$VpnProps {
   bool get systemProxy => throw _privateConstructorUsedError;
   bool get ipv6 => throw _privateConstructorUsedError;
   bool get allowBypass => throw _privateConstructorUsedError;
+  List<String> get bypassDomain => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -935,7 +936,11 @@ abstract class $VpnPropsCopyWith<$Res> {
   factory $VpnPropsCopyWith(VpnProps value, $Res Function(VpnProps) then) =
       _$VpnPropsCopyWithImpl<$Res, VpnProps>;
   @useResult
-  $Res call({bool systemProxy, bool ipv6, bool allowBypass});
+  $Res call(
+      {bool systemProxy,
+      bool ipv6,
+      bool allowBypass,
+      List<String> bypassDomain});
 }
 
 /// @nodoc
@@ -954,6 +959,7 @@ class _$VpnPropsCopyWithImpl<$Res, $Val extends VpnProps>
     Object? systemProxy = null,
     Object? ipv6 = null,
     Object? allowBypass = null,
+    Object? bypassDomain = null,
   }) {
     return _then(_value.copyWith(
       systemProxy: null == systemProxy
@@ -968,6 +974,10 @@ class _$VpnPropsCopyWithImpl<$Res, $Val extends VpnProps>
           ? _value.allowBypass
           : allowBypass // ignore: cast_nullable_to_non_nullable
               as bool,
+      bypassDomain: null == bypassDomain
+          ? _value.bypassDomain
+          : bypassDomain // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -980,7 +990,11 @@ abstract class _$$VpnPropsImplCopyWith<$Res>
       __$$VpnPropsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool systemProxy, bool ipv6, bool allowBypass});
+  $Res call(
+      {bool systemProxy,
+      bool ipv6,
+      bool allowBypass,
+      List<String> bypassDomain});
 }
 
 /// @nodoc
@@ -997,6 +1011,7 @@ class __$$VpnPropsImplCopyWithImpl<$Res>
     Object? systemProxy = null,
     Object? ipv6 = null,
     Object? allowBypass = null,
+    Object? bypassDomain = null,
   }) {
     return _then(_$VpnPropsImpl(
       systemProxy: null == systemProxy
@@ -1011,6 +1026,10 @@ class __$$VpnPropsImplCopyWithImpl<$Res>
           ? _value.allowBypass
           : allowBypass // ignore: cast_nullable_to_non_nullable
               as bool,
+      bypassDomain: null == bypassDomain
+          ? _value._bypassDomain
+          : bypassDomain // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -1019,7 +1038,11 @@ class __$$VpnPropsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$VpnPropsImpl implements _VpnProps {
   const _$VpnPropsImpl(
-      {this.systemProxy = true, this.ipv6 = false, this.allowBypass = true});
+      {this.systemProxy = true,
+      this.ipv6 = false,
+      this.allowBypass = true,
+      final List<String> bypassDomain = defaultBypassDomain})
+      : _bypassDomain = bypassDomain;
 
   factory _$VpnPropsImpl.fromJson(Map<String, dynamic> json) =>
       _$$VpnPropsImplFromJson(json);
@@ -1033,10 +1056,18 @@ class _$VpnPropsImpl implements _VpnProps {
   @override
   @JsonKey()
   final bool allowBypass;
+  final List<String> _bypassDomain;
+  @override
+  @JsonKey()
+  List<String> get bypassDomain {
+    if (_bypassDomain is EqualUnmodifiableListView) return _bypassDomain;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_bypassDomain);
+  }
 
   @override
   String toString() {
-    return 'VpnProps(systemProxy: $systemProxy, ipv6: $ipv6, allowBypass: $allowBypass)';
+    return 'VpnProps(systemProxy: $systemProxy, ipv6: $ipv6, allowBypass: $allowBypass, bypassDomain: $bypassDomain)';
   }
 
   @override
@@ -1048,12 +1079,15 @@ class _$VpnPropsImpl implements _VpnProps {
                 other.systemProxy == systemProxy) &&
             (identical(other.ipv6, ipv6) || other.ipv6 == ipv6) &&
             (identical(other.allowBypass, allowBypass) ||
-                other.allowBypass == allowBypass));
+                other.allowBypass == allowBypass) &&
+            const DeepCollectionEquality()
+                .equals(other._bypassDomain, _bypassDomain));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, systemProxy, ipv6, allowBypass);
+  int get hashCode => Object.hash(runtimeType, systemProxy, ipv6, allowBypass,
+      const DeepCollectionEquality().hash(_bypassDomain));
 
   @JsonKey(ignore: true)
   @override
@@ -1073,7 +1107,8 @@ abstract class _VpnProps implements VpnProps {
   const factory _VpnProps(
       {final bool systemProxy,
       final bool ipv6,
-      final bool allowBypass}) = _$VpnPropsImpl;
+      final bool allowBypass,
+      final List<String> bypassDomain}) = _$VpnPropsImpl;
 
   factory _VpnProps.fromJson(Map<String, dynamic> json) =
       _$VpnPropsImpl.fromJson;
@@ -1084,6 +1119,8 @@ abstract class _VpnProps implements VpnProps {
   bool get ipv6;
   @override
   bool get allowBypass;
+  @override
+  List<String> get bypassDomain;
   @override
   @JsonKey(ignore: true)
   _$$VpnPropsImplCopyWith<_$VpnPropsImpl> get copyWith =>

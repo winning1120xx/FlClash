@@ -15,6 +15,7 @@ class CoreState with _$CoreState {
     required String currentProfileName,
     required bool allowBypass,
     required bool systemProxy,
+    required List<String> bypassDomain,
     required bool ipv6,
     required bool onlyProxy,
   }) = _CoreState;

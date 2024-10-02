@@ -59,6 +59,18 @@ Future<void> vpnService() async {
     selectedMap: config.currentSelectedMap,
     version: version,
   );
+  clashCore.setState(
+    CoreState(
+      accessControl: config.isAccessControl ? config.accessControl : null,
+      ipv6: config.vpnProps.ipv6,
+      allowBypass: config.vpnProps.allowBypass,
+      systemProxy: config.vpnProps.systemProxy,
+      onlyProxy: config.appSetting.onlyProxy,
+      bypassDomain: config.vpnProps.bypassDomain,
+      currentProfileName:
+      config.currentProfile?.label ?? config.currentProfileId ?? "",
+    ),
+  );
   await globalState.init(
     appState: appState,
     config: config,

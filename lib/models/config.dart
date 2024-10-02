@@ -80,12 +80,33 @@ class WindowProps with _$WindowProps {
       json == null ? const WindowProps() : _$WindowPropsFromJson(json);
 }
 
+const defaultBypassDomain = [
+  "*zhihu.com",
+  "*zhimg.com",
+  "*jd.com",
+  "100ime-iat-api.xfyun.cn",
+  "*360buyimg.com",
+  "localhost",
+  "*.local",
+  "127.*",
+  "10.*",
+  "172.16.*",
+  "172.17.*",
+  "172.18.*",
+  "172.19.*",
+  "172.2*",
+  "172.30.*",
+  "172.31.*",
+  "192.168.*"
+];
+
 @freezed
 class VpnProps with _$VpnProps {
   const factory VpnProps({
     @Default(true) bool systemProxy,
     @Default(false) bool ipv6,
     @Default(true) bool allowBypass,
+    @Default(defaultBypassDomain) List<String> bypassDomain,
   }) = _VpnProps;
 
   factory VpnProps.fromJson(Map<String, Object?>? json) =>

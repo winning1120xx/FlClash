@@ -129,17 +129,6 @@ class GlobalState {
         config: config,
         clashConfig: clashConfig,
       );
-      clashCore.setState(
-        CoreState(
-          accessControl: config.isAccessControl ? config.accessControl : null,
-          ipv6: config.vpnProps.ipv6,
-          allowBypass: config.vpnProps.allowBypass,
-          systemProxy: config.vpnProps.systemProxy,
-          onlyProxy: config.appSetting.onlyProxy,
-          currentProfileName:
-              config.currentProfile?.label ?? config.currentProfileId ?? "",
-        ),
-      );
     }
     updateCoreVersionInfo(appState);
   }
