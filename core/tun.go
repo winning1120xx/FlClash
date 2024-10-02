@@ -60,7 +60,7 @@ func startTUN(fd C.int, port C.longlong) {
 		tunLock.Lock()
 		defer tunLock.Unlock()
 		f := int(fd)
-		tunListener, _ := t.Start(f)
+		tunListener, _ = t.Start(f)
 		if tunListener != nil {
 			log.Infoln("TUN address: %v", tunListener.Address())
 		}
