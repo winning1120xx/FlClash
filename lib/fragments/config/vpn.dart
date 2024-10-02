@@ -10,18 +10,17 @@ class VPNSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<ClashConfig, bool>(
-      selector: (_, clashConfig) => clashConfig.tun.enable,
+    return Selector<Config, bool>(
+      selector: (_, config) => config.vpnProps.enable,
       builder: (_, enable, __) {
         return ListItem.switchItem(
-          leading: const Icon(Icons.stacked_line_chart),
           title: const Text("VPN"),
           subtitle: Text(appLocalizations.vpnEnableDesc),
           delegate: SwitchDelegate(
             value: enable,
-            onChanged: (bool value) async {
-              final clashConfig = globalState.appController.clashConfig;
-              clashConfig.tun = clashConfig.tun.copyWith(
+            onChanged: (value) async {
+              final config = globalState.appController.config;
+              config.vpnProps = config.vpnProps.copyWith(
                 enable: value,
               );
             },
@@ -41,7 +40,6 @@ class AllowBypassSwitch extends StatelessWidget {
       selector: (_, config) => config.vpnProps.allowBypass,
       builder: (_, allowBypass, __) {
         return ListItem.switchItem(
-          leading: const Icon(Icons.arrow_forward_outlined),
           title: Text(appLocalizations.allowBypass),
           subtitle: Text(appLocalizations.allowBypassDesc),
           delegate: SwitchDelegate(
@@ -69,7 +67,6 @@ class SystemProxySwitch extends StatelessWidget {
       selector: (_, config) => config.vpnProps.systemProxy,
       builder: (_, systemProxy, __) {
         return ListItem.switchItem(
-          leading: const Icon(Icons.settings_ethernet),
           title: Text(appLocalizations.systemProxy),
           subtitle: Text(appLocalizations.systemProxyDesc),
           delegate: SwitchDelegate(
@@ -97,7 +94,6 @@ class Ipv6Switch extends StatelessWidget {
       selector: (_, config) => config.vpnProps.ipv6,
       builder: (_, ipv6, __) {
         return ListItem.switchItem(
-          leading: const Icon(Icons.water_outlined),
           title: const Text("IPv6"),
           subtitle: Text(appLocalizations.ipv6InboundDesc),
           delegate: SwitchDelegate(

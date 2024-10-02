@@ -25,6 +25,7 @@ type AccessControl struct {
 }
 
 type AndroidVpnRawOptions struct {
+	Enable        bool           `json:"enable"`
 	AccessControl *AccessControl `json:"accessControl"`
 	AllowBypass   bool           `json:"allowBypass"`
 	SystemProxy   bool           `json:"systemProxy"`

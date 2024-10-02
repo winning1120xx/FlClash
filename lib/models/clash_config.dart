@@ -1,7 +1,5 @@
 // ignore_for_file: invalid_annotation_target
 
-import 'dart:io';
-
 import 'package:collection/collection.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/state.dart';
@@ -28,7 +26,14 @@ class Tun with _$Tun {
   factory Tun.fromJson(Map<String, Object?> json) => _$TunFromJson(json);
 
   factory Tun.realFromJson(Map<String, Object?>? json) {
-    return json == null ? defaultTun : Tun.fromJson(json);
+    if (json == null) {
+      return defaultTun;
+    }
+    try {
+      return Tun.fromJson(json);
+    } catch (_) {
+      return defaultTun;
+    }
   }
 }
 
@@ -269,9 +274,6 @@ class ClashConfig extends ChangeNotifier {
   }
 
   Tun get tun {
-    if (Platform.isAndroid) {
-      return _tun.copyWith(enable: false);
-    }
     return _tun;
   }
 
