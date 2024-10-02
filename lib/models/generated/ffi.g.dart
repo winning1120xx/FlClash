@@ -8,6 +8,7 @@ part of '../ffi.dart';
 
 _$CoreStateImpl _$$CoreStateImplFromJson(Map<String, dynamic> json) =>
     _$CoreStateImpl(
+      enable: json['enable'] as bool,
       accessControl: json['accessControl'] == null
           ? null
           : AccessControl.fromJson(
@@ -24,6 +25,7 @@ _$CoreStateImpl _$$CoreStateImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$CoreStateImplToJson(_$CoreStateImpl instance) =>
     <String, dynamic>{
+      'enable': instance.enable,
       'accessControl': instance.accessControl,
       'currentProfileName': instance.currentProfileName,
       'allowBypass': instance.allowBypass,

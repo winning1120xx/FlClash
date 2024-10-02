@@ -9,12 +9,10 @@ import (
 
 //export getCurrentProfileName
 func getCurrentProfileName() *C.char {
-	data, err := json.Marshal(state.CurrentState)
-	if err != nil {
-		fmt.Println("Error:", err)
+	if state.CurrentState == nil {
 		return C.CString("")
 	}
-	return C.CString(string(data))
+	return C.CString(state.CurrentState.CurrentProfileName)
 }
 
 //export getAndroidVpnOptions

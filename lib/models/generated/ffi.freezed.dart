@@ -20,6 +20,7 @@ CoreState _$CoreStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CoreState {
+  bool get enable => throw _privateConstructorUsedError;
   AccessControl? get accessControl => throw _privateConstructorUsedError;
   String get currentProfileName => throw _privateConstructorUsedError;
   bool get allowBypass => throw _privateConstructorUsedError;
@@ -40,7 +41,8 @@ abstract class $CoreStateCopyWith<$Res> {
       _$CoreStateCopyWithImpl<$Res, CoreState>;
   @useResult
   $Res call(
-      {AccessControl? accessControl,
+      {bool enable,
+      AccessControl? accessControl,
       String currentProfileName,
       bool allowBypass,
       bool systemProxy,
@@ -64,6 +66,7 @@ class _$CoreStateCopyWithImpl<$Res, $Val extends CoreState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? enable = null,
     Object? accessControl = freezed,
     Object? currentProfileName = null,
     Object? allowBypass = null,
@@ -73,6 +76,10 @@ class _$CoreStateCopyWithImpl<$Res, $Val extends CoreState>
     Object? onlyProxy = null,
   }) {
     return _then(_value.copyWith(
+      enable: null == enable
+          ? _value.enable
+          : enable // ignore: cast_nullable_to_non_nullable
+              as bool,
       accessControl: freezed == accessControl
           ? _value.accessControl
           : accessControl // ignore: cast_nullable_to_non_nullable
@@ -126,7 +133,8 @@ abstract class _$$CoreStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {AccessControl? accessControl,
+      {bool enable,
+      AccessControl? accessControl,
       String currentProfileName,
       bool allowBypass,
       bool systemProxy,
@@ -149,6 +157,7 @@ class __$$CoreStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? enable = null,
     Object? accessControl = freezed,
     Object? currentProfileName = null,
     Object? allowBypass = null,
@@ -158,6 +167,10 @@ class __$$CoreStateImplCopyWithImpl<$Res>
     Object? onlyProxy = null,
   }) {
     return _then(_$CoreStateImpl(
+      enable: null == enable
+          ? _value.enable
+          : enable // ignore: cast_nullable_to_non_nullable
+              as bool,
       accessControl: freezed == accessControl
           ? _value.accessControl
           : accessControl // ignore: cast_nullable_to_non_nullable
@@ -194,7 +207,8 @@ class __$$CoreStateImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CoreStateImpl implements _CoreState {
   const _$CoreStateImpl(
-      {this.accessControl,
+      {required this.enable,
+      this.accessControl,
       required this.currentProfileName,
       required this.allowBypass,
       required this.systemProxy,
@@ -206,6 +220,8 @@ class _$CoreStateImpl implements _CoreState {
   factory _$CoreStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$CoreStateImplFromJson(json);
 
+  @override
+  final bool enable;
   @override
   final AccessControl? accessControl;
   @override
@@ -229,7 +245,7 @@ class _$CoreStateImpl implements _CoreState {
 
   @override
   String toString() {
-    return 'CoreState(accessControl: $accessControl, currentProfileName: $currentProfileName, allowBypass: $allowBypass, systemProxy: $systemProxy, bypassDomain: $bypassDomain, ipv6: $ipv6, onlyProxy: $onlyProxy)';
+    return 'CoreState(enable: $enable, accessControl: $accessControl, currentProfileName: $currentProfileName, allowBypass: $allowBypass, systemProxy: $systemProxy, bypassDomain: $bypassDomain, ipv6: $ipv6, onlyProxy: $onlyProxy)';
   }
 
   @override
@@ -237,6 +253,7 @@ class _$CoreStateImpl implements _CoreState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CoreStateImpl &&
+            (identical(other.enable, enable) || other.enable == enable) &&
             (identical(other.accessControl, accessControl) ||
                 other.accessControl == accessControl) &&
             (identical(other.currentProfileName, currentProfileName) ||
@@ -256,6 +273,7 @@ class _$CoreStateImpl implements _CoreState {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      enable,
       accessControl,
       currentProfileName,
       allowBypass,
@@ -280,7 +298,8 @@ class _$CoreStateImpl implements _CoreState {
 
 abstract class _CoreState implements CoreState {
   const factory _CoreState(
-      {final AccessControl? accessControl,
+      {required final bool enable,
+      final AccessControl? accessControl,
       required final String currentProfileName,
       required final bool allowBypass,
       required final bool systemProxy,
@@ -291,6 +310,8 @@ abstract class _CoreState implements CoreState {
   factory _CoreState.fromJson(Map<String, dynamic> json) =
       _$CoreStateImpl.fromJson;
 
+  @override
+  bool get enable;
   @override
   AccessControl? get accessControl;
   @override

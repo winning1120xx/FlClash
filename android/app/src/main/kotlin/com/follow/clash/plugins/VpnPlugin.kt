@@ -240,7 +240,7 @@ class VpnPlugin : FlutterPlugin, MethodChannel.MethodCallHandler {
             val fd = flClashService?.start(options)
             flutterMethodChannel.invokeMethod(
                 "started",
-                Gson().toJson(fd)
+                fd
             )
         }
     }

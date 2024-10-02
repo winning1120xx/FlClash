@@ -1,6 +1,8 @@
 package state
 
-import "net/netip"
+import (
+	"net/netip"
+)
 
 var DefaultIpv4Address = "172.18.0.1/30"
 var DefaultIpv6Address = "fdfe:dcba:9876::1/126"
@@ -11,10 +13,10 @@ type AndroidVpnOptions struct {
 	AccessControl    *AccessControl `json:"accessControl"`
 	AllowBypass      bool           `json:"allowBypass"`
 	SystemProxy      bool           `json:"systemProxy"`
-	BypassDomain     bool           `json:"bypassDomain"`
+	BypassDomain     []string       `json:"bypassDomain"`
 	Ipv4Address      string         `json:"ipv4Address"`
 	Ipv6Address      string         `json:"ipv6Address"`
-	DnsServerAddress string         `json:"dnsAddress"`
+	DnsServerAddress string         `json:"dnsServerAddress"`
 }
 
 type AccessControl struct {
@@ -30,7 +32,7 @@ type AndroidVpnRawOptions struct {
 	AllowBypass   bool           `json:"allowBypass"`
 	SystemProxy   bool           `json:"systemProxy"`
 	Ipv6          bool           `json:"ipv6"`
-	BypassDomain  bool           `json:"bypassDomain"`
+	BypassDomain  []string       `json:"bypassDomain"`
 }
 
 type State struct {
@@ -39,7 +41,7 @@ type State struct {
 	OnlyProxy          bool   `json:"onlyProxy"`
 }
 
-var CurrentState State
+var CurrentState = &State{}
 
 func GetIpv6Address() string {
 	if CurrentState.Ipv6 {
@@ -50,6 +52,6 @@ func GetIpv6Address() string {
 }
 
 func GetDnsServerAddress() string {
-	addr, _ := netip.ParseAddr(DefaultIpv4Address)
-	return addr.String()
+	prefix, _ := netip.ParsePrefix(DefaultIpv4Address)
+	return prefix.Addr().String()
 }

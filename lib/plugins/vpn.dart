@@ -38,7 +38,7 @@ class Vpn {
     return _instance!;
   }
 
-  Future<bool?> startVpn(port) async {
+  Future<bool?> startVpn() async {
     final options = clashCore.getAndroidVpnOptions();
     return await methodChannel.invokeMethod<bool>("start", {
       'data': json.encode(options),

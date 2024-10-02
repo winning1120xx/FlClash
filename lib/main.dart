@@ -61,6 +61,7 @@ Future<void> vpnService() async {
   );
   clashCore.setState(
     CoreState(
+      enable: config.vpnProps.enable,
       accessControl: config.isAccessControl ? config.accessControl : null,
       ipv6: config.vpnProps.ipv6,
       allowBypass: config.vpnProps.allowBypass,

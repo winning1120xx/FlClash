@@ -77,7 +77,7 @@ class GlobalState {
   }) async {
     clashCore.start();
     if (globalState.isVpnService) {
-      await vpn?.startVpn(clashConfig.mixedPort);
+      await vpn?.startVpn();
       startListenUpdate();
       return;
     }

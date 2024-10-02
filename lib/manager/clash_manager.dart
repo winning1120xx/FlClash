@@ -64,6 +64,7 @@ class _ClashContainerState extends State<ClashManager> with AppMessageListener {
   Widget _updateCoreState(Widget child) {
     return Selector2<Config, ClashConfig, CoreState>(
       selector: (_, config, clashConfig) => CoreState(
+        enable: config.vpnProps.enable,
         accessControl: config.isAccessControl ? config.accessControl : null,
         ipv6: config.vpnProps.ipv6,
         allowBypass: config.vpnProps.allowBypass,

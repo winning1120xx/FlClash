@@ -11,6 +11,7 @@ part 'generated/ffi.freezed.dart';
 @freezed
 class CoreState with _$CoreState {
   const factory CoreState({
+    required bool enable,
     AccessControl? accessControl,
     required String currentProfileName,
     required bool allowBypass,
