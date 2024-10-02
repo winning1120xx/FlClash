@@ -84,10 +84,6 @@ class _ClashContainerState extends State<ClashManager> with AppMessageListener {
 
   _changeProfile() async {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (globalState.autoRun) {
-        globalState.autoRun = false;
-        return;
-      }
       final appController = globalState.appController;
       appController.appState.delayMap = {};
       await appController.applyProfile();
