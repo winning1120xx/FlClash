@@ -1,13 +1,7 @@
 package state
 
-import (
-	"net/netip"
-)
-
 var DefaultIpv4Address = "172.19.0.1/30"
-
-// var DefaultDnsAddress = "172.19.0.2"
-
+var DefaultDnsAddress = "172.19.0.2"
 var DefaultIpv6Address = "fdfe:dcba:9876::1/126"
 
 type AndroidVpnOptions struct {
@@ -55,6 +49,7 @@ func GetIpv6Address() string {
 }
 
 func GetDnsServerAddress() string {
-	prefix, _ := netip.ParsePrefix(DefaultIpv4Address)
-	return prefix.Addr().String()
+	//prefix, _ := netip.ParsePrefix(DefaultIpv4Address)
+	//return prefix.Addr().String()
+	return DefaultDnsAddress
 }
