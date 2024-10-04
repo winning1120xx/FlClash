@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:flutter/material.dart';
@@ -60,7 +59,7 @@ class AppState with ChangeNotifier {
   List<NavigationItem> get navigationItems => _navigationItems;
 
   set navigationItems(List<NavigationItem> value) {
-    if (!const ListEquality<NavigationItem>().equals(_navigationItems, value)) {
+    if (!navigationItemListEquality.equals(_navigationItems, value)) {
       _navigationItems = value;
       notifyListeners();
     }
@@ -163,7 +162,7 @@ class AppState with ChangeNotifier {
   List<Group> get groups => _groups;
 
   set groups(List<Group> value) {
-    if (!const ListEquality<Group>().equals(_groups, value)) {
+    if (!groupListEquality.equals(_groups, value)) {
       _groups = value;
       notifyListeners();
     }
@@ -201,7 +200,7 @@ class AppState with ChangeNotifier {
   }
 
   set selectedMap(SelectedMap value) {
-    if (!const MapEquality<String, String>().equals(_selectedMap, value)) {
+    if (!stringAndStringMapEquality.equals(_selectedMap, value)) {
       _selectedMap = value;
       notifyListeners();
     }
@@ -239,7 +238,7 @@ class AppState with ChangeNotifier {
   }
 
   set delayMap(DelayMap value) {
-    if (!const MapEquality<String, int?>().equals(_delayMap, value)) {
+    if (!stringAndIntQMapEquality.equals(_delayMap, value)) {
       _delayMap = value;
       notifyListeners();
     }
@@ -255,7 +254,7 @@ class AppState with ChangeNotifier {
   List<Package> get packages => _packages;
 
   set packages(List<Package> value) {
-    if (!const ListEquality<Package>().equals(_packages, value)) {
+    if (!packageListEquality.equals(_packages, value)) {
       _packages = value;
       notifyListeners();
     }
@@ -264,7 +263,7 @@ class AppState with ChangeNotifier {
   List<ExternalProvider> get providers => _providers;
 
   set providers(List<ExternalProvider> value) {
-    if (!const ListEquality<ExternalProvider>().equals(_providers, value)) {
+    if (!externalProviderListEquality.equals(_providers, value)) {
       _providers = value;
       notifyListeners();
     }

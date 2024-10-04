@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class ProxiesSettingWidget extends StatelessWidget {
-  const ProxiesSettingWidget({super.key});
+class ProxiesSetting extends StatelessWidget {
+  const ProxiesSetting({super.key});
 
   IconData _getIconWithProxiesType(ProxiesType type) {
     return switch (type) {
@@ -251,6 +251,28 @@ class ProxiesSettingWidget extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class GroupIconSetting extends StatelessWidget {
+  const GroupIconSetting({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatLayout(
+      floatingWidget: FloatWrapper(
+        child: FloatingActionButton(
+          onPressed: () async {},
+          child: const Icon(Icons.add),
+        ),
+      ),
+      child: Selector<Config, Map<String, String>>(
+        selector: (_, config) => config.proxiesStyle.iconMap,
+        builder: (_, iconMap, __) {
+          return Container();
+        },
       ),
     );
   }

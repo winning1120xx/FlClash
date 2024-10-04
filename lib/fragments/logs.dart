@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:collection/collection.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/state.dart';
@@ -37,7 +35,7 @@ class _LogsFragmentState extends State<LogsFragment> {
       }
       timer = Timer.periodic(const Duration(milliseconds: 200), (timer) {
         final logs = appFlowingState.logs;
-        if (!const ListEquality<Log>().equals(
+        if (!logListEquality.equals(
           logsNotifier.value.logs,
           logs,
         )) {
@@ -203,7 +201,8 @@ class _LogsFragmentState extends State<LogsFragment> {
                             final bodyMediumHeight = measure.bodyMediumHeight;
                             final log = reversedLogs[(index / 2).floor()];
                             final width = (log.payload?.length ?? 0) *
-                                bodyLargeSize.width + 200;
+                                    bodyLargeSize.width +
+                                200;
                             final lines = (width / constraints.maxWidth).ceil();
                             return lines * bodyLargeSize.height +
                                 bodySmallHeight +

@@ -187,9 +187,9 @@ class BypassDomainItem extends StatelessWidget {
         widget: Selector<Config, List<String>>(
           selector: (_, config) => config.vpnProps.bypassDomain,
           shouldRebuild: (prev, next) =>
-              !bypassDomainEquality.equals(prev, next),
+              !stringListEquality.equals(prev, next),
           builder: (_, bypassDomain, __) {
-            return UpdatePage(
+            return ListPage(
               title: appLocalizations.bypassDomain,
               items: bypassDomain,
               titleBuilder: (item) => Text(item),
@@ -248,9 +248,9 @@ class NetworkListView extends StatelessWidget {
         IconButton(
           onPressed: () {
             globalState.showMessage(
-              title: appLocalizations.resetNetwork,
+              title: appLocalizations.reset,
               message: TextSpan(
-                text: appLocalizations.resetNetworkTip,
+                text: appLocalizations.resetTip,
               ),
               onTab: () {
                 final appController = globalState.appController;
@@ -260,7 +260,7 @@ class NetworkListView extends StatelessWidget {
               },
             );
           },
-          tooltip: appLocalizations.resetNetwork,
+          tooltip: appLocalizations.reset,
           icon: const Icon(
             Icons.replay,
           ),

@@ -287,7 +287,6 @@
   "geoipCode": "Geoip代码",
   "ipcidr": "IP/掩码",
   "domain": "域名",
-  "resetDns": "重置DNS",
   "reset": "重置",
   "action_view": "显示/隐藏",
   "action_start": "启动/停止",
@@ -304,7 +303,6 @@
   "hotkeyConflict": "快捷键冲突",
   "remove": "移除",
   "noHotKey": "暂无快捷键",
-  "dnsResetTip": "确定重置DNS",
   "noNetwork": "无网络",
   "ipv6InboundDesc": "允许IPv6入站",
   "exportLogs": "导出日志",
@@ -317,6 +315,5 @@
   "networkDesc": "修改网络相关设置",
   "bypassDomain": "排除域名",
   "bypassDomainDesc": "仅在系统代理启用时生效",
-  "resetNetwork": "重置网络",
-  "resetNetworkTip": "确定要重置网络吗?"
+  "resetTip": "确定要重置吗?"
 }

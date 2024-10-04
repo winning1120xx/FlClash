@@ -2930,16 +2930,6 @@ class AppLocalizations {
     );
   }
 
-  /// `Reset dns`
-  String get resetDns {
-    return Intl.message(
-      'Reset dns',
-      name: 'resetDns',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Reset`
   String get reset {
     return Intl.message(
@@ -3100,16 +3090,6 @@ class AppLocalizations {
     );
   }
 
-  /// `Make sure to reset the DNS`
-  String get dnsResetTip {
-    return Intl.message(
-      'Make sure to reset the DNS',
-      name: 'dnsResetTip',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `No network`
   String get noNetwork {
     return Intl.message(
@@ -3230,21 +3210,11 @@ class AppLocalizations {
     );
   }
 
-  /// `Reset network`
-  String get resetNetwork {
+  /// `Make sure to reset`
+  String get resetTip {
     return Intl.message(
-      'Reset network',
-      name: 'resetNetwork',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Make sure to reset the network`
-  String get resetNetworkTip {
-    return Intl.message(
-      'Make sure to reset the network',
-      name: 'resetNetworkTip',
+      'Make sure to reset',
+      name: 'resetTip',
       desc: '',
       args: [],
     );

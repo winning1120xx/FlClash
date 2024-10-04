@@ -1297,6 +1297,7 @@ mixin _$ProxiesStyle {
   ProxiesLayout get layout => throw _privateConstructorUsedError;
   ProxiesIconStyle get iconStyle => throw _privateConstructorUsedError;
   ProxyCardType get cardType => throw _privateConstructorUsedError;
+  Map<String, String> get iconMap => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1315,7 +1316,8 @@ abstract class $ProxiesStyleCopyWith<$Res> {
       ProxiesSortType sortType,
       ProxiesLayout layout,
       ProxiesIconStyle iconStyle,
-      ProxyCardType cardType});
+      ProxyCardType cardType,
+      Map<String, String> iconMap});
 }
 
 /// @nodoc
@@ -1336,6 +1338,7 @@ class _$ProxiesStyleCopyWithImpl<$Res, $Val extends ProxiesStyle>
     Object? layout = null,
     Object? iconStyle = null,
     Object? cardType = null,
+    Object? iconMap = null,
   }) {
     return _then(_value.copyWith(
       type: null == type
@@ -1358,6 +1361,10 @@ class _$ProxiesStyleCopyWithImpl<$Res, $Val extends ProxiesStyle>
           ? _value.cardType
           : cardType // ignore: cast_nullable_to_non_nullable
               as ProxyCardType,
+      iconMap: null == iconMap
+          ? _value.iconMap
+          : iconMap // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
     ) as $Val);
   }
 }
@@ -1375,7 +1382,8 @@ abstract class _$$ProxiesStyleImplCopyWith<$Res>
       ProxiesSortType sortType,
       ProxiesLayout layout,
       ProxiesIconStyle iconStyle,
-      ProxyCardType cardType});
+      ProxyCardType cardType,
+      Map<String, String> iconMap});
 }
 
 /// @nodoc
@@ -1394,6 +1402,7 @@ class __$$ProxiesStyleImplCopyWithImpl<$Res>
     Object? layout = null,
     Object? iconStyle = null,
     Object? cardType = null,
+    Object? iconMap = null,
   }) {
     return _then(_$ProxiesStyleImpl(
       type: null == type
@@ -1416,6 +1425,10 @@ class __$$ProxiesStyleImplCopyWithImpl<$Res>
           ? _value.cardType
           : cardType // ignore: cast_nullable_to_non_nullable
               as ProxyCardType,
+      iconMap: null == iconMap
+          ? _value._iconMap
+          : iconMap // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
     ));
   }
 }
@@ -1428,7 +1441,9 @@ class _$ProxiesStyleImpl implements _ProxiesStyle {
       this.sortType = ProxiesSortType.none,
       this.layout = ProxiesLayout.standard,
       this.iconStyle = ProxiesIconStyle.standard,
-      this.cardType = ProxyCardType.expand});
+      this.cardType = ProxyCardType.expand,
+      final Map<String, String> iconMap = const {}})
+      : _iconMap = iconMap;
 
   factory _$ProxiesStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProxiesStyleImplFromJson(json);
@@ -1448,10 +1463,18 @@ class _$ProxiesStyleImpl implements _ProxiesStyle {
   @override
   @JsonKey()
   final ProxyCardType cardType;
+  final Map<String, String> _iconMap;
+  @override
+  @JsonKey()
+  Map<String, String> get iconMap {
+    if (_iconMap is EqualUnmodifiableMapView) return _iconMap;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_iconMap);
+  }
 
   @override
   String toString() {
-    return 'ProxiesStyle(type: $type, sortType: $sortType, layout: $layout, iconStyle: $iconStyle, cardType: $cardType)';
+    return 'ProxiesStyle(type: $type, sortType: $sortType, layout: $layout, iconStyle: $iconStyle, cardType: $cardType, iconMap: $iconMap)';
   }
 
   @override
@@ -1466,13 +1489,14 @@ class _$ProxiesStyleImpl implements _ProxiesStyle {
             (identical(other.iconStyle, iconStyle) ||
                 other.iconStyle == iconStyle) &&
             (identical(other.cardType, cardType) ||
-                other.cardType == cardType));
+                other.cardType == cardType) &&
+            const DeepCollectionEquality().equals(other._iconMap, _iconMap));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, type, sortType, layout, iconStyle, cardType);
+  int get hashCode => Object.hash(runtimeType, type, sortType, layout,
+      iconStyle, cardType, const DeepCollectionEquality().hash(_iconMap));
 
   @JsonKey(ignore: true)
   @override
@@ -1494,7 +1518,8 @@ abstract class _ProxiesStyle implements ProxiesStyle {
       final ProxiesSortType sortType,
       final ProxiesLayout layout,
       final ProxiesIconStyle iconStyle,
-      final ProxyCardType cardType}) = _$ProxiesStyleImpl;
+      final ProxyCardType cardType,
+      final Map<String, String> iconMap}) = _$ProxiesStyleImpl;
 
   factory _ProxiesStyle.fromJson(Map<String, dynamic> json) =
       _$ProxiesStyleImpl.fromJson;
@@ -1509,6 +1534,8 @@ abstract class _ProxiesStyle implements ProxiesStyle {
   ProxiesIconStyle get iconStyle;
   @override
   ProxyCardType get cardType;
+  @override
+  Map<String, String> get iconMap;
   @override
   @JsonKey(ignore: true)
   _$$ProxiesStyleImplCopyWith<_$ProxiesStyleImpl> get copyWith =>

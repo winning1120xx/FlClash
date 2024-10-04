@@ -149,8 +149,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "dnsDesc":
             MessageLookupByLibrary.simpleMessage("Update DNS related settings"),
         "dnsMode": MessageLookupByLibrary.simpleMessage("DNS mode"),
-        "dnsResetTip":
-            MessageLookupByLibrary.simpleMessage("Make sure to reset the DNS"),
         "doYouWantToPass":
             MessageLookupByLibrary.simpleMessage("Do you want to pass"),
         "domain": MessageLookupByLibrary.simpleMessage("Domain"),
@@ -384,10 +382,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "requestsDesc": MessageLookupByLibrary.simpleMessage(
             "View recently request records"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
-        "resetDns": MessageLookupByLibrary.simpleMessage("Reset dns"),
-        "resetNetwork": MessageLookupByLibrary.simpleMessage("Reset network"),
-        "resetNetworkTip": MessageLookupByLibrary.simpleMessage(
-            "Make sure to reset the network"),
+        "resetTip": MessageLookupByLibrary.simpleMessage("Make sure to reset"),
         "resources": MessageLookupByLibrary.simpleMessage("Resources"),
         "resourcesDesc": MessageLookupByLibrary.simpleMessage(
             "External resource related info"),

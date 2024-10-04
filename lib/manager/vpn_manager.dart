@@ -42,7 +42,7 @@ class _VpnContainerState extends State<VpnManager> {
       selector: (_, config, clashConfig) => VPNState(
         accessControl: config.accessControl,
         vpnProps: config.vpnProps,
-        enable: clashConfig.tun.enable,
+        stack: clashConfig.tun.stack,
       ),
       shouldRebuild: (prev, next) {
         if (prev != next) {

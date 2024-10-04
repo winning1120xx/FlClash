@@ -3889,7 +3889,7 @@ VPNState _$VPNStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$VPNState {
   AccessControl? get accessControl => throw _privateConstructorUsedError;
-  bool get enable => throw _privateConstructorUsedError;
+  TunStack get stack => throw _privateConstructorUsedError;
   VpnProps get vpnProps => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -3903,7 +3903,7 @@ abstract class $VPNStateCopyWith<$Res> {
   factory $VPNStateCopyWith(VPNState value, $Res Function(VPNState) then) =
       _$VPNStateCopyWithImpl<$Res, VPNState>;
   @useResult
-  $Res call({AccessControl? accessControl, bool enable, VpnProps vpnProps});
+  $Res call({AccessControl? accessControl, TunStack stack, VpnProps vpnProps});
 
   $AccessControlCopyWith<$Res>? get accessControl;
   $VpnPropsCopyWith<$Res> get vpnProps;
@@ -3923,7 +3923,7 @@ class _$VPNStateCopyWithImpl<$Res, $Val extends VPNState>
   @override
   $Res call({
     Object? accessControl = freezed,
-    Object? enable = null,
+    Object? stack = null,
     Object? vpnProps = null,
   }) {
     return _then(_value.copyWith(
@@ -3931,10 +3931,10 @@ class _$VPNStateCopyWithImpl<$Res, $Val extends VPNState>
           ? _value.accessControl
           : accessControl // ignore: cast_nullable_to_non_nullable
               as AccessControl?,
-      enable: null == enable
-          ? _value.enable
-          : enable // ignore: cast_nullable_to_non_nullable
-              as bool,
+      stack: null == stack
+          ? _value.stack
+          : stack // ignore: cast_nullable_to_non_nullable
+              as TunStack,
       vpnProps: null == vpnProps
           ? _value.vpnProps
           : vpnProps // ignore: cast_nullable_to_non_nullable
@@ -3971,7 +3971,7 @@ abstract class _$$VPNStateImplCopyWith<$Res>
       __$$VPNStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AccessControl? accessControl, bool enable, VpnProps vpnProps});
+  $Res call({AccessControl? accessControl, TunStack stack, VpnProps vpnProps});
 
   @override
   $AccessControlCopyWith<$Res>? get accessControl;
@@ -3991,7 +3991,7 @@ class __$$VPNStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? accessControl = freezed,
-    Object? enable = null,
+    Object? stack = null,
     Object? vpnProps = null,
   }) {
     return _then(_$VPNStateImpl(
@@ -3999,10 +3999,10 @@ class __$$VPNStateImplCopyWithImpl<$Res>
           ? _value.accessControl
           : accessControl // ignore: cast_nullable_to_non_nullable
               as AccessControl?,
-      enable: null == enable
-          ? _value.enable
-          : enable // ignore: cast_nullable_to_non_nullable
-              as bool,
+      stack: null == stack
+          ? _value.stack
+          : stack // ignore: cast_nullable_to_non_nullable
+              as TunStack,
       vpnProps: null == vpnProps
           ? _value.vpnProps
           : vpnProps // ignore: cast_nullable_to_non_nullable
@@ -4016,7 +4016,7 @@ class __$$VPNStateImplCopyWithImpl<$Res>
 class _$VPNStateImpl implements _VPNState {
   const _$VPNStateImpl(
       {required this.accessControl,
-      required this.enable,
+      required this.stack,
       required this.vpnProps});
 
   factory _$VPNStateImpl.fromJson(Map<String, dynamic> json) =>
@@ -4025,13 +4025,13 @@ class _$VPNStateImpl implements _VPNState {
   @override
   final AccessControl? accessControl;
   @override
-  final bool enable;
+  final TunStack stack;
   @override
   final VpnProps vpnProps;
 
   @override
   String toString() {
-    return 'VPNState(accessControl: $accessControl, enable: $enable, vpnProps: $vpnProps)';
+    return 'VPNState(accessControl: $accessControl, stack: $stack, vpnProps: $vpnProps)';
   }
 
   @override
@@ -4041,14 +4041,14 @@ class _$VPNStateImpl implements _VPNState {
             other is _$VPNStateImpl &&
             (identical(other.accessControl, accessControl) ||
                 other.accessControl == accessControl) &&
-            (identical(other.enable, enable) || other.enable == enable) &&
+            (identical(other.stack, stack) || other.stack == stack) &&
             (identical(other.vpnProps, vpnProps) ||
                 other.vpnProps == vpnProps));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, accessControl, enable, vpnProps);
+  int get hashCode => Object.hash(runtimeType, accessControl, stack, vpnProps);
 
   @JsonKey(ignore: true)
   @override
@@ -4067,7 +4067,7 @@ class _$VPNStateImpl implements _VPNState {
 abstract class _VPNState implements VPNState {
   const factory _VPNState(
       {required final AccessControl? accessControl,
-      required final bool enable,
+      required final TunStack stack,
       required final VpnProps vpnProps}) = _$VPNStateImpl;
 
   factory _VPNState.fromJson(Map<String, dynamic> json) =
@@ -4076,7 +4076,7 @@ abstract class _VPNState implements VPNState {
   @override
   AccessControl? get accessControl;
   @override
-  bool get enable;
+  TunStack get stack;
   @override
   VpnProps get vpnProps;
   @override

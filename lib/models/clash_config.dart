@@ -1,6 +1,5 @@
 // ignore_for_file: invalid_annotation_target
 
-import 'package:collection/collection.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/state.dart';
 import 'package:flutter/material.dart';
@@ -328,7 +327,7 @@ class ClashConfig extends ChangeNotifier {
   GeoXMap get geoXUrl => _geoXUrl;
 
   set geoXUrl(GeoXMap value) {
-    if (!const MapEquality<String, String>().equals(value, _geoXUrl)) {
+    if (!stringAndStringMapEquality.equals(value, _geoXUrl)) {
       _geoXUrl = value;
       notifyListeners();
     }
@@ -338,7 +337,7 @@ class ClashConfig extends ChangeNotifier {
   HostsMap get hosts => _hosts;
 
   set hosts(HostsMap value) {
-    if (!const MapEquality<String, String>().equals(value, _hosts)) {
+    if (!stringAndStringMapEquality.equals(value, _hosts)) {
       _hosts = value;
       notifyListeners();
     }

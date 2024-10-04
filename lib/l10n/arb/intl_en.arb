@@ -287,7 +287,6 @@
   "geoipCode": "Geoip code",
   "ipcidr": "Ipcidr",
   "domain": "Domain",
-  "resetDns": "Reset dns",
   "reset": "Reset",
   "action_view": "Show/Hide",
   "action_start": "Start/Stop",
@@ -304,7 +303,6 @@
   "hotkeyConflict": "Hotkey conflict",
   "remove": "Remove",
   "noHotKey": "No HotKey",
-  "dnsResetTip": "Make sure to reset the DNS",
   "noNetwork": "No network",
   "ipv6InboundDesc": "Allow IPv6 inbound",
   "exportLogs": "Export logs",
@@ -317,6 +315,5 @@
   "networkDesc": "Modify network-related settings",
   "bypassDomain": "Bypass domain",
   "bypassDomainDesc": "Only takes effect when the system proxy is enabled",
-  "resetNetwork": "Reset network",
-  "resetNetworkTip": "Make sure to reset the network"
+  "resetTip": "Make sure to reset"
 }

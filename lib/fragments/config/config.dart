@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/fragments/config/dns.dart';
 import 'package:fl_clash/fragments/config/general.dart';

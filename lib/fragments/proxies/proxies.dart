@@ -57,23 +57,23 @@ class _ProxiesFragmentState extends State<ProxiesFragment> {
             width: 8,
           )
         ] else ...[
-          // IconButton(
-          //   onPressed: () {
-          //     showSheet(
-          //       title: appLocalizations.style,
-          //       context: context,
-          //       builder: (context) {
-          //         return const ListStyleSetting();
-          //       },
-          //     );
-          //   },
-          //   icon: const Icon(
-          //     Icons.style_outlined,
-          //   ),
-          // ),
-          // const SizedBox(
-          //   width: 8,
-          // )
+          IconButton(
+            onPressed: () {
+              showSheet(
+                title: "图标配置",
+                context: context,
+                builder: (context) {
+                  return const GroupIconSetting();
+                },
+              );
+            },
+            icon: const Icon(
+              Icons.style_outlined,
+            ),
+          ),
+          const SizedBox(
+            width: 8,
+          )
         ],
         IconButton(
           onPressed: () {
@@ -81,7 +81,7 @@ class _ProxiesFragmentState extends State<ProxiesFragment> {
               title: appLocalizations.proxiesSetting,
               context: context,
               builder: (context) {
-                return const ProxiesSettingWidget();
+                return const ProxiesSetting();
               },
             );
           },

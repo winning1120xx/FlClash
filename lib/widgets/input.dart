@@ -142,7 +142,7 @@ class _InputDialogState extends State<InputDialog> {
   }
 }
 
-class UpdatePage<T> extends StatelessWidget {
+class ListPage<T> extends StatelessWidget {
   final String title;
   final Iterable<T> items;
   final Widget Function(T item) titleBuilder;
@@ -150,7 +150,7 @@ class UpdatePage<T> extends StatelessWidget {
   final Function(T item) onAdd;
   final Function(T item) onRemove;
 
-  const UpdatePage({
+  const ListPage({
     super.key,
     required this.title,
     required this.items,
@@ -307,7 +307,6 @@ class _AddDialogState extends State<AddDialog> {
                   minLines: 1,
                   controller: keyController,
                   decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.key),
                     border: const OutlineInputBorder(),
                     labelText: appLocalizations.key,
                   ),
@@ -323,7 +322,6 @@ class _AddDialogState extends State<AddDialog> {
                 minLines: 1,
                 controller: valueController,
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.label),
                   border: const OutlineInputBorder(),
                   labelText: appLocalizations.value,
                 ),

@@ -215,7 +215,7 @@ class HostsItem extends StatelessWidget {
               !const MapEquality<String, String>().equals(prev, next),
           builder: (_, hosts, ___) {
             final entries = hosts.entries;
-            return UpdatePage(
+            return ListPage(
               title: "Hosts",
               items: entries,
               titleBuilder: (item) => Text(item.key),

@@ -1,6 +1,4 @@
 import 'dart:math';
-
-import 'package:collection/collection.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
@@ -120,8 +118,7 @@ class ProxiesTabFragmentState extends State<ProxiesTabFragment>
         );
       },
       shouldRebuild: (prev, next) {
-        if (!const ListEquality<String>()
-            .equals(prev.groupNames, next.groupNames)) {
+        if (!stringListEquality.equals(prev.groupNames, next.groupNames)) {
           _tabController?.dispose();
           _tabController = null;
           return true;

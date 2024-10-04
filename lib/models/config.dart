@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:collection/collection.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:flutter/material.dart';
@@ -100,8 +98,6 @@ const defaultBypassDomain = [
   "192.168.*"
 ];
 
-const bypassDomainEquality = ListEquality<String>();
-
 const defaultVpnProps = VpnProps();
 
 @freezed
@@ -138,6 +134,7 @@ class ProxiesStyle with _$ProxiesStyle {
     @Default(ProxiesLayout.standard) ProxiesLayout layout,
     @Default(ProxiesIconStyle.standard) ProxiesIconStyle iconStyle,
     @Default(ProxyCardType.expand) ProxyCardType cardType,
+    @Default({}) Map<String, String> iconMap,
   }) = _ProxiesStyle;
 
   factory ProxiesStyle.fromJson(Map<String, Object?>? json) =>
@@ -267,7 +264,7 @@ class Config extends ChangeNotifier {
   Set<String> get currentUnfoldSet => currentProfile?.unfoldSet ?? {};
 
   updateCurrentUnfoldSet(Set<String> value) {
-    if (!const SetEquality<String>().equals(currentUnfoldSet, value)) {
+    if (!stringSetEquality.equals(currentUnfoldSet, value)) {
       _setProfile(
         currentProfile!.copyWith(
           unfoldSet: value,

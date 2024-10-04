@@ -245,7 +245,7 @@ class ClashConfigState with _$ClashConfigState {
 class VPNState with _$VPNState {
   const factory VPNState({
     required AccessControl? accessControl,
-    required bool enable,
+    required TunStack stack,
     required VpnProps vpnProps,
   }) = _VPNState;
 

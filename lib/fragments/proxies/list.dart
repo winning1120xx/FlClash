@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:collection/collection.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
@@ -253,7 +252,7 @@ class _ProxiesListFragmentState extends State<ProxiesListFragment> {
         );
       },
       shouldRebuild: (prev, next) {
-        if (!const ListEquality<String>()
+        if (!stringListEquality
             .equals(prev.groupNames, next.groupNames)) {
           _headerStateNotifier.value = const ProxiesListHeaderSelectorState(
             offset: 0,
@@ -440,7 +439,7 @@ class _ListHeaderState extends State<ListHeader>
               ),
             child: GroupIcon(
               src: icon,
-              size: 48,
+              size: 42,
             ),
             ),
           ProxiesIconStyle.none => Container(),
@@ -615,3 +614,4 @@ class GroupIcon extends StatelessWidget {
     );
   }
 }
+
