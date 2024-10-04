@@ -100,6 +100,10 @@ const defaultBypassDomain = [
   "192.168.*"
 ];
 
+const bypassDomainEquality = ListEquality<String>();
+
+const defaultVpnProps = VpnProps();
+
 @freezed
 class VpnProps with _$VpnProps {
   const factory VpnProps({
@@ -168,7 +172,7 @@ class Config extends ChangeNotifier {
         _accessControl = const AccessControl(),
         _windowProps = const WindowProps(),
         _prueBlack = false,
-        _vpnProps = const VpnProps(),
+        _vpnProps = defaultVpnProps,
         _desktopProps = const DesktopProps(),
         _overrideDns = false,
         _appSetting = defaultAppSetting,

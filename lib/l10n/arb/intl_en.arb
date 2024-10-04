@@ -287,7 +287,7 @@
   "geoipCode": "Geoip code",
   "ipcidr": "Ipcidr",
   "domain": "Domain",
-  "resetDns": "Reset Dns",
+  "resetDns": "Reset dns",
   "reset": "Reset",
   "action_view": "Show/Hide",
   "action_start": "Start/Stop",
@@ -311,5 +311,12 @@
   "exportSuccess": "Export Success",
   "iconStyle": "Icon style",
   "onlyIcon": "Icon",
-  "noIcon": "None"
+  "noIcon": "None",
+  "stackMode": "Stack mode",
+  "network": "Network",
+  "networkDesc": "Modify network-related settings",
+  "bypassDomain": "Bypass domain",
+  "bypassDomainDesc": "Only takes effect when the system proxy is enabled",
+  "resetNetwork": "Reset network",
+  "resetNetworkTip": "Make sure to reset the network"
 }

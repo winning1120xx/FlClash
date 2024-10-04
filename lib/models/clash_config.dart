@@ -19,7 +19,7 @@ class Tun with _$Tun {
   const factory Tun({
     @Default(false) bool enable,
     @Default(appName) String device,
-    @Default(TunStack.gvisor) TunStack stack,
+    @Default(TunStack.mixed) TunStack stack,
     @JsonKey(name: "dns-hijack") @Default(["any:53"]) List<String> dnsHijack,
   }) = _Tun;
 
@@ -55,6 +55,8 @@ class FallbackFilter with _$FallbackFilter {
   factory FallbackFilter.fromJson(Map<String, Object?> json) =>
       _$FallbackFilterFromJson(json);
 }
+
+const defaultDns = Dns();
 
 @freezed
 class Dns with _$Dns {
@@ -158,7 +160,7 @@ class ClashConfig extends ChangeNotifier {
         _geodataLoader = geodataLoaderMemconservative,
         _externalController = '',
         _keepAliveInterval = defaultKeepAliveInterval,
-        _dns = const Dns(),
+        _dns = defaultDns,
         _geoXUrl = defaultGeoXMap,
         _rules = [],
         _hosts = {};

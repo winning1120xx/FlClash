@@ -3,6 +3,7 @@ package main
 import "C"
 import (
 	"context"
+	"core/state"
 	"errors"
 	"github.com/metacubex/mihomo/constant/features"
 	"github.com/metacubex/mihomo/hub/route"
@@ -524,7 +525,7 @@ func patchSelectGroup() {
 }
 
 func applyConfig() error {
-	cfg, err := config.ParseRawConfig(currentRawConfig)
+	cfg, err := config.ParseRawConfig(state.CurrentRawConfig)
 	if err != nil {
 		cfg, _ = config.ParseRawConfig(config.DefaultRawConfig())
 	}

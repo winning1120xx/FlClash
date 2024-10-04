@@ -89,6 +89,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "backupSuccess": MessageLookupByLibrary.simpleMessage("Backup success"),
         "bind": MessageLookupByLibrary.simpleMessage("Bind"),
         "blacklistMode": MessageLookupByLibrary.simpleMessage("Blacklist mode"),
+        "bypassDomain": MessageLookupByLibrary.simpleMessage("Bypass domain"),
+        "bypassDomainDesc": MessageLookupByLibrary.simpleMessage(
+            "Only takes effect when the system proxy is enabled"),
         "cancelFilterSystemApp":
             MessageLookupByLibrary.simpleMessage("Cancel filter system app"),
         "cancelSelectAll":
@@ -268,6 +271,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nameserver policy"),
         "nameserverPolicyDesc": MessageLookupByLibrary.simpleMessage(
             "Specify the corresponding nameserver policy"),
+        "network": MessageLookupByLibrary.simpleMessage("Network"),
+        "networkDesc": MessageLookupByLibrary.simpleMessage(
+            "Modify network-related settings"),
         "networkDetection":
             MessageLookupByLibrary.simpleMessage("Network detection"),
         "networkSpeed": MessageLookupByLibrary.simpleMessage("Network speed"),
@@ -378,7 +384,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "requestsDesc": MessageLookupByLibrary.simpleMessage(
             "View recently request records"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
-        "resetDns": MessageLookupByLibrary.simpleMessage("Reset Dns"),
+        "resetDns": MessageLookupByLibrary.simpleMessage("Reset dns"),
+        "resetNetwork": MessageLookupByLibrary.simpleMessage("Reset network"),
+        "resetNetworkTip": MessageLookupByLibrary.simpleMessage(
+            "Make sure to reset the network"),
         "resources": MessageLookupByLibrary.simpleMessage("Resources"),
         "resourcesDesc": MessageLookupByLibrary.simpleMessage(
             "External resource related info"),
@@ -401,6 +410,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "size": MessageLookupByLibrary.simpleMessage("Size"),
         "sort": MessageLookupByLibrary.simpleMessage("Sort"),
         "source": MessageLookupByLibrary.simpleMessage("Source"),
+        "stackMode": MessageLookupByLibrary.simpleMessage("Stack mode"),
         "standard": MessageLookupByLibrary.simpleMessage("Standard"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "startVpn": MessageLookupByLibrary.simpleMessage("Starting VPN..."),

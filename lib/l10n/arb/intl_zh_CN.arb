@@ -311,5 +311,12 @@
   "exportSuccess": "导出成功",
   "iconStyle": "图标样式",
   "onlyIcon": "仅图标",
-  "noIcon": "无图标"
+  "noIcon": "无图标",
+  "stackMode": "栈模式",
+  "network": "网络",
+  "networkDesc": "修改网络相关设置",
+  "bypassDomain": "排除域名",
+  "bypassDomainDesc": "仅在系统代理启用时生效",
+  "resetNetwork": "重置网络",
+  "resetNetworkTip": "确定要重置网络吗?"
 }

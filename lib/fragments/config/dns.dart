@@ -804,7 +804,7 @@ class DnsListView extends StatelessWidget {
                   text: appLocalizations.dnsResetTip,
                 ),
                 onTab: () {
-                  globalState.appController.clashConfig.dns = const Dns();
+                  globalState.appController.clashConfig.dns = defaultDns;
                   Navigator.of(context).pop();
                 });
           },

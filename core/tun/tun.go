@@ -5,7 +5,6 @@ package tun
 import "C"
 import (
 	"core/state"
-	"github.com/metacubex/mihomo/constant"
 	LC "github.com/metacubex/mihomo/listener/config"
 	"github.com/metacubex/mihomo/listener/sing_tun"
 	"github.com/metacubex/mihomo/log"
@@ -47,8 +46,8 @@ func Start(fd int) (*sing_tun.Listener, error) {
 
 	options := LC.Tun{
 		Enable:              true,
-		Device:              sing_tun.InterfaceName,
-		Stack:               constant.TunMixed,
+		Device:              state.CurrentRawConfig.Tun.Device,
+		Stack:               state.CurrentRawConfig.Tun.Stack,
 		DNSHijack:           dnsHijack,
 		AutoRoute:           false,
 		AutoDetectInterface: false,

@@ -2930,10 +2930,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Reset Dns`
+  /// `Reset dns`
   String get resetDns {
     return Intl.message(
-      'Reset Dns',
+      'Reset dns',
       name: 'resetDns',
       desc: '',
       args: [],
@@ -3175,6 +3175,76 @@ class AppLocalizations {
     return Intl.message(
       'None',
       name: 'noIcon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stack mode`
+  String get stackMode {
+    return Intl.message(
+      'Stack mode',
+      name: 'stackMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network`
+  String get network {
+    return Intl.message(
+      'Network',
+      name: 'network',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Modify network-related settings`
+  String get networkDesc {
+    return Intl.message(
+      'Modify network-related settings',
+      name: 'networkDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bypass domain`
+  String get bypassDomain {
+    return Intl.message(
+      'Bypass domain',
+      name: 'bypassDomain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Only takes effect when the system proxy is enabled`
+  String get bypassDomainDesc {
+    return Intl.message(
+      'Only takes effect when the system proxy is enabled',
+      name: 'bypassDomainDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset network`
+  String get resetNetwork {
+    return Intl.message(
+      'Reset network',
+      name: 'resetNetwork',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make sure to reset the network`
+  String get resetNetworkTip {
+    return Intl.message(
+      'Make sure to reset the network',
+      name: 'resetNetworkTip',
       desc: '',
       args: [],
     );

@@ -31,8 +31,6 @@ import (
 	"github.com/metacubex/mihomo/tunnel/statistic"
 )
 
-var currentRawConfig = config.DefaultRawConfig()
-
 var configParams = ConfigExtendedParams{}
 
 var externalProviders = map[string]cp.Provider{}
@@ -125,7 +123,7 @@ func updateConfig(s *C.char, port C.longlong) {
 		}
 		configParams = params.Params
 		prof := decorationConfig(params.ProfileId, params.Config)
-		currentRawConfig = prof
+		state.CurrentRawConfig = prof
 		err = applyConfig()
 		if err != nil {
 			bridge.SendToPort(i, err.Error())
