@@ -19,7 +19,7 @@ func getCurrentProfileName() *C.char {
 func getAndroidVpnOptions() *C.char {
 	options := state.AndroidVpnOptions{
 		Enable:           state.CurrentState.Enable,
-		Port:             currentRawConfig.MixedPort,
+		Port:             state.CurrentRawConfig.MixedPort,
 		Ipv4Address:      state.DefaultIpv4Address,
 		Ipv6Address:      state.GetIpv6Address(),
 		AccessControl:    state.CurrentState.AccessControl,
