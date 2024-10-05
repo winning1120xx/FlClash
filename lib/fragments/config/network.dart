@@ -193,19 +193,10 @@ class BypassDomainItem extends StatelessWidget {
               title: appLocalizations.bypassDomain,
               items: bypassDomain,
               titleBuilder: (item) => Text(item),
-              onRemove: (value) {
+              onChange: (items){
                 final config = globalState.appController.config;
                 config.vpnProps = config.vpnProps.copyWith(
-                  bypassDomain: List.from(config.vpnProps.bypassDomain)
-                    ..remove(value),
-                );
-              },
-              onAdd: (value) {
-                final config = globalState.appController.config;
-                final vpnProps = config.vpnProps;
-                if (vpnProps.bypassDomain.contains(value)) return;
-                config.vpnProps = vpnProps.copyWith(
-                  bypassDomain: List.from(vpnProps.bypassDomain)..add(value),
+                  bypassDomain: List.from(items),
                 );
               },
             );

@@ -60,12 +60,10 @@ class _ProxiesFragmentState extends State<ProxiesFragment> {
         ] else ...[
           IconButton(
             onPressed: () {
-              showSheet(
-                title: "图标配置",
-                context: context,
-                builder: (context) {
-                  return const GroupIconSetting();
-                },
+              showExtendPage(
+                context,
+                title: appLocalizations.iconConfiguration,
+                body: const GroupIconSetting(),
               );
             },
             icon: const Icon(

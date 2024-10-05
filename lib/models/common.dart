@@ -431,3 +431,14 @@ class HotKeyAction with _$HotKeyAction {
       _$HotKeyActionFromJson(json);
 }
 
+
+typedef Validator = String? Function(String? value);
+
+@freezed
+class Field with _$Field {
+  const factory Field({
+    required String label,
+    required String value,
+    Validator? validator,
+  }) = _Field;
+}

@@ -250,8 +250,7 @@
   "dnsDesc": "更新DNS相关设置",
   "key": "键",
   "value": "值",
-  "keyNotEmpty": "键不能为空",
-  "valueNotEmpty": "值不能为空",
+  "notEmpty": "不能为空",
   "hostsDesc": "追加Hosts",
   "vpnTip": "重启VPN后改变生效",
   "vpnEnableDesc": "通过VpnService自动路由系统所有流量",
@@ -315,5 +314,8 @@
   "networkDesc": "修改网络相关设置",
   "bypassDomain": "排除域名",
   "bypassDomainDesc": "仅在系统代理启用时生效",
-  "resetTip": "确定要重置吗?"
+  "resetTip": "确定要重置吗?",
+  "regExp": "正则",
+  "icon": "图片",
+  "iconConfiguration": "图片配置"
 }

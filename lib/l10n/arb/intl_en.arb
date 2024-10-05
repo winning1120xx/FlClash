@@ -250,8 +250,7 @@
   "dnsDesc": "Update DNS related settings",
   "key": "Key",
   "value": "Value",
-  "keyNotEmpty": "The key cannot be empty",
-  "valueNotEmpty": "The value cannot be empty",
+  "notEmpty": "Cannot be empty",
   "hostsDesc": "Add Hosts",
   "vpnTip": "Changes take effect after restarting the VPN",
   "vpnEnableDesc": "Auto routes all system traffic through VpnService",
@@ -315,5 +314,8 @@
   "networkDesc": "Modify network-related settings",
   "bypassDomain": "Bypass domain",
   "bypassDomainDesc": "Only takes effect when the system proxy is enabled",
-  "resetTip": "Make sure to reset"
+  "resetTip": "Make sure to reset",
+  "regExp": "RegExp",
+  "icon": "Icon",
+  "iconConfiguration": "Icon configuration"
 }

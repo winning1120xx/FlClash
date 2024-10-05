@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/state.dart';
@@ -8,15 +9,48 @@ import 'package:provider/provider.dart';
 class GroupIconSetting extends StatelessWidget {
   const GroupIconSetting({super.key});
 
-  _handleAdd() async {
+  _handleAddOrEdit([MapEntry<String, String>? item]) async {
     final value = await globalState.showCommonDialog<MapEntry<String, String>>(
       child: AddDialog(
-        defaultKey: "",
-        defaultValue: "",
-        title: "图标配置",
+        keyField: Field(
+          label: appLocalizations.regExp,
+          value: item?.key ?? "",
+        ),
+        valueField: Field(
+          label: appLocalizations.icon,
+          value: item?.value ?? "",
+        ),
+        title: appLocalizations.iconConfiguration,
       ),
     );
-    print(value);
+    if (value == null) {
+      return;
+    }
+    final config = globalState.appController.config;
+    final entries = List<MapEntry<String, String>>.from(
+      config.proxiesStyle.iconMap.entries,
+    );
+    if (item != null) {
+      final index = entries.indexWhere(
+        (entry) => entry.key == item.key,
+      );
+      if (index != -1) {
+        entries[index] = value;
+      }
+      entries[index] = value;
+    } else {
+      entries.add(value);
+    }
+    config.proxiesStyle = config.proxiesStyle.copyWith(
+      iconMap: Map.fromEntries(entries),
+    );
+  }
+
+  _handleDelete(MapEntry<String, String> item) async {
+    final config = globalState.appController.config;
+    config.proxiesStyle = config.proxiesStyle.copyWith(
+      iconMap: Map.from(config.proxiesStyle.iconMap)..remove(item.key),
+    );
   }
 
   @override
@@ -24,7 +58,7 @@ class GroupIconSetting extends StatelessWidget {
     return FloatLayout(
       floatingWidget: FloatWrapper(
         child: FloatingActionButton(
-          onPressed: _handleAdd,
+          onPressed: _handleAddOrEdit,
           child: const Icon(Icons.add),
         ),
       ),
@@ -39,13 +73,35 @@ class GroupIconSetting extends StatelessWidget {
             itemBuilder: (_, index) {
               final item = entries[index];
               return ListItem(
-                title: Text(item.key),
-                subtitle: Column(
-                  children: [
-                    Text(item.value),
-                  ],
+                leading: Container(
+                  height: 36,
+                  width: 36,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.secondaryContainer,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: CommonIcon(
+                    src: item.value,
+                    size: 24,
+                  ),
                 ),
-                onTap: () {},
+                title: Text(item.key),
+                subtitle: Text(
+                  item.value,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete_outline),
+                  onPressed: () {
+                    _handleDelete(item);
+                  },
+                ),
+                onTap: () {
+                  _handleAddOrEdit(item);
+                },
               );
             },
           );

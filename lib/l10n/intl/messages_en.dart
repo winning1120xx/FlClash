@@ -209,6 +209,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "hotkeyManagementDesc": MessageLookupByLibrary.simpleMessage(
             "Use keyboard to control applications"),
         "hours": MessageLookupByLibrary.simpleMessage("Hours"),
+        "icon": MessageLookupByLibrary.simpleMessage("Icon"),
+        "iconConfiguration":
+            MessageLookupByLibrary.simpleMessage("Icon configuration"),
         "iconStyle": MessageLookupByLibrary.simpleMessage("Icon style"),
         "importFromURL":
             MessageLookupByLibrary.simpleMessage("Import from URL"),
@@ -229,8 +232,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "keepAliveIntervalDesc":
             MessageLookupByLibrary.simpleMessage("Tcp keep alive interval"),
         "key": MessageLookupByLibrary.simpleMessage("Key"),
-        "keyNotEmpty":
-            MessageLookupByLibrary.simpleMessage("The key cannot be empty"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "layout": MessageLookupByLibrary.simpleMessage("Layout"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
@@ -283,6 +284,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noProxy": MessageLookupByLibrary.simpleMessage("No proxy"),
         "noProxyDesc": MessageLookupByLibrary.simpleMessage(
             "Please create a profile or add a valid profile"),
+        "notEmpty": MessageLookupByLibrary.simpleMessage("Cannot be empty"),
         "notSelectedTip": MessageLookupByLibrary.simpleMessage(
             "The current proxy group cannot be selected."),
         "nullConnectionsDesc":
@@ -372,6 +374,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Only recovery profiles"),
         "recoverySuccess":
             MessageLookupByLibrary.simpleMessage("Recovery success"),
+        "regExp": MessageLookupByLibrary.simpleMessage("RegExp"),
         "remote": MessageLookupByLibrary.simpleMessage("Remote"),
         "remoteBackupDesc":
             MessageLookupByLibrary.simpleMessage("Backup local data to WebDAV"),
@@ -459,8 +462,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "useSystemHosts":
             MessageLookupByLibrary.simpleMessage("Use system hosts"),
         "value": MessageLookupByLibrary.simpleMessage("Value"),
-        "valueNotEmpty":
-            MessageLookupByLibrary.simpleMessage("The value cannot be empty"),
         "view": MessageLookupByLibrary.simpleMessage("View"),
         "vpnDesc":
             MessageLookupByLibrary.simpleMessage("Modify VPN related settings"),

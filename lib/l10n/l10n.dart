@@ -2560,21 +2560,11 @@ class AppLocalizations {
     );
   }
 
-  /// `The key cannot be empty`
-  String get keyNotEmpty {
+  /// `Cannot be empty`
+  String get notEmpty {
     return Intl.message(
-      'The key cannot be empty',
-      name: 'keyNotEmpty',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `The value cannot be empty`
-  String get valueNotEmpty {
-    return Intl.message(
-      'The value cannot be empty',
-      name: 'valueNotEmpty',
+      'Cannot be empty',
+      name: 'notEmpty',
       desc: '',
       args: [],
     );
@@ -3215,6 +3205,36 @@ class AppLocalizations {
     return Intl.message(
       'Make sure to reset',
       name: 'resetTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `RegExp`
+  String get regExp {
+    return Intl.message(
+      'RegExp',
+      name: 'regExp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Icon`
+  String get icon {
+    return Intl.message(
+      'Icon',
+      name: 'icon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Icon configuration`
+  String get iconConfiguration {
+    return Intl.message(
+      'Icon configuration',
+      name: 'iconConfiguration',
       desc: '',
       args: [],
     );

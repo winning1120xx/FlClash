@@ -225,19 +225,11 @@ class FakeIpFilterItem extends StatelessWidget {
               title: appLocalizations.fakeipFilter,
               items: fakeIpFilter,
               titleBuilder: (item) => Text(item),
-              onRemove: (value) {
+              onChange: (items){
                 final clashConfig = globalState.appController.clashConfig;
                 final dns = clashConfig.dns;
                 clashConfig.dns = dns.copyWith(
-                  fakeIpFilter: List.from(dns.fakeIpFilter)..remove(value),
-                );
-              },
-              onAdd: (value) {
-                final clashConfig = globalState.appController.clashConfig;
-                final dns = clashConfig.dns;
-                if (fakeIpFilter.contains(value)) return;
-                clashConfig.dns = dns.copyWith(
-                  fakeIpFilter: List.from(dns.fakeIpFilter)..add(value),
+                  fakeIpFilter: List.from(items),
                 );
               },
             );
@@ -268,21 +260,11 @@ class DefaultNameserverItem extends StatelessWidget {
               title: appLocalizations.defaultNameserver,
               items: defaultNameserver,
               titleBuilder: (item) => Text(item),
-              onRemove: (value) {
+              onChange: (items){
                 final clashConfig = globalState.appController.clashConfig;
                 final dns = clashConfig.dns;
                 clashConfig.dns = dns.copyWith(
-                  defaultNameserver: List.from(dns.defaultNameserver)
-                    ..remove(value),
-                );
-              },
-              onAdd: (value) {
-                final clashConfig = globalState.appController.clashConfig;
-                final dns = clashConfig.dns;
-                if (defaultNameserver.contains(value)) return;
-                clashConfig.dns = dns.copyWith(
-                  defaultNameserver: List.from(dns.defaultNameserver)
-                    ..add(value),
+                  defaultNameserver: List.from(items),
                 );
               },
             );
@@ -313,19 +295,11 @@ class NameserverItem extends StatelessWidget {
               title: "域名服务器",
               items: nameserver,
               titleBuilder: (item) => Text(item),
-              onRemove: (value) {
+              onChange: (items){
                 final clashConfig = globalState.appController.clashConfig;
                 final dns = clashConfig.dns;
                 clashConfig.dns = dns.copyWith(
-                  nameserver: List.from(dns.nameserver)..remove(value),
-                );
-              },
-              onAdd: (value) {
-                final clashConfig = globalState.appController.clashConfig;
-                final dns = clashConfig.dns;
-                if (nameserver.contains(value)) return;
-                clashConfig.dns = dns.copyWith(
-                  nameserver: List.from(dns.nameserver)..add(value),
+                  nameserver: List.from(items),
                 );
               },
             );
@@ -410,20 +384,11 @@ class NameserverPolicyItem extends StatelessWidget {
               items: nameserverPolicy.entries,
               titleBuilder: (item) => Text(item.key),
               subtitleBuilder: (item) => Text(item.value),
-              onRemove: (value) {
+              onChange: (items){
                 final clashConfig = globalState.appController.clashConfig;
                 final dns = clashConfig.dns;
                 clashConfig.dns = dns.copyWith(
-                  nameserverPolicy: Map.from(dns.nameserverPolicy)
-                    ..remove(value.key),
-                );
-              },
-              onAdd: (value) {
-                final clashConfig = globalState.appController.clashConfig;
-                final dns = clashConfig.dns;
-                clashConfig.dns = dns.copyWith(
-                  nameserverPolicy: Map.from(dns.nameserverPolicy)
-                    ..addEntries([value]),
+                  nameserverPolicy: Map.fromEntries(items),
                 );
               },
             );
@@ -454,21 +419,11 @@ class ProxyServerNameserverItem extends StatelessWidget {
               title: appLocalizations.proxyNameserver,
               items: proxyServerNameserver,
               titleBuilder: (item) => Text(item),
-              onRemove: (value) {
+              onChange: (items){
                 final clashConfig = globalState.appController.clashConfig;
                 final dns = clashConfig.dns;
                 clashConfig.dns = dns.copyWith(
-                  proxyServerNameserver: List.from(dns.proxyServerNameserver)
-                    ..remove(value),
-                );
-              },
-              onAdd: (value) {
-                final clashConfig = globalState.appController.clashConfig;
-                final dns = clashConfig.dns;
-                if (proxyServerNameserver.contains(value)) return;
-                clashConfig.dns = dns.copyWith(
-                  proxyServerNameserver: List.from(dns.proxyServerNameserver)
-                    ..add(value),
+                  proxyServerNameserver: List.from(items),
                 );
               },
             );
@@ -499,19 +454,11 @@ class FallbackItem extends StatelessWidget {
               title: appLocalizations.fallback,
               items: fallback,
               titleBuilder: (item) => Text(item),
-              onRemove: (value) {
+              onChange: (items){
                 final clashConfig = globalState.appController.clashConfig;
                 final dns = clashConfig.dns;
                 clashConfig.dns = dns.copyWith(
-                  fallback: List.from(dns.fallback)..remove(value),
-                );
-              },
-              onAdd: (value) {
-                final clashConfig = globalState.appController.clashConfig;
-                final dns = clashConfig.dns;
-                if (fallback.contains(value)) return;
-                clashConfig.dns = dns.copyWith(
-                  fallback: List.from(dns.fallback)..add(value),
+                  fallback: List.from(items),
                 );
               },
             );
@@ -608,21 +555,12 @@ class GeositeItem extends StatelessWidget {
               title: "Geosite",
               items: geosite,
               titleBuilder: (item) => Text(item),
-              onRemove: (value) {
+              onChange: (items){
                 final clashConfig = globalState.appController.clashConfig;
                 final dns = clashConfig.dns;
                 clashConfig.dns = dns.copyWith(
                   fallbackFilter: dns.fallbackFilter.copyWith(
-                    geosite: List.from(geosite)..remove(value),
-                  ),
-                );
-              },
-              onAdd: (value) {
-                final clashConfig = globalState.appController.clashConfig;
-                final dns = clashConfig.dns;
-                clashConfig.dns = dns.copyWith(
-                  fallbackFilter: dns.fallbackFilter.copyWith(
-                    geosite: List.from(geosite)..add(value),
+                    geosite: List.from(items),
                   ),
                 );
               },
@@ -653,21 +591,12 @@ class IpcidrItem extends StatelessWidget {
               title: appLocalizations.ipcidr,
               items: ipcidr,
               titleBuilder: (item) => Text(item),
-              onRemove: (value) {
+              onChange: (items){
                 final clashConfig = globalState.appController.clashConfig;
                 final dns = clashConfig.dns;
                 clashConfig.dns = dns.copyWith(
                   fallbackFilter: dns.fallbackFilter.copyWith(
-                    ipcidr: List.from(ipcidr)..remove(value),
-                  ),
-                );
-              },
-              onAdd: (value) {
-                final clashConfig = globalState.appController.clashConfig;
-                final dns = clashConfig.dns;
-                clashConfig.dns = dns.copyWith(
-                  fallbackFilter: dns.fallbackFilter.copyWith(
-                    ipcidr: List.from(ipcidr)..add(value),
+                    ipcidr: List.from(items),
                   ),
                 );
               },
@@ -698,21 +627,12 @@ class DomainItem extends StatelessWidget {
               title: appLocalizations.domain,
               items: domain,
               titleBuilder: (item) => Text(item),
-              onRemove: (value) {
+              onChange: (items){
                 final clashConfig = globalState.appController.clashConfig;
                 final dns = clashConfig.dns;
                 clashConfig.dns = dns.copyWith(
                   fallbackFilter: dns.fallbackFilter.copyWith(
-                    domain: List.from(domain)..remove(value),
-                  ),
-                );
-              },
-              onAdd: (value) {
-                final clashConfig = globalState.appController.clashConfig;
-                final dns = clashConfig.dns;
-                clashConfig.dns = dns.copyWith(
-                  fallbackFilter: dns.fallbackFilter.copyWith(
-                    domain: List.from(domain)..add(value),
+                    domain: List.from(items),
                   ),
                 );
               },

@@ -169,6 +169,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hotkeyManagementDesc":
             MessageLookupByLibrary.simpleMessage("使用键盘控制应用程序"),
         "hours": MessageLookupByLibrary.simpleMessage("小时"),
+        "icon": MessageLookupByLibrary.simpleMessage("图片"),
+        "iconConfiguration": MessageLookupByLibrary.simpleMessage("图片配置"),
         "iconStyle": MessageLookupByLibrary.simpleMessage("图标样式"),
         "importFromURL": MessageLookupByLibrary.simpleMessage("从URL导入"),
         "infiniteTime": MessageLookupByLibrary.simpleMessage("长期有效"),
@@ -183,7 +185,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "keepAliveIntervalDesc":
             MessageLookupByLibrary.simpleMessage("TCP保持活动间隔"),
         "key": MessageLookupByLibrary.simpleMessage("键"),
-        "keyNotEmpty": MessageLookupByLibrary.simpleMessage("键不能为空"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
         "layout": MessageLookupByLibrary.simpleMessage("布局"),
         "light": MessageLookupByLibrary.simpleMessage("浅色"),
@@ -226,6 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "noProxy": MessageLookupByLibrary.simpleMessage("暂无代理"),
         "noProxyDesc":
             MessageLookupByLibrary.simpleMessage("请创建配置文件或者添加有效配置文件"),
+        "notEmpty": MessageLookupByLibrary.simpleMessage("不能为空"),
         "notSelectedTip": MessageLookupByLibrary.simpleMessage("当前代理组无法选中"),
         "nullConnectionsDesc": MessageLookupByLibrary.simpleMessage("暂无连接"),
         "nullCoreInfoDesc": MessageLookupByLibrary.simpleMessage("无法获取内核信息"),
@@ -292,6 +294,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "recoveryAll": MessageLookupByLibrary.simpleMessage("恢复所有数据"),
         "recoveryProfiles": MessageLookupByLibrary.simpleMessage("仅恢复配置文件"),
         "recoverySuccess": MessageLookupByLibrary.simpleMessage("恢复成功"),
+        "regExp": MessageLookupByLibrary.simpleMessage("正则"),
         "remote": MessageLookupByLibrary.simpleMessage("远程"),
         "remoteBackupDesc": MessageLookupByLibrary.simpleMessage("备份数据到WebDAV"),
         "remoteRecoveryDesc":
@@ -367,7 +370,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "useHosts": MessageLookupByLibrary.simpleMessage("使用Hosts"),
         "useSystemHosts": MessageLookupByLibrary.simpleMessage("使用系统Hosts"),
         "value": MessageLookupByLibrary.simpleMessage("值"),
-        "valueNotEmpty": MessageLookupByLibrary.simpleMessage("值不能为空"),
         "view": MessageLookupByLibrary.simpleMessage("查看"),
         "vpnDesc": MessageLookupByLibrary.simpleMessage("修改VPN相关设置"),
         "vpnEnableDesc":

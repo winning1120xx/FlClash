@@ -220,14 +220,9 @@ class HostsItem extends StatelessWidget {
               items: entries,
               titleBuilder: (item) => Text(item.key),
               subtitleBuilder: (item) => Text(item.value),
-              onRemove: (value) {
+              onChange: (items){
                 final clashConfig = globalState.appController.clashConfig;
-                clashConfig.hosts = Map.from(hosts)..remove(value.key);
-              },
-              onAdd: (value) {
-                final clashConfig = globalState.appController.clashConfig;
-                clashConfig.hosts = Map.from(clashConfig.hosts)
-                  ..addEntries([value]);
+                clashConfig.hosts = Map.fromEntries(items);
               },
             );
           },

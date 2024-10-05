@@ -1,8 +1,8 @@
+import 'package:fl_clash/common/app_localizations.dart';
 import 'package:fl_clash/common/constant.dart';
+import 'package:fl_clash/models/common.dart';
 import 'package:fl_clash/state.dart';
 import 'package:flutter/material.dart';
-
-import '../common/app_localizations.dart';
 import 'card.dart';
 import 'float_layout.dart';
 import 'list.dart';
@@ -147,45 +147,76 @@ class ListPage<T> extends StatelessWidget {
   final Iterable<T> items;
   final Widget Function(T item) titleBuilder;
   final Widget Function(T item)? subtitleBuilder;
-  final Function(T item) onAdd;
-  final Function(T item) onRemove;
+  final Function(Iterable<T> items) onChange;
 
   const ListPage({
     super.key,
     required this.title,
     required this.items,
     required this.titleBuilder,
-    required this.onRemove,
-    required this.onAdd,
+    required this.onChange,
     this.subtitleBuilder,
   });
 
   bool get isMap => items is Iterable<MapEntry>;
 
-  _handleEdit(T item) async {
-    if (isMap) {
-      item as MapEntry<String, String>;
-      final value = await globalState.showCommonDialog<T>(
-        child: AddDialog(
-          defaultKey: item.key,
-          defaultValue: item.value,
-          title: title,
+  _handleAddOrEdit([T? item]) async {
+    final value = await globalState.showCommonDialog<T>(
+      child: AddDialog(
+        keyField: isMap
+            ? Field(
+                label: appLocalizations.key,
+                value: (item as MapEntry<String, String>).key,
+              )
+            : null,
+        valueField: Field(
+          label: appLocalizations.value,
+          value:
+              isMap ? (item as MapEntry<String, String>).value : item as String,
         ),
+        title: title,
+      ),
+    );
+    if (value == null) return;
+    final entries = List<T>.from(
+      items,
+    );
+    if (item != null) {
+      final index = entries.indexWhere(
+        (entry) {
+          if (isMap) {
+            return (entry as MapEntry<String, String>).key ==
+                (item as MapEntry<String, String>).key;
+          }
+          return entry == item;
+        },
       );
-      if (value == null) return;
-      onAdd(value);
+      if (index != -1) {
+        entries[index] = value;
+      }
     } else {
-      item as String;
-      final value = await globalState.showCommonDialog<T>(
-        child: AddDialog(
-          defaultKey: null,
-          defaultValue: item,
-          title: title,
-        ),
-      );
-      if (value == null) return;
-      onAdd(value);
+      entries.add(value);
     }
+    onChange(entries);
+  }
+
+  _handleDelete(T item){
+    final entries = List<T>.from(
+      items,
+    );
+    final index = entries.indexWhere(
+          (entry) {
+        if (isMap) {
+          return (entry as MapEntry<String, String>).key ==
+              (item as MapEntry<String, String>).key;
+        }
+        return entry == item;
+      },
+    );
+    if (index != -1) {
+      entries.removeAt(index);
+    }
+    onChange(entries);
   }
 
   @override
@@ -194,15 +225,7 @@ class ListPage<T> extends StatelessWidget {
       floatingWidget: FloatWrapper(
         child: FloatingActionButton(
           onPressed: () async {
-            final value = await globalState.showCommonDialog<T>(
-              child: AddDialog(
-                defaultKey: isMap ? "" : null,
-                defaultValue: "",
-                title: title,
-              ),
-            );
-            if (value == null) return;
-            onAdd(value);
+            _handleAddOrEdit();
           },
           child: const Icon(Icons.add),
         ),
@@ -225,12 +248,12 @@ class ListPage<T> extends StatelessWidget {
                 trailing: IconButton(
                   icon: const Icon(Icons.delete_outline),
                   onPressed: () {
-                    onRemove(e);
+                    _handleDelete(e);
                   },
                 ),
               ),
               onPressed: () {
-                _handleEdit(e);
+                _handleAddOrEdit(e);
               },
             ),
           );
@@ -240,22 +263,16 @@ class ListPage<T> extends StatelessWidget {
   }
 }
 
-typedef Validator = String? Function(String value);
-
 class AddDialog extends StatefulWidget {
   final String title;
-  final String? defaultKey;
-  final String defaultValue;
-  final Validator? keyValidator;
-  final Validator? valueValidator;
+  final Field? keyField;
+  final Field valueField;
 
   const AddDialog({
     super.key,
     required this.title,
-    this.defaultKey,
-    this.keyValidator,
-    this.valueValidator,
-    required this.defaultValue,
+    this.keyField,
+    required this.valueField,
   });
 
   @override
@@ -263,29 +280,33 @@ class AddDialog extends StatefulWidget {
 }
 
 class _AddDialogState extends State<AddDialog> {
-  late TextEditingController keyController;
+  TextEditingController? keyController;
   late TextEditingController valueController;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Field? get keyField => widget.keyField;
+
+  Field get valueField => widget.valueField;
 
   @override
   void initState() {
     super.initState();
-    keyController = TextEditingController(
-      text: widget.defaultKey,
-    );
+    if (keyField != null) {
+      keyController = TextEditingController(
+        text: keyField!.value,
+      );
+    }
     valueController = TextEditingController(
-      text: widget.defaultValue,
+      text: valueField.value,
     );
   }
 
-  bool get hasKey => widget.defaultKey != null;
-
   _submit() {
     if (!_formKey.currentState!.validate()) return;
-    if (hasKey) {
+    if (keyField != null) {
       Navigator.of(context).pop<MapEntry<String, String>>(
         MapEntry(
-          keyController.text,
+          keyController!.text,
           valueController.text,
         ),
       );
@@ -307,23 +328,23 @@ class _AddDialogState extends State<AddDialog> {
           child: Wrap(
             runSpacing: 16,
             children: [
-              if (hasKey)
+              if (keyField != null)
                 TextFormField(
                   maxLines: 2,
                   minLines: 1,
                   controller: keyController,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    labelText: appLocalizations.key,
+                    labelText: keyField!.label,
                   ),
                   validator: (String? value) {
+                    if (keyField!.validator != null) {
+                      return keyField!.validator!(value);
+                    }
                     if (value == null || value.isEmpty) {
-                      return appLocalizations.keyNotEmpty;
+                      return appLocalizations.notEmpty;
                     }
-                    if(widget.keyValidator == null){
-                      return null;
-                    }
-                    widget.keyValidator!(value);
+                    return null;
                   },
                 ),
               TextFormField(
@@ -332,16 +353,15 @@ class _AddDialogState extends State<AddDialog> {
                 controller: valueController,
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
-                  labelText: appLocalizations.value,
+                  labelText: valueField.label,
                 ),
                 validator: (String? value) {
+                  if (valueField.validator != null) {
+                    return valueField.validator!(value);
+                  }
                   if (value == null || value.isEmpty) {
-                    return appLocalizations.valueNotEmpty;
+                    return appLocalizations.notEmpty;
                   }
-                  if(widget.valueValidator == null){
-                    return null;
-                  }
-                  widget.valueValidator!(value);
                   return null;
                 },
               ),

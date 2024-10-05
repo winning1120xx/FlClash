@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
+
 extension StringExtension on String {
   bool get isUrl {
     return RegExp(r'^(http|https|ftp)://').hasMatch(this);
@@ -22,12 +24,17 @@ extension StringExtension on String {
     return bom + byteData.buffer.asUint8List();
   }
 
-  bool get isBase64 {
+  Uint8List? get getBase64 {
+    final regExp = RegExp(r'base64,(.*)');
+    final match = regExp.firstMatch(this);
+    final realValue = match?.group(1) ?? '';
+    if (realValue.isEmpty) {
+      return null;
+    }
     try {
-      base64.decode(this);
-      return true;
-    } catch (_) {
-      return false;
+      return base64.decode(realValue);
+    } catch (e) {
+      return null;
     }
   }
 
@@ -35,7 +42,8 @@ extension StringExtension on String {
     try {
       RegExp(this);
       return true;
-    } catch (_) {
+    } catch (e) {
+      debugPrint(e.toString());
       return false;
     }
   }

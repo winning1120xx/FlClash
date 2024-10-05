@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -7,6 +8,7 @@ import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/card.dart';
 import 'package:fl_clash/widgets/text.dart';
+import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -428,7 +430,7 @@ class _ListHeaderState extends State<ListHeader>
                 borderRadius: BorderRadius.circular(16),
               ),
               clipBehavior: Clip.antiAlias,
-              child: GroupIcon(
+              child: CommonIcon(
                 src: icon,
                 size: 32,
               ),
@@ -437,7 +439,7 @@ class _ListHeaderState extends State<ListHeader>
               margin: const EdgeInsets.only(
                 right: 16,
               ),
-            child: GroupIcon(
+            child: CommonIcon(
               src: icon,
               size: 42,
             ),
@@ -576,41 +578,6 @@ class _ListHeaderState extends State<ListHeader>
       onPressed: () {
         _handleChange(groupName);
       },
-    );
-  }
-}
-
-class GroupIcon extends StatelessWidget {
-  final String src;
-  final double size;
-
-  const GroupIcon({
-    super.key,
-    required this.src,
-    required this.size,
-  });
-
-  Widget _defaultIcon() {
-    return Icon(
-      IconsExt.target,
-      size: size,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (src.isEmpty) {
-      return _defaultIcon();
-    }
-    if (src.isBase64) {
-      Image.asset(
-        src,
-        errorBuilder: (_, __, ___) => _defaultIcon(),
-      );
-    }
-    return CachedNetworkImage(
-      imageUrl: src,
-      errorWidget: (_, __, ___) => _defaultIcon(),
     );
   }
 }
