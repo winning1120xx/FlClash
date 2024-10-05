@@ -166,7 +166,8 @@ class ListPage<T> extends StatelessWidget {
         keyField: isMap
             ? Field(
                 label: appLocalizations.key,
-                value: (item as MapEntry<String, String>).key,
+                value:
+                    item == null ? "" : (item as MapEntry<String, String>).key,
               )
             : null,
         valueField: Field(
