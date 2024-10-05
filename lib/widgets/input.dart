@@ -171,8 +171,11 @@ class ListPage<T> extends StatelessWidget {
             : null,
         valueField: Field(
           label: appLocalizations.value,
-          value:
-              isMap ? (item as MapEntry<String, String>).value : item as String,
+          value: item == null
+              ? ""
+              : isMap
+                  ? (item as MapEntry<String, String>).value
+                  : item as String,
         ),
         title: title,
       ),
@@ -200,12 +203,12 @@ class ListPage<T> extends StatelessWidget {
     onChange(entries);
   }
 
-  _handleDelete(T item){
+  _handleDelete(T item) {
     final entries = List<T>.from(
       items,
     );
     final index = entries.indexWhere(
-          (entry) {
+      (entry) {
         if (isMap) {
           return (entry as MapEntry<String, String>).key ==
               (item as MapEntry<String, String>).key;
