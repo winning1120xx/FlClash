@@ -1,13 +1,9 @@
-import 'dart:convert';
 import 'dart:math';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/state.dart';
-import 'package:fl_clash/widgets/card.dart';
-import 'package:fl_clash/widgets/text.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -254,8 +250,7 @@ class _ProxiesListFragmentState extends State<ProxiesListFragment> {
         );
       },
       shouldRebuild: (prev, next) {
-        if (!stringListEquality
-            .equals(prev.groupNames, next.groupNames)) {
+        if (!stringListEquality.equals(prev.groupNames, next.groupNames)) {
           _headerStateNotifier.value = const ProxiesListHeaderSelectorState(
             offset: 0,
             currentIndex: 0,
@@ -417,35 +412,54 @@ class _ListHeaderState extends State<ListHeader>
     return Selector<Config, ProxiesIconStyle>(
       selector: (_, config) => config.proxiesStyle.iconStyle,
       builder: (_, iconStyle, child) {
-        return switch (iconStyle) {
-          ProxiesIconStyle.standard => Container(
-              height: 48,
-              width: 48,
-              margin: const EdgeInsets.only(
-                right: 16,
-              ),
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: context.colorScheme.secondaryContainer,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: CommonIcon(
-                src: icon,
-                size: 32,
-              ),
-            ),
-          ProxiesIconStyle.icon => Container(
-              margin: const EdgeInsets.only(
-                right: 16,
-              ),
-            child: CommonIcon(
-              src: icon,
-              size: 42,
-            ),
-            ),
-          ProxiesIconStyle.none => Container(),
-        };
+        return Selector<Config, String>(
+          selector: (_, config) {
+            final iconMapEntryList =
+                config.proxiesStyle.iconMap.entries.toList();
+            final index = iconMapEntryList.indexWhere((item) {
+              try{
+                return RegExp(item.key).hasMatch(groupName);
+              }catch(_){
+                return false;
+              }
+            });
+            if (index != -1) {
+              return iconMapEntryList[index].value;
+            }
+            return icon;
+          },
+          builder: (_, icon, __) {
+            return switch (iconStyle) {
+              ProxiesIconStyle.standard => Container(
+                  height: 48,
+                  width: 48,
+                  margin: const EdgeInsets.only(
+                    right: 16,
+                  ),
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: context.colorScheme.secondaryContainer,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: CommonIcon(
+                    src: icon,
+                    size: 32,
+                  ),
+                ),
+              ProxiesIconStyle.icon => Container(
+                  margin: const EdgeInsets.only(
+                    right: 16,
+                  ),
+                  child: CommonIcon(
+                    src: icon,
+                    size: 42,
+                  ),
+                ),
+              ProxiesIconStyle.none => Container(),
+            };
+          },
+        );
       },
     );
   }
@@ -581,4 +595,3 @@ class _ListHeaderState extends State<ListHeader>
     );
   }
 }
-

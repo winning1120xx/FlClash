@@ -3882,17 +3882,12 @@ abstract class _ClashConfigState implements ClashConfigState {
       throw _privateConstructorUsedError;
 }
 
-VPNState _$VPNStateFromJson(Map<String, dynamic> json) {
-  return _VPNState.fromJson(json);
-}
-
 /// @nodoc
 mixin _$VPNState {
   AccessControl? get accessControl => throw _privateConstructorUsedError;
   TunStack get stack => throw _privateConstructorUsedError;
   VpnProps get vpnProps => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $VPNStateCopyWith<VPNState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -4012,15 +4007,12 @@ class __$$VPNStateImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$VPNStateImpl implements _VPNState {
   const _$VPNStateImpl(
       {required this.accessControl,
       required this.stack,
       required this.vpnProps});
-
-  factory _$VPNStateImpl.fromJson(Map<String, dynamic> json) =>
-      _$$VPNStateImplFromJson(json);
 
   @override
   final AccessControl? accessControl;
@@ -4046,7 +4038,6 @@ class _$VPNStateImpl implements _VPNState {
                 other.vpnProps == vpnProps));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, accessControl, stack, vpnProps);
 
@@ -4055,13 +4046,6 @@ class _$VPNStateImpl implements _VPNState {
   @pragma('vm:prefer-inline')
   _$$VPNStateImplCopyWith<_$VPNStateImpl> get copyWith =>
       __$$VPNStateImplCopyWithImpl<_$VPNStateImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$VPNStateImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _VPNState implements VPNState {
@@ -4069,9 +4053,6 @@ abstract class _VPNState implements VPNState {
       {required final AccessControl? accessControl,
       required final TunStack stack,
       required final VpnProps vpnProps}) = _$VPNStateImpl;
-
-  factory _VPNState.fromJson(Map<String, dynamic> json) =
-      _$VPNStateImpl.fromJson;
 
   @override
   AccessControl? get accessControl;

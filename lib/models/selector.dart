@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'generated/selector.freezed.dart';
-part 'generated/selector.g.dart';
 
 @freezed
 class StartButtonSelectorState with _$StartButtonSelectorState {
@@ -217,6 +216,8 @@ class HttpOverridesState with _$HttpOverridesState {
   }) = _HttpOverridesState;
 }
 
+
+
 @freezed
 class ClashConfigState with _$ClashConfigState {
   const factory ClashConfigState({
@@ -248,7 +249,4 @@ class VPNState with _$VPNState {
     required TunStack stack,
     required VpnProps vpnProps,
   }) = _VPNState;
-
-  factory VPNState.fromJson(Map<String, Object?> json) =>
-      _$VPNStateFromJson(json);
 }
