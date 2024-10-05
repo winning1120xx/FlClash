@@ -6,6 +6,7 @@ import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'icon.dart';
 import 'providers.dart';
 import 'setting.dart';
 import 'tab.dart';

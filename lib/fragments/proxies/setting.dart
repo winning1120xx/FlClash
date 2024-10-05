@@ -255,25 +255,3 @@ class ProxiesSetting extends StatelessWidget {
     );
   }
 }
-
-class GroupIconSetting extends StatelessWidget {
-  const GroupIconSetting({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return FloatLayout(
-      floatingWidget: FloatWrapper(
-        child: FloatingActionButton(
-          onPressed: () async {},
-          child: const Icon(Icons.add),
-        ),
-      ),
-      child: Selector<Config, Map<String, String>>(
-        selector: (_, config) => config.proxiesStyle.iconMap,
-        builder: (_, iconMap, __) {
-          return Container();
-        },
-      ),
-    );
-  }
-}

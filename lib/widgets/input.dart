@@ -240,15 +240,21 @@ class ListPage<T> extends StatelessWidget {
   }
 }
 
+typedef Validator = String? Function(String value);
+
 class AddDialog extends StatefulWidget {
   final String title;
   final String? defaultKey;
   final String defaultValue;
+  final Validator? keyValidator;
+  final Validator? valueValidator;
 
   const AddDialog({
     super.key,
     required this.title,
     this.defaultKey,
+    this.keyValidator,
+    this.valueValidator,
     required this.defaultValue,
   });
 
@@ -314,7 +320,10 @@ class _AddDialogState extends State<AddDialog> {
                     if (value == null || value.isEmpty) {
                       return appLocalizations.keyNotEmpty;
                     }
-                    return null;
+                    if(widget.keyValidator == null){
+                      return null;
+                    }
+                    widget.keyValidator!(value);
                   },
                 ),
               TextFormField(
@@ -329,6 +338,10 @@ class _AddDialogState extends State<AddDialog> {
                   if (value == null || value.isEmpty) {
                     return appLocalizations.valueNotEmpty;
                   }
+                  if(widget.valueValidator == null){
+                    return null;
+                  }
+                  widget.valueValidator!(value);
                   return null;
                 },
               ),

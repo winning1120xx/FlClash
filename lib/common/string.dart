@@ -30,4 +30,13 @@ extension StringExtension on String {
       return false;
     }
   }
+
+  bool get isRegex {
+    try {
+      RegExp(this);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
 }
