@@ -19,7 +19,6 @@ class AndroidManager extends StatefulWidget {
 class _AndroidContainerState extends State<AndroidManager> {
   @override
   void initState() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.initState();
   }
 
@@ -34,23 +33,27 @@ class _AndroidContainerState extends State<AndroidManager> {
     );
   }
 
-  Widget _systemUiOverlayContainer(Widget child) {
+  Widget _systemUiContainer(Widget child) {
     return AnnotatedRegion(
-      value: SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Theme.of(context).brightness == Brightness.dark
-            ? Brightness.light
-            : Brightness.dark,
-        systemNavigationBarColor: Colors.transparent,
-        systemNavigationBarDividerColor: Colors.transparent,
+      value: SystemUiMode.edgeToEdge,
+      child: AnnotatedRegion(
+        value: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness:
+              Theme.of(context).brightness == Brightness.dark
+                  ? Brightness.light
+                  : Brightness.dark,
+          systemNavigationBarColor: Colors.transparent,
+          systemNavigationBarDividerColor: Colors.transparent,
+        ),
+        child: child,
       ),
-      child: child,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return _systemUiOverlayContainer(
+    return _systemUiContainer(
       _excludeContainer(widget.child),
     );
   }
