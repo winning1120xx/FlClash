@@ -123,8 +123,9 @@ class CommonScaffoldState extends State<CommonScaffold> {
                         Theme.of(context).brightness == Brightness.dark
                             ? Brightness.light
                             : Brightness.dark,
-                    systemNavigationBarColor:
-                        context.colorScheme.surfaceContainer,
+                    systemNavigationBarColor: widget.bottomNavigationBar != null
+                        ? context.colorScheme.surfaceContainer
+                        : context.colorScheme.surface,
                     systemNavigationBarDividerColor: Colors.transparent,
                   ),
                   automaticallyImplyLeading: widget.automaticallyImplyLeading,
