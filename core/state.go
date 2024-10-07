@@ -39,7 +39,7 @@ func getAndroidVpnOptions() *C.char {
 //export setState
 func setState(s *C.char) {
 	paramsString := C.GoString(s)
-	err := json.Unmarshal([]byte(paramsString), &state.CurrentState)
+	err := json.Unmarshal([]byte(paramsString), state.CurrentState)
 	if err != nil {
 		return
 	}

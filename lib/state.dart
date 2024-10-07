@@ -81,6 +81,8 @@ class GlobalState {
       return;
     }
     startTime ??= DateTime.now();
+    await preferences.saveClashConfig(clashConfig);
+    await preferences.saveConfig(config);
     await service?.init();
     startListenUpdate();
   }
