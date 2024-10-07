@@ -219,6 +219,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "networkDesc": MessageLookupByLibrary.simpleMessage("修改网络相关设置"),
         "networkDetection": MessageLookupByLibrary.simpleMessage("网络检测"),
         "networkSpeed": MessageLookupByLibrary.simpleMessage("网络速度"),
+        "noData": MessageLookupByLibrary.simpleMessage("暂无数据"),
         "noHotKey": MessageLookupByLibrary.simpleMessage("暂无快捷键"),
         "noIcon": MessageLookupByLibrary.simpleMessage("无图标"),
         "noInfo": MessageLookupByLibrary.simpleMessage("暂无信息"),

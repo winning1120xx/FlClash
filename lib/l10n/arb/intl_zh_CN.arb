@@ -317,5 +317,6 @@
   "resetTip": "确定要重置吗?",
   "regExp": "正则",
   "icon": "图片",
-  "iconConfiguration": "图片配置"
+  "iconConfiguration": "图片配置",
+  "noData": "暂无数据"
 }

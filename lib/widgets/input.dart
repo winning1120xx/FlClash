@@ -2,6 +2,7 @@ import 'package:fl_clash/common/app_localizations.dart';
 import 'package:fl_clash/common/constant.dart';
 import 'package:fl_clash/models/common.dart';
 import 'package:fl_clash/state.dart';
+import 'package:fl_clash/widgets/null_status.dart';
 import 'package:flutter/material.dart';
 import 'card.dart';
 import 'float_layout.dart';
@@ -145,16 +146,20 @@ class _InputDialogState extends State<InputDialog> {
 class ListPage<T> extends StatelessWidget {
   final String title;
   final Iterable<T> items;
+  final Key Function(T item)? keyBuilder;
   final Widget Function(T item) titleBuilder;
   final Widget Function(T item)? subtitleBuilder;
+  final Widget Function(T item)? leadingBuilder;
   final Function(Iterable<T> items) onChange;
 
   const ListPage({
     super.key,
     required this.title,
     required this.items,
+    this.keyBuilder,
     required this.titleBuilder,
     required this.onChange,
+    this.leadingBuilder,
     this.subtitleBuilder,
   });
 
@@ -223,30 +228,25 @@ class ListPage<T> extends StatelessWidget {
     onChange(entries);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return FloatLayout(
-      floatingWidget: FloatWrapper(
-        child: FloatingActionButton(
-          onPressed: () async {
-            _handleAddOrEdit();
-          },
-          child: const Icon(Icons.add),
-        ),
-      ),
-      child: ListView.builder(
+  Widget _buildList() {
+    final items = this.items.toList();
+    if (this.keyBuilder != null) {
+      return ReorderableListView.builder(
         padding: const EdgeInsets.only(
           bottom: 16 + 64,
           left: 16,
           right: 16,
         ),
+        // buildDefaultDragHandles: false,
         itemCount: items.length,
         itemBuilder: (_, index) {
-          final e = items.toList()[index];
+          final e = items[index];
           return Padding(
+            key: keyBuilder!(e),
             padding: const EdgeInsets.symmetric(vertical: 8),
             child: CommonCard(
               child: ListItem(
+                leading: leadingBuilder != null ? leadingBuilder!(e) : null,
                 title: titleBuilder(e),
                 subtitle: subtitleBuilder != null ? subtitleBuilder!(e) : null,
                 trailing: IconButton(
@@ -262,7 +262,65 @@ class ListPage<T> extends StatelessWidget {
             ),
           );
         },
+        onReorder: (oldIndex, newIndex) {
+          if (oldIndex < newIndex) {
+            newIndex -= 1;
+          }
+          final nextItems = List<T>.from(items);
+          final item = nextItems.removeAt(oldIndex);
+          nextItems.insert(newIndex, item);
+          onChange(nextItems);
+        },
+      );
+    } else {
+      return ListView.builder(
+        padding: const EdgeInsets.only(
+          bottom: 16 + 64,
+          left: 16,
+          right: 16,
+        ),
+        itemCount: items.length,
+        itemBuilder: (_, index) {
+          final e = items[index];
+          return Padding(
+            key: ObjectKey(e.toString()),
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: CommonCard(
+              child: ListItem(
+                leading: leadingBuilder != null ? leadingBuilder!(e) : null,
+                title: titleBuilder(e),
+                subtitle: subtitleBuilder != null ? subtitleBuilder!(e) : null,
+                trailing: IconButton(
+                  icon: const Icon(Icons.delete_outline),
+                  onPressed: () {
+                    _handleDelete(e);
+                  },
+                ),
+              ),
+              onPressed: () {
+                _handleAddOrEdit(e);
+              },
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatLayout(
+      floatingWidget: FloatWrapper(
+        child: FloatingActionButton(
+          onPressed: () async {
+            _handleAddOrEdit();
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
+      child: items.isEmpty
+          ? NullStatus(label: appLocalizations.noData)
+          : _buildList(),
     );
   }
 }

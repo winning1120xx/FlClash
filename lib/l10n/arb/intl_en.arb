@@ -317,5 +317,6 @@
   "resetTip": "Make sure to reset",
   "regExp": "RegExp",
   "icon": "Icon",
-  "iconConfiguration": "Icon configuration"
+  "iconConfiguration": "Icon configuration",
+  "noData": "No data"
 }

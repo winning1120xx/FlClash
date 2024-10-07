@@ -417,7 +417,11 @@ class Config extends ChangeNotifier {
   ProxiesStyle get proxiesStyle => _proxiesStyle;
 
   set proxiesStyle(ProxiesStyle value) {
-    if (_proxiesStyle != value) {
+    if (_proxiesStyle != value ||
+        !stringAndStringMapEntryIterableEquality.equals(
+          _proxiesStyle.iconMap.entries,
+          value.iconMap.entries,
+        )) {
       _proxiesStyle = value;
       notifyListeners();
     }

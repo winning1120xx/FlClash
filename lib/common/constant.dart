@@ -61,6 +61,8 @@ const externalProviderListEquality = ListEquality<ExternalProvider>();
 const packageListEquality = ListEquality<Package>();
 const hotKeyActionListEquality = ListEquality<HotKeyAction>();
 const stringAndStringMapEquality = MapEquality<String, String>();
+const stringAndStringMapEntryIterableEquality =
+    IterableEquality<MapEntry<String, String>>();
 const stringAndIntQMapEquality = MapEquality<String, int?>();
 const stringSetEquality = SetEquality<String>();
 const keyboardModifierListEquality = SetEquality<KeyboardModifier>();

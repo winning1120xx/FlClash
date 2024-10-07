@@ -276,6 +276,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "networkDetection":
             MessageLookupByLibrary.simpleMessage("Network detection"),
         "networkSpeed": MessageLookupByLibrary.simpleMessage("Network speed"),
+        "noData": MessageLookupByLibrary.simpleMessage("No data"),
         "noHotKey": MessageLookupByLibrary.simpleMessage("No HotKey"),
         "noIcon": MessageLookupByLibrary.simpleMessage("None"),
         "noInfo": MessageLookupByLibrary.simpleMessage("No info"),

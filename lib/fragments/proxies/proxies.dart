@@ -1,12 +1,11 @@
-import 'package:fl_clash/common/app_localizations.dart';
+import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/fragments/proxies/list.dart';
 import 'package:fl_clash/models/models.dart';
+import 'package:fl_clash/state.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'icon.dart';
 import 'providers.dart';
 import 'setting.dart';
 import 'tab.dart';
@@ -63,7 +62,49 @@ class _ProxiesFragmentState extends State<ProxiesFragment> {
               showExtendPage(
                 context,
                 title: appLocalizations.iconConfiguration,
-                body: const GroupIconSetting(),
+                body: Selector<Config, Map<String, String>>(
+                  selector: (_, config) => config.proxiesStyle.iconMap,
+                  shouldRebuild: (prev, next) {
+                    return !stringAndStringMapEntryIterableEquality.equals(
+                      prev.entries,
+                      next.entries,
+                    );
+                  },
+                  builder: (_, iconMap, __) {
+                    final entries = iconMap.entries.toList();
+                    return ListPage(
+                      title: appLocalizations.iconConfiguration,
+                      items: entries,
+                      keyBuilder: (item) => Key(item.key),
+                      titleBuilder: (item) => Text(item.key),
+                      leadingBuilder: (item) => Container(
+                        height: 48,
+                        width: 48,
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: context.colorScheme.secondaryContainer,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: CommonIcon(
+                          src: item.value,
+                          size: 32,
+                        ),
+                      ),
+                      subtitleBuilder: (item) => Text(
+                        item.value,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      onChange: (entries) {
+                        final config = globalState.appController.config;
+                        config.proxiesStyle = config.proxiesStyle.copyWith(
+                          iconMap: Map.fromEntries(entries),
+                        );
+                      },
+                    );
+                  },
+                ),
               );
             },
             icon: const Icon(
