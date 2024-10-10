@@ -26,7 +26,7 @@ jobs:
           for tag in $tags; do
             if [ -n "$previous" ]; then
               echo "## $tag" >> CHANGELOG.md
-              git log --pretty=format:"* %s (%h)" "$previous..$tag" >> CHANGELOG.md
+              git log --pretty=format:"%B" | awk 'NF {print "* " $0} !NF {print ""}' "$previous..$tag" >> CHANGELOG.md
               echo -e "\n" >> CHANGELOG.md
             fi
             previous=$tag
