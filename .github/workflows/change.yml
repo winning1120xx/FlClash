@@ -16,7 +16,7 @@ jobs:
 
       - name: Generate
         run: |
-          tags=$(git tag --sort=creatordate)
+          tags=$(git tag --merged $(git rev-parse HEAD) --sort=creatordate)
           previous=""
           if [ ! -f CHANGELOG.md ]; then
             echo "" > CHANGELOG.md
