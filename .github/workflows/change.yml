@@ -33,11 +33,12 @@ jobs:
           done
 
       - name: Commit
-        run: |
+        run: |  
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add CHANGELOG.md
+        
           if ! git diff --cached --quiet; then
-            git config --local user.email "action@github.com"
-            git config --local user.name "GitHub Action"
-            git add CHANGELOG.md
             git commit -m "Update Changelog"
             git push
           fi
