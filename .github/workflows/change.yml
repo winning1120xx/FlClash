@@ -3,7 +3,7 @@ name: change
 on:
   push:
     branches:
-      - 'main'
+      - '*'
 
 jobs:
   changelog:
@@ -14,37 +14,73 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Generate
+      - name: Generate release.md
         run: |
           tags=($(git tag --merged $(git rev-parse HEAD) --sort=-creatordate))
-          lastTag=""
-          previous=""
-          if [ -f CHANGELOG.md ]; then
-            lastTag=$(grep -oP '^## \K.*' CHANGELOG.md | head -n 1)
-          fi
-          echo "Previous Tag: $previous"
+          preTag=$(curl --silent "https://api.github.com/repos/chen08209/FlClash/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' || echo "")
+          currentTag=""
           for ((i = 0; i <= ${#tags[@]}; i++)); do
             if (( i < ${#tags[@]} )); then
               tag=${tags[$i]}
             else
               tag=""
             fi
-            if [ -n "$previous" ]; then
-              if [ "$(echo -e "$previous\n$lastTag" | sort -V | head -n 1)" == "$previous" ]; then
+            if [ -n "$currentTag" ]; then
+              if [ "$(echo -e "$currentTag\n$preTag" | sort -V | head -n 1)" == "$currentTag" ]; then
                 break
               fi
             fi
-            if [ -n "$previous" ]; then
-              echo "## $previous" >> NEW_CHANGELOG.md
+            if [ -n "$currentTag" ]; then
+              echo "## $currentTag" >> release.md
+              echo "" >> release.md
+              if [ -n "$tag" ]; then
+                git log --pretty=format:"%B" "$tag..$currentTag" | awk 'NF {print "- " $0} !NF {print ""}' >> release.md
+              else
+                git log --pretty=format:"%B" "$currentTag" | awk 'NF {print "- " $0} !NF {print ""}' >> release.md
+              fi
+              echo "" >> release.md
+            fi
+            currentTag=$tag
+          done
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact
+          path: ./release.md
+          retention-days: 7
+          overwrite: true
+
+      - name: Generate
+        run: |
+          tags=($(git tag --merged $(git rev-parse HEAD) --sort=-creatordate))
+          preTag=""
+          currentTag=""
+          if [ -f CHANGELOG.md ]; then
+            preTag=$(grep -oP '^## \K.*' CHANGELOG.md | head -n 1)
+          fi
+          for ((i = 0; i <= ${#tags[@]}; i++)); do
+            if (( i < ${#tags[@]} )); then
+              tag=${tags[$i]}
+            else
+              tag=""
+            fi
+            if [ -n "$currentTag" ]; then
+              if [ "$(echo -e "$currentTag\n$preTag" | sort -V | head -n 1)" == "$currentTag" ]; then
+                break
+              fi
+            fi
+            if [ -n "$currentTag" ]; then
+              echo "## $currentTag" >> NEW_CHANGELOG.md
               echo "" >> NEW_CHANGELOG.md
               if [ -n "$tag" ]; then
-                git log --pretty=format:"%B" "$tag..$previous" | awk 'NF {print "- " $0} !NF {print ""}' >> NEW_CHANGELOG.md
+                git log --pretty=format:"%B" "$tag..$currentTag" | awk 'NF {print "- " $0} !NF {print ""}' >> NEW_CHANGELOG.md
               else
-                git log --pretty=format:"%B" "$previous" | awk 'NF {print "- " $0} !NF {print ""}' >> NEW_CHANGELOG.md
+                git log --pretty=format:"%B" "$currentTag" | awk 'NF {print "- " $0} !NF {print ""}' >> NEW_CHANGELOG.md
               fi
               echo "" >> NEW_CHANGELOG.md
             fi
-            previous=$tag
+            currentTag=$tag
           done
           if [ -f CHANGELOG.md ]; then
             cat CHANGELOG.md >> NEW_CHANGELOG.md
