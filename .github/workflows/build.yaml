@@ -164,6 +164,7 @@ jobs:
           CHAT_ID: "-1002428644828"
         run: |
           DIST_DIR="$(pwd)/dist"
+          ls -la "$DIST_DIR"
           media="["
           i=1
           for file in "$DIST_DIR"/*; do
