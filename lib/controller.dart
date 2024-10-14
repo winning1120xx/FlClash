@@ -618,6 +618,7 @@ class AppController {
         brightness: brightness ??
             WidgetsBinding.instance.platformDispatcher.platformBrightness,
       ),
+      isTemplate: true,
     );
     if (!Platform.isLinux) {
       await trayManager.setToolTip(

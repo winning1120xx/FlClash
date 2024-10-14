@@ -126,7 +126,6 @@ jobs:
           tags=($(git tag --merged $(git rev-parse HEAD) --sort=-creatordate))
           preTag=$(curl --silent "https://api.github.com/repos/chen08209/FlClash/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")' || echo "")
           version=$(echo "${{ github.ref_name }}" | sed 's/^v//')
-          sed "s|VERSION|$version|g" ./.github/release_template.md > release.md
           currentTag=""
           for ((i = 0; i <= ${#tags[@]}; i++)); do
             if (( i < ${#tags[@]} )); then
@@ -151,15 +150,39 @@ jobs:
             fi
             currentTag=$tag
           done
+          sed "s|VERSION|$version|g" ./.github/release_template.md >> release.md
 
-      - name: Upload
-        if: ${{ contains(github.ref, '+') }}
-        uses: actions/upload-artifact@v4
+      - name: Telegram Bot Server
+        uses: zjns/telegram-bot-server@v1
         with:
-          name: artifact
-          path: ./dist
-          retention-days: 7
-          overwrite: true
+          api_id: secrets.TELEGRAM_API_ID
+          api_hash: secrets.TELEGRAM_API_HASH
+
+      - name: Push to telegram
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT_ID: "-1002428644828"
+        run: |
+          DIST_DIR="./dist"
+          media="["
+          i=1
+          for file in "$DIST_DIR"/*; do
+            basename=$(basename "$file")
+            if [[ $i -eq 1 ]]; then
+              media="${media}{\"type\": \"document\", \"media\": \"attach://file$i\"}"
+            else
+              media="${media}, {\"type\": \"document\", \"media\": \"attach://file$i\"}"
+            fi
+            curl_files="$curl_files -F \"file$i=@$file\""
+            i=$((i+1))
+          done
+          
+          media="${media}]"
+          
+          curl -X POST "https://localhost:8080/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMediaGroup" \
+          -F "chat_id=${CHAT_ID}" \
+          -F "media=$media" \
+          $curl_files
 
       - name: Release
         if: ${{ !contains(github.ref, '+') }}
