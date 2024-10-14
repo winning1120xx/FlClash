@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
@@ -31,7 +32,6 @@ if media:
     media[-1]["caption"] = release_notes
     media[-1]["parse_mode"] = "MarkdownV2"
 
-# 发送 POST 请求到 Telegram API
 response = requests.post(
     API_URL,
     data={
