@@ -30,7 +30,7 @@ with open(release_file, 'r') as f:
 
 if media:
     media[-1]["caption"] = release_notes
-    media[-1]["parse_mode"] = "MarkdownV2"
+#     media[-1]["parse_mode"] = "MarkdownV2"
 
 response = requests.post(
     API_URL,
