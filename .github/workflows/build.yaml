@@ -163,7 +163,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: "-1002428644828"
         run: |
-          DIST_DIR="./dist"
+          DIST_DIR="$(pwd)/dist"
           media="["
           i=1
           for file in "$DIST_DIR"/*; do
