@@ -11,14 +11,14 @@ jobs:
     strategy:
       matrix:
         include:
-          - platform: android
-            os: ubuntu-latest
+#          - platform: android
+#            os: ubuntu-latest
 #          - platform: windows
 #            os: windows-latest
 #            arch: amd64
-#          - platform: linux
-#            os: ubuntu-latest
-#            arch: amd64
+          - platform: linux
+            os: ubuntu-latest
+            arch: amd64
 #          - platform: macos
 #            os: macos-13
 #            arch: amd64
@@ -178,6 +178,9 @@ jobs:
           done
           
           media="${media}]"
+          
+          echo "Generated media JSON: $media"
+          echo "Generated curl files: $curl_files"
           
           curl -X POST "https://localhost:8080/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMediaGroup" \
             -F "chat_id=${CHAT_ID}" \
