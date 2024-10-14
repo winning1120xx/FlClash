@@ -40,3 +40,5 @@ response = requests.post(
     },
     files=curl_files
 )
+
+print("Response JSON:", response.json())
