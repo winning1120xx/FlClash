@@ -153,10 +153,23 @@ jobs:
           sed "s|VERSION|$version|g" ./.github/release_template.md >> release.md
 
       - name: Telegram Bot Server
-        uses: zjns/telegram-bot-server@v1
-        with:
-          api_id: secrets.TELEGRAM_API_ID
-          api_hash: secrets.TELEGRAM_API_HASH
+        env:
+          TELEGRAM_API_ID: secrets.TELEGRAM_API_ID
+          TELEGRAM_API_HASH: secrets.TELEGRAM_API_HASH
+        run: |
+          sudo apt-get update
+          sudo apt-get upgrade
+          sudo apt-get install make git zlib1g-dev libssl-dev gperf cmake g++
+          git clone --recursive https://github.com/tdlib/telegram-bot-api.git
+          cd telegram-bot-api
+          rm -rf build
+          mkdir build
+          cd build
+          cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=.. ..
+          cmake --build . --target install
+          cd ../..
+          ls -l telegram-bot-api/bin/telegram-bot-api*
+          ./telegram-bot-api/bin/telegram-bot-api --local
 
       - name: Push to telegram
         env:
@@ -185,7 +198,7 @@ jobs:
           
           echo "Final curl command: curl -X POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMediaGroup' -F 'chat_id=${CHAT_ID}' -F 'media=$media' $curl_files"
           
-          curl -X POST "http://localhost:8088/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMediaGroup" \
+          curl -X POST "http://localhost:8081/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMediaGroup" \
             -F "chat_id=${CHAT_ID}" \
             -F "media=$media" \
             $curl_files
