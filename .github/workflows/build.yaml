@@ -163,34 +163,14 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: "-1002428644828"
         run: |
-          DIST_DIR="$(pwd)/dist"
-          media="["
-          i=1
-          for file in "$DIST_DIR"/*; do
-            basename=$(basename "$file")
-            if [[ $i -eq 1 ]]; then
-              media="${media}{\"type\": \"document\", \"media\": \"attach://file$i\"}"
-            else
-              media="${media}, {\"type\": \"document\", \"media\": \"attach://file$i\"}"
-            fi
-            curl_files="$curl_files -F file$i=@$file"
-            i=$((i+1))
-          done
-          
-          release_notes=$(cat $(pwd)/release.md)
-          
-          media="${media%,*}, {\"type\": \"document\", \"media\": \"attach://file$((i-1))\", \"caption\": \"$release_notes\", \"parse_mode\": \"MarkdownV2\"}]"
-          
-          curl -X POST "http://localhost:8081/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMediaGroup" \
-            -F "chat_id=${CHAT_ID}" \
-            -F "media=$media" \
-            $curl_files
+          python -m pip install --upgrade pip
+          pip install requests
+          python release.py
 
       - name: Patch release.md
         run: |
           version=$(echo "${{ github.ref_name }}" | sed 's/^v//')
           sed "s|VERSION|$version|g" ./.github/release_template.md >> release.md
-          
 
       - name: Release
         if: ${{ !contains(github.ref, '+') }}
