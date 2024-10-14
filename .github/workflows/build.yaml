@@ -146,8 +146,6 @@ jobs:
               fi
             fi
             if [ -n "$currentTag" ]; then
-              echo "## $currentTag" >> release.md
-              echo "" >> release.md
               if [ -n "$tag" ]; then
                 git log --pretty=format:"%B" "$tag..$currentTag" | awk 'NF {print "- " $0} !NF {print ""}' >> release.md
               else
@@ -161,6 +159,7 @@ jobs:
       - name: Push to telegram
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TAG: ${{ github.ref_name }}
         run: |
           python -m pip install --upgrade pip
           pip install requests

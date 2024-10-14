@@ -3,12 +3,17 @@ import json
 import requests
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TAG = os.getenv("TAG")
+
+IS_RELEASE = "+" not in TAG
 
 CHAT_ID = "-1002428644828"
 API_URL = f"http://localhost:8081/bot{TELEGRAM_BOT_TOKEN}/sendMediaGroup"
 
 DIST_DIR = os.path.join(os.getcwd(), "dist")
 release_file = os.path.join(os.getcwd(), "release.md")
+
+text = ""
 
 media = []
 curl_files = {}
@@ -25,12 +30,21 @@ for file in os.listdir(DIST_DIR):
         curl_files[file_key] = open(file_path, 'rb')
         i += 1
 
+if TAG:
+    text += f"\n**{TAG}**\n"
+
+if IS_RELEASE:
+    text += f"\nhttps://github.com/chen08209/FlClash/releases/tag/{TAG}\n"
+
+
+text += "\n"
 with open(release_file, 'r') as f:
-    release_notes = f.read()
+    text += f.read()
+text += "\n"
 
 if media:
-    media[-1]["caption"] = release_notes
-#     media[-1]["parse_mode"] = "MarkdownV2"
+    media[-1]["caption"] = text
+    media[-1]["parse_mode"] = "Markdown"
 
 response = requests.post(
     API_URL,
