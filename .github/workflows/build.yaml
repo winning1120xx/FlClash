@@ -13,18 +13,18 @@ jobs:
         include:
           - platform: android
             os: ubuntu-latest
-          - platform: windows
-            os: windows-latest
-            arch: amd64
-          - platform: linux
-            os: ubuntu-latest
-            arch: amd64
-          - platform: macos
-            os: macos-13
-            arch: amd64
-          - platform: macos
-            os: macos-latest
-            arch: arm64
+#          - platform: windows
+#            os: windows-latest
+#            arch: amd64
+#          - platform: linux
+#            os: ubuntu-latest
+#            arch: amd64
+#          - platform: macos
+#            os: macos-13
+#            arch: amd64
+#          - platform: macos
+#            os: macos-latest
+#            arch: arm64
 
     steps:
       - name: Setup Mingw64
@@ -180,9 +180,9 @@ jobs:
           media="${media}]"
           
           curl -X POST "https://localhost:8080/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMediaGroup" \
-          -F "chat_id=${CHAT_ID}" \
-          -F "media=$media" \
-          $curl_files
+            -F "chat_id=${CHAT_ID}" \
+            -F "media=$media" \
+            $curl_files
 
       - name: Release
         if: ${{ !contains(github.ref, '+') }}
