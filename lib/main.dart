@@ -103,10 +103,7 @@ Future<void> vpnService() async {
         WidgetsBinding.instance.platformDispatcher.locale,
   );
   await app?.tip(appLocalizations.startVpn);
-  await globalState.handleStart(
-    config: config,
-    clashConfig: clashConfig,
-  );
+  await globalState.handleStart();
 
   tile?.addListener(
     TileListenerWithVpn(

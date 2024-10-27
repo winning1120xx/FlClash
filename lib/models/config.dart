@@ -152,7 +152,8 @@ class ThemeProps with _$ThemeProps {
     @Default(FontFamily.system) FontFamily fontFamily,
   }) = _ThemeProps;
 
-  factory ThemeProps.fromJson(Map<String, Object?> json) => _$ThemePropsFromJson(json);
+  factory ThemeProps.fromJson(Map<String, Object?> json) =>
+      _$ThemePropsFromJson(json);
 
   factory ThemeProps.realFromJson(Map<String, Object?>? json) {
     if (json == null) {
@@ -478,5 +479,10 @@ class Config extends ChangeNotifier {
 
   factory Config.fromJson(Map<String, dynamic> json) {
     return _$ConfigFromJson(json);
+  }
+
+  @override
+  String toString() {
+    return 'Config{_appSetting: $_appSetting, _profiles: $_profiles, _currentProfileId: $_currentProfileId, _isAccessControl: $_isAccessControl, _accessControl: $_accessControl, _dav: $_dav, _windowProps: $_windowProps, _themeProps: $_themeProps, _vpnProps: $_vpnProps, _desktopProps: $_desktopProps, _overrideDns: $_overrideDns, _hotKeyActions: $_hotKeyActions, _proxiesStyle: $_proxiesStyle}';
   }
 }

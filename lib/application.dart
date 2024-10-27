@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:animations/animations.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:fl_clash/l10n/l10n.dart';
 import 'package:fl_clash/common/common.dart';
@@ -58,10 +59,18 @@ class ApplicationState extends State<Application> {
 
   final _pageTransitionsTheme = const PageTransitionsTheme(
     builders: <TargetPlatform, PageTransitionsBuilder>{
-      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.windows: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.linux: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+      TargetPlatform.android: SharedAxisPageTransitionsBuilder(
+        transitionType: SharedAxisTransitionType.horizontal,
+      ),
+      TargetPlatform.windows: SharedAxisPageTransitionsBuilder(
+        transitionType: SharedAxisTransitionType.horizontal,
+      ),
+      TargetPlatform.linux: SharedAxisPageTransitionsBuilder(
+        transitionType: SharedAxisTransitionType.horizontal,
+      ),
+      TargetPlatform.macOS: SharedAxisPageTransitionsBuilder(
+        transitionType: SharedAxisTransitionType.horizontal,
+      ),
     },
   );
 

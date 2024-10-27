@@ -7,6 +7,7 @@ import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:fl_clash/common/archive.dart';
 import 'package:fl_clash/enum/enum.dart';
+import 'package:fl_clash/plugins/app.dart';
 import 'package:fl_clash/state.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -29,6 +30,7 @@ class AppController {
   late Function updateGroupDebounce;
   late Function addCheckIpNumDebounce;
   late Function applyProfileDebounce;
+  late Function savePreferencesDebounce;
 
   AppController(this.context) {
     appState = context.read<AppState>();
@@ -37,6 +39,9 @@ class AppController {
     appFlowingState = context.read<AppFlowingState>();
     updateClashConfigDebounce = debounce<Function()>(() async {
       await updateClashConfig();
+    });
+    savePreferencesDebounce = debounce<Function()>(() async {
+      await savePreferences();
     });
     applyProfileDebounce = debounce<Function()>(() async {
       await applyProfile(isPrue: true);
@@ -51,10 +56,7 @@ class AppController {
 
   updateStatus(bool isStart) async {
     if (isStart) {
-      await globalState.handleStart(
-        config: config,
-        clashConfig: clashConfig,
-      );
+      await globalState.handleStart();
       updateRunTime();
       updateTraffic();
       globalState.updateFunctionLists = [
@@ -202,17 +204,8 @@ class AppController {
   }
 
   savePreferences() async {
-    await saveConfigPreferences();
-    await saveClashConfigPreferences();
-  }
-
-  saveConfigPreferences() async {
-    debugPrint("saveConfigPreferences");
+    debugPrint("[APP] savePreferences");
     await preferences.saveConfig(config);
-  }
-
-  saveClashConfigPreferences() async {
-    debugPrint("saveClashConfigPreferences");
     await preferences.saveClashConfig(clashConfig);
   }
 
@@ -231,7 +224,7 @@ class AppController {
   handleBackOrExit() async {
     if (config.appSetting.minimizeOnExit) {
       if (system.isDesktop) {
-        await savePreferences();
+        await savePreferencesDebounce();
       }
       await system.back();
     } else {
