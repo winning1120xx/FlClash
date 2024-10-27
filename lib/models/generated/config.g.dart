@@ -234,7 +234,7 @@ const _$ProxyCardTypeEnumMap = {
 
 _$ThemePropsImpl _$$ThemePropsImplFromJson(Map<String, dynamic> json) =>
     _$ThemePropsImpl(
-      primaryColor: (json['primaryColor'] as num?)?.toInt() ?? 0xFF795548,
+      primaryColor: (json['primaryColor'] as num?)?.toInt(),
       themeMode: $enumDecodeNullable(_$ThemeModeEnumMap, json['themeMode']) ??
           ThemeMode.system,
       prueBlack: json['prueBlack'] as bool? ?? false,

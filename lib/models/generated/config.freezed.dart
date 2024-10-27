@@ -1667,7 +1667,7 @@ class __$$ThemePropsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ThemePropsImpl implements _ThemeProps {
   const _$ThemePropsImpl(
-      {this.primaryColor = 0xFF795548,
+      {this.primaryColor,
       this.themeMode = ThemeMode.system,
       this.prueBlack = false,
       this.fontFamily = FontFamily.system});
@@ -1676,7 +1676,6 @@ class _$ThemePropsImpl implements _ThemeProps {
       _$$ThemePropsImplFromJson(json);
 
   @override
-  @JsonKey()
   final int? primaryColor;
   @override
   @JsonKey()

@@ -146,7 +146,7 @@ const defaultThemeProps = ThemeProps();
 @freezed
 class ThemeProps with _$ThemeProps {
   const factory ThemeProps({
-    @Default(0xFF795548) int? primaryColor,
+    int? primaryColor,
     @Default(ThemeMode.system) ThemeMode themeMode,
     @Default(false) bool prueBlack,
     @Default(FontFamily.system) FontFamily fontFamily,
@@ -158,14 +158,20 @@ class ThemeProps with _$ThemeProps {
   factory ThemeProps.realFromJson(Map<String, Object?>? json) {
     if (json == null) {
       return Platform.isWindows
-          ? defaultThemeProps.copyWith(fontFamily: FontFamily.miSans)
+          ? defaultThemeProps.copyWith(
+              fontFamily: FontFamily.miSans,
+              primaryColor: defaultPrimaryColor.value,
+            )
           : defaultThemeProps;
     }
     try {
       return ThemeProps.fromJson(json);
     } catch (_) {
       return Platform.isWindows
-          ? defaultThemeProps.copyWith(fontFamily: FontFamily.miSans)
+          ? defaultThemeProps.copyWith(
+              fontFamily: FontFamily.miSans,
+              primaryColor: defaultPrimaryColor.value,
+            )
           : defaultThemeProps;
     }
   }
