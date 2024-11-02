@@ -7,7 +7,6 @@ import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:fl_clash/common/archive.dart';
 import 'package:fl_clash/enum/enum.dart';
-import 'package:fl_clash/plugins/app.dart';
 import 'package:fl_clash/state.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -601,7 +600,6 @@ class AppController {
   }
 
   Future _updateSystemTray({
-    required bool isStart,
     required Brightness? brightness,
     bool force = false,
   }) async {
@@ -610,7 +608,6 @@ class AppController {
     }
     await trayManager.setIcon(
       other.getTrayIconPath(
-        isStart: isStart,
         brightness: brightness ??
             WidgetsBinding.instance.platformDispatcher.platformBrightness,
       ),
@@ -626,7 +623,6 @@ class AppController {
   updateTray([bool focus = false]) async {
     if (!Platform.isLinux) {
       await _updateSystemTray(
-        isStart: appFlowingState.isStart,
         brightness: appState.brightness,
         force: focus,
       );
@@ -711,7 +707,6 @@ class AppController {
     await trayManager.setContextMenu(menu);
     if (Platform.isLinux) {
       await _updateSystemTray(
-        isStart: appFlowingState.isStart,
         brightness: appState.brightness,
         force: focus,
       );

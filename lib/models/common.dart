@@ -332,19 +332,16 @@ class SystemColorSchemes {
 
   getSystemColorSchemeForBrightness(Brightness? brightness) {
     if (brightness == Brightness.dark) {
-      return darkColorScheme != null
-          ? ColorScheme.fromSeed(
-              seedColor: darkColorScheme!.primary,
-              brightness: Brightness.dark,
-            )
-          : ColorScheme.fromSeed(
-              seedColor: defaultPrimaryColor,
-              brightness: Brightness.dark,
-            );
+      return darkColorScheme ??
+          ColorScheme.fromSeed(
+            seedColor: defaultPrimaryColor,
+            brightness: Brightness.dark,
+          );
     }
-    return lightColorScheme != null
-        ? ColorScheme.fromSeed(seedColor: darkColorScheme!.primary)
-        : ColorScheme.fromSeed(seedColor: defaultPrimaryColor);
+    return darkColorScheme ??
+        ColorScheme.fromSeed(
+          seedColor: defaultPrimaryColor,
+        );
   }
 }
 
@@ -430,7 +427,6 @@ class HotKeyAction with _$HotKeyAction {
   factory HotKeyAction.fromJson(Map<String, Object?> json) =>
       _$HotKeyActionFromJson(json);
 }
-
 
 typedef Validator = String? Function(String? value);
 

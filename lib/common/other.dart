@@ -101,14 +101,13 @@ class Other {
   }
 
   String getTrayIconPath({
-    required bool isStart,
     required Brightness brightness,
   }) {
     if(Platform.isMacOS){
       return "assets/images/icon_white.png";
     }
     final suffix = Platform.isWindows ? "ico" : "png";
-    if (isStart && Platform.isWindows) {
+    if (Platform.isWindows) {
       return "assets/images/icon.$suffix";
     }
     return switch (brightness) {
