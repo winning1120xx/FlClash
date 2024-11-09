@@ -40,10 +40,12 @@ class _TrayContainerState extends State<TrayManager>
         brightness: appState.brightness,
       ),
       shouldRebuild: (prev, next) {
+        if(prev != next){
+          globalState.appController.updateTray();
+        }
         return prev != next;
       },
       builder: (_, state, child) {
-        globalState.appController.updateTray();
         return child!;
       },
       child: widget.child,

@@ -60,14 +60,14 @@ class _WindowContainerState extends State<WindowManager>
   }
 
   @override
+  Future<void> onShouldTerminate() async {
+    await globalState.appController.handleExit();
+    super.onShouldTerminate();
+  }
+
+  @override
   Future<void> onWindowMoved() async {
     super.onWindowMoved();
-    final offset = await windowManager.getPosition();
-    final config = globalState.appController.config;
-    config.windowProps = config.windowProps.copyWith(
-      top: offset.dy,
-      left: offset.dx,
-    );
   }
 
   @override
@@ -98,6 +98,11 @@ class _WindowContainerState extends State<WindowManager>
     windowManager.removeListener(this);
     windowExtManager.removeListener(this);
     super.dispose();
+  }
+
+  @override
+  void onWindowEvent(String eventName) {
+    super.onWindowEvent(eventName);
   }
 }
 
