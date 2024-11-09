@@ -13,9 +13,9 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:tray_manager/tray_manager.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'common/common.dart';
 import 'controller.dart';
 import 'models/models.dart';
-import 'common/common.dart';
 
 class GlobalState {
   Timer? timer;
@@ -104,6 +104,7 @@ class GlobalState {
     required Config config,
     required ClashConfig clashConfig,
   }) async {
+    clashCore.requestGc();
     await updateClashConfig(
       clashConfig: clashConfig,
       config: config,
@@ -137,9 +138,9 @@ class GlobalState {
         allowBypass: config.vpnProps.allowBypass,
         systemProxy: config.vpnProps.systemProxy,
         onlyProxy: config.appSetting.onlyProxy,
-        bypassDomain: config.vpnProps.bypassDomain,
+        bypassDomain: config.networkProps.bypassDomain,
         currentProfileName:
-        config.currentProfile?.label ?? config.currentProfileId ?? "",
+            config.currentProfile?.label ?? config.currentProfileId ?? "",
       ),
     );
     updateCoreVersionInfo(appState);
@@ -379,7 +380,7 @@ class GlobalState {
           onClick: (_) {
             globalState.appController.updateSystemProxy();
           },
-          checked: config.desktopProps.systemProxy,
+          checked: config.networkProps.systemProxy,
         ),
       );
       menuItems.add(MenuItem.separator());
@@ -393,7 +394,7 @@ class GlobalState {
     );
     menuItems.add(autoStartMenuItem);
 
-    if(Platform.isWindows){
+    if (Platform.isWindows) {
       final adminAutoStartMenuItem = MenuItem.checkbox(
         label: appLocalizations.adminAutoLaunch,
         onClick: (_) async {

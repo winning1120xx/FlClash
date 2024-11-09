@@ -39,8 +39,8 @@ class TUNItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Selector<Config, bool>(
-      selector: (_, config) => config.vpnProps.enable,
+    return Selector<ClashConfig, bool>(
+      selector: (_, clashConfig) => clashConfig.tun.enable,
       builder: (_, enable, __) {
         return ListItem.switchItem(
           title: Text(appLocalizations.tun),
@@ -87,8 +87,8 @@ class AllowBypassSwitch extends StatelessWidget {
   }
 }
 
-class SystemProxySwitch extends StatelessWidget {
-  const SystemProxySwitch({super.key});
+class VpnSystemProxySwitch extends StatelessWidget {
+  const VpnSystemProxySwitch({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +104,33 @@ class SystemProxySwitch extends StatelessWidget {
               final config = globalState.appController.config;
               final vpnProps = config.vpnProps;
               config.vpnProps = vpnProps.copyWith(
+                systemProxy: value,
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+}
+
+class SystemProxySwitch extends StatelessWidget {
+  const SystemProxySwitch({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Selector<Config, bool>(
+      selector: (_, config) => config.networkProps.systemProxy,
+      builder: (_, systemProxy, __) {
+        return ListItem.switchItem(
+          title: Text(appLocalizations.systemProxy),
+          subtitle: Text(appLocalizations.systemProxyDesc),
+          delegate: SwitchDelegate(
+            value: systemProxy,
+            onChanged: (bool value) async {
+              final config = globalState.appController.config;
+              final networkProps = config.networkProps;
+              config.networkProps = networkProps.copyWith(
                 systemProxy: value,
               );
             },
@@ -176,6 +203,36 @@ class TunStackItem extends StatelessWidget {
 class BypassDomainItem extends StatelessWidget {
   const BypassDomainItem({super.key});
 
+  _initActions(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final commonScaffoldState =
+          context.findAncestorStateOfType<CommonScaffoldState>();
+      commonScaffoldState?.actions = [
+        IconButton(
+          onPressed: () {
+            globalState.showMessage(
+              title: appLocalizations.reset,
+              message: TextSpan(
+                text: appLocalizations.resetTip,
+              ),
+              onTab: () {
+                final config = globalState.appController.config;
+                config.networkProps = config.networkProps.copyWith(
+                  bypassDomain: defaultBypassDomain,
+                );
+                Navigator.of(context).pop();
+              },
+            );
+          },
+          tooltip: appLocalizations.reset,
+          icon: const Icon(
+            Icons.replay,
+          ),
+        )
+      ];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListItem.open(
@@ -183,19 +240,20 @@ class BypassDomainItem extends StatelessWidget {
       subtitle: Text(appLocalizations.bypassDomainDesc),
       delegate: OpenDelegate(
         isBlur: false,
+        isScaffold: true,
         title: appLocalizations.bypassDomain,
         widget: Selector<Config, List<String>>(
-          selector: (_, config) => config.vpnProps.bypassDomain,
-          shouldRebuild: (prev, next) =>
-              !stringListEquality.equals(prev, next),
-          builder: (_, bypassDomain, __) {
+          selector: (_, config) => config.networkProps.bypassDomain,
+          shouldRebuild: (prev, next) => !stringListEquality.equals(prev, next),
+          builder: (context, bypassDomain, __) {
+            _initActions(context);
             return ListPage(
               title: appLocalizations.bypassDomain,
               items: bypassDomain,
               titleBuilder: (item) => Text(item),
-              onChange: (items){
+              onChange: (items) {
                 final config = globalState.appController.config;
-                config.vpnProps = config.vpnProps.copyWith(
+                config.networkProps = config.networkProps.copyWith(
                   bypassDomain: List.from(items),
                 );
               },
@@ -209,7 +267,7 @@ class BypassDomainItem extends StatelessWidget {
 }
 
 final networkItems = [
-  Platform.isAndroid ? const VPNSwitch() : const TUNItem(),
+  if (Platform.isAndroid) const VPNSwitch(),
   if (Platform.isAndroid)
     ...generateSection(
       title: "VPN",
@@ -217,12 +275,20 @@ final networkItems = [
         const SystemProxySwitch(),
         const AllowBypassSwitch(),
         const Ipv6Switch(),
-        const BypassDomainItem(),
+      ],
+    ),
+  if (system.isDesktop)
+    ...generateSection(
+      title: appLocalizations.system,
+      items: [
+        SystemProxySwitch(),
+        BypassDomainItem(),
       ],
     ),
   ...generateSection(
     title: appLocalizations.options,
     items: [
+      if (system.isDesktop) const TUNItem(),
       const TunStackItem(),
     ],
   ),

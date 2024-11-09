@@ -528,8 +528,8 @@ class AppController {
   }
 
   updateSystemProxy() {
-    config.desktopProps = config.desktopProps.copyWith(
-      systemProxy: !config.desktopProps.systemProxy,
+    config.networkProps = config.networkProps.copyWith(
+      systemProxy: !config.networkProps.systemProxy,
     );
   }
 

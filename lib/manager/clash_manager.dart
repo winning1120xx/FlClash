@@ -68,7 +68,7 @@ class _ClashContainerState extends State<ClashManager> with AppMessageListener {
         accessControl: config.isAccessControl ? config.accessControl : null,
         ipv6: config.vpnProps.ipv6,
         allowBypass: config.vpnProps.allowBypass,
-        bypassDomain: config.vpnProps.bypassDomain,
+        bypassDomain: config.networkProps.bypassDomain,
         systemProxy: config.vpnProps.systemProxy,
         onlyProxy: config.appSetting.onlyProxy,
         currentProfileName:

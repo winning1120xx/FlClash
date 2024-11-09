@@ -340,10 +340,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "style": MessageLookupByLibrary.simpleMessage("风格"),
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
         "sync": MessageLookupByLibrary.simpleMessage("同步"),
+        "system": MessageLookupByLibrary.simpleMessage("系统"),
         "systemFont": MessageLookupByLibrary.simpleMessage("系统字体"),
         "systemProxy": MessageLookupByLibrary.simpleMessage("系统代理"),
-        "systemProxyDesc":
-            MessageLookupByLibrary.simpleMessage("为VpnService附加HTTP代理"),
+        "systemProxyDesc": MessageLookupByLibrary.simpleMessage("设置系统代理"),
         "tab": MessageLookupByLibrary.simpleMessage("标签页"),
         "tabAnimation": MessageLookupByLibrary.simpleMessage("选项卡动画"),
         "tabAnimationDesc":
@@ -381,6 +381,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "vpnDesc": MessageLookupByLibrary.simpleMessage("修改VPN相关设置"),
         "vpnEnableDesc":
             MessageLookupByLibrary.simpleMessage("通过VpnService自动路由系统所有流量"),
+        "vpnSystemProxyDesc":
+            MessageLookupByLibrary.simpleMessage("为VpnService附加HTTP代理"),
         "vpnTip": MessageLookupByLibrary.simpleMessage("重启VPN后改变生效"),
         "webDAVConfiguration": MessageLookupByLibrary.simpleMessage("WebDAV配置"),
         "whitelistMode": MessageLookupByLibrary.simpleMessage("白名单模式"),

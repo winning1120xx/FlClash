@@ -1741,6 +1741,16 @@ class AppLocalizations {
   }
 
   /// `Attach HTTP proxy to VpnService`
+  String get vpnSystemProxyDesc {
+    return Intl.message(
+      'Attach HTTP proxy to VpnService',
+      name: 'vpnSystemProxyDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Attach HTTP proxy to VpnService`
   String get systemProxyDesc {
     return Intl.message(
       'Attach HTTP proxy to VpnService',
@@ -3295,6 +3305,16 @@ class AppLocalizations {
     return Intl.message(
       'Toggle',
       name: 'toggle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `System`
+  String get system {
+    return Intl.message(
+      'System',
+      name: 'system',
       desc: '',
       args: [],
     );

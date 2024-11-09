@@ -17,8 +17,7 @@ class TrayManager extends StatefulWidget {
   State<TrayManager> createState() => _TrayContainerState();
 }
 
-class _TrayContainerState extends State<TrayManager>
-    with TrayListener {
+class _TrayContainerState extends State<TrayManager> with TrayListener {
   @override
   void initState() {
     super.initState();
@@ -35,12 +34,12 @@ class _TrayContainerState extends State<TrayManager>
         autoLaunch: config.appSetting.autoLaunch,
         isStart: appFlowingState.isStart,
         locale: config.appSetting.locale,
-        systemProxy: config.desktopProps.systemProxy,
+        systemProxy: config.networkProps.systemProxy,
         tunEnable: clashConfig.tun.enable,
         brightness: appState.brightness,
       ),
       shouldRebuild: (prev, next) {
-        if(prev != next){
+        if (prev != next) {
           globalState.appController.updateTray();
         }
         return prev != next;

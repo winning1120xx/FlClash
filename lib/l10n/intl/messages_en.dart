@@ -426,6 +426,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "style": MessageLookupByLibrary.simpleMessage("Style"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "sync": MessageLookupByLibrary.simpleMessage("Sync"),
+        "system": MessageLookupByLibrary.simpleMessage("System"),
         "systemFont": MessageLookupByLibrary.simpleMessage("System font"),
         "systemProxy": MessageLookupByLibrary.simpleMessage("System proxy"),
         "systemProxyDesc": MessageLookupByLibrary.simpleMessage(
@@ -475,6 +476,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Modify VPN related settings"),
         "vpnEnableDesc": MessageLookupByLibrary.simpleMessage(
             "Auto routes all system traffic through VpnService"),
+        "vpnSystemProxyDesc": MessageLookupByLibrary.simpleMessage(
+            "Attach HTTP proxy to VpnService"),
         "vpnTip": MessageLookupByLibrary.simpleMessage(
             "Changes take effect after restarting the VPN"),
         "webDAVConfiguration":

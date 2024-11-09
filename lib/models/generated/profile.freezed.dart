@@ -25,8 +25,12 @@ mixin _$UserInfo {
   int get total => throw _privateConstructorUsedError;
   int get expire => throw _privateConstructorUsedError;
 
+  /// Serializes this UserInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of UserInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $UserInfoCopyWith<UserInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$UserInfoCopyWithImpl<$Res, $Val extends UserInfo>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of UserInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -97,6 +103,8 @@ class __$$UserInfoImplCopyWithImpl<$Res>
       _$UserInfoImpl _value, $Res Function(_$UserInfoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of UserInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -165,11 +173,13 @@ class _$UserInfoImpl implements _UserInfo {
             (identical(other.expire, expire) || other.expire == expire));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, upload, download, total, expire);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of UserInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$UserInfoImplCopyWith<_$UserInfoImpl> get copyWith =>
@@ -201,8 +211,11 @@ abstract class _UserInfo implements UserInfo {
   int get total;
   @override
   int get expire;
+
+  /// Create a copy of UserInfo
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UserInfoImplCopyWith<_$UserInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -226,8 +239,12 @@ mixin _$Profile {
   @JsonKey(includeToJson: false, includeFromJson: false)
   bool get isUpdating => throw _privateConstructorUsedError;
 
+  /// Serializes this Profile to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ProfileCopyWith<Profile> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -262,6 +279,8 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -325,6 +344,8 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
     ) as $Val);
   }
 
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $UserInfoCopyWith<$Res>? get userInfo {
@@ -370,6 +391,8 @@ class __$$ProfileImplCopyWithImpl<$Res>
       _$ProfileImpl _value, $Res Function(_$ProfileImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -527,7 +550,7 @@ class _$ProfileImpl implements _Profile {
                 other.isUpdating == isUpdating));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -543,7 +566,9 @@ class _$ProfileImpl implements _Profile {
       const DeepCollectionEquality().hash(_unfoldSet),
       isUpdating);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
@@ -597,8 +622,11 @@ abstract class _Profile implements Profile {
   @override
   @JsonKey(includeToJson: false, includeFromJson: false)
   bool get isUpdating;
+
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

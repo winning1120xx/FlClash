@@ -99,11 +99,6 @@ class _WindowContainerState extends State<WindowManager>
     windowExtManager.removeListener(this);
     super.dispose();
   }
-
-  @override
-  void onWindowEvent(String eventName) {
-    super.onWindowEvent(eventName);
-  }
 }
 
 class WindowHeaderContainer extends StatelessWidget {

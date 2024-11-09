@@ -75,7 +75,7 @@ class ProxySwitch extends StatelessWidget {
         iconData: Icons.shuffle,
       ),
       child: Selector<Config, bool>(
-        selector: (_, config) => config.desktopProps.systemProxy,
+        selector: (_, config) => config.networkProps.systemProxy,
         builder: (_, systemProxy, __) {
           return LocaleBuilder(
             builder: (_) => Switch(
@@ -83,8 +83,8 @@ class ProxySwitch extends StatelessWidget {
               value: systemProxy,
               onChanged: (value) {
                 final config = globalState.appController.config;
-                config.desktopProps =
-                    config.desktopProps.copyWith(systemProxy: value);
+                config.networkProps =
+                    config.networkProps.copyWith(systemProxy: value);
               },
             ),
           );
