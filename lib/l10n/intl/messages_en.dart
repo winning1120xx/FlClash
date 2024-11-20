@@ -326,6 +326,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "paste": MessageLookupByLibrary.simpleMessage("Paste"),
         "pleaseBindWebDAV":
             MessageLookupByLibrary.simpleMessage("Please bind WebDAV"),
+        "pleaseInputAdminPassword": MessageLookupByLibrary.simpleMessage(
+            "Please enter the admin password"),
         "pleaseUploadFile":
             MessageLookupByLibrary.simpleMessage("Please upload file"),
         "pleaseUploadValidQrcode": MessageLookupByLibrary.simpleMessage(

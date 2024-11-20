@@ -6,20 +6,7 @@ import (
 	"github.com/metacubex/mihomo/constant"
 )
 
-var Port int64
-var ServicePort int64
-
 type MessageType string
-
-const (
-	LogMessage     MessageType = "log"
-	ProtectMessage MessageType = "protect"
-	DelayMessage   MessageType = "delay"
-	ProcessMessage MessageType = "process"
-	RequestMessage MessageType = "request"
-	StartedMessage MessageType = "started"
-	LoadedMessage  MessageType = "loaded"
-)
 
 type Delay struct {
 	Name  string `json:"name"`
@@ -30,6 +17,21 @@ type Process struct {
 	Id       int64              `json:"id"`
 	Metadata *constant.Metadata `json:"metadata"`
 }
+
+var (
+	Port        int64 = -1
+	ServicePort int64 = -1
+)
+
+const (
+	LogMessage     MessageType = "log"
+	ProtectMessage MessageType = "protect"
+	DelayMessage   MessageType = "delay"
+	ProcessMessage MessageType = "process"
+	RequestMessage MessageType = "request"
+	StartedMessage MessageType = "started"
+	LoadedMessage  MessageType = "loaded"
+)
 
 type Message struct {
 	Type MessageType `json:"type"`
@@ -44,6 +46,12 @@ func (message *Message) Json() (string, error) {
 func SendMessage(message Message) {
 	s, err := message.Json()
 	if err != nil {
+		return
+	}
+	if Port == -1 && ServicePort == -1 {
+		Action{
+			Method: messageMethod,
+		}.callback(s)
 		return
 	}
 	if handler, ok := messageHandlers[message.Type]; ok {

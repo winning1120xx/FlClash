@@ -28,7 +28,6 @@ class _WindowContainerState extends State<WindowManager>
     return Selector<Config, AutoLaunchState>(
       selector: (_, config) => AutoLaunchState(
         isAutoLaunch: config.appSetting.autoLaunch,
-        isAdminAutoLaunch: config.appSetting.adminAutoLaunch,
       ),
       builder: (_, state, child) {
         updateLaunchDebounce ??= debounce((AutoLaunchState state) {

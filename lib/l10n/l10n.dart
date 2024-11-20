@@ -3369,6 +3369,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Please enter the admin password`
+  String get pleaseInputAdminPassword {
+    return Intl.message(
+      'Please enter the admin password',
+      name: 'pleaseInputAdminPassword',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -1,7 +1,10 @@
 import 'dart:ffi';
 import 'dart:io';
+
 import 'package:ffi/ffi.dart';
 import 'package:fl_clash/common/common.dart';
+import 'package:fl_clash/enum/enum.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
 
 class Windows {
@@ -51,10 +54,74 @@ class Windows {
     calloc.free(argumentsPtr);
     calloc.free(operationPtr);
 
-    if (result <= 32) {
+    debugPrint("[Windows] runas: $command $arguments resultCode:$result");
+
+    if (result < 42) {
       return false;
     }
     return true;
+  }
+
+  _killProcess(int port) async {
+    final result = await Process.run('netstat', ['-ano']);
+    final lines = result.stdout.toString().trim().split('\n');
+    for (final line in lines) {
+      if (!line.contains(":$port") || !line.contains("LISTENING")) {
+        continue;
+      }
+      final parts = line.trim().split(RegExp(r'\s+'));
+      final pid = int.tryParse(parts.last);
+      if (pid != null) {
+        await Process.run('taskkill', ['/PID', pid.toString(), '/F']);
+      }
+    }
+  }
+
+  Future<WindowsHelperServiceStatus> checkService() async {
+    final result = await Process.run('sc', ['query', appHelperService]);
+    if (result.exitCode != 0) {
+      return WindowsHelperServiceStatus.none;
+    }
+    final isRunning = await request.pingHelper();
+    if (isRunning) {
+      return WindowsHelperServiceStatus.running;
+    }
+    return WindowsHelperServiceStatus.presence;
+  }
+
+  Future<bool> registerService() async {
+    final status = await checkService();
+
+    if (status == WindowsHelperServiceStatus.running) {
+      return true;
+    }
+
+    await _killProcess(helperPort);
+
+    final startCommand = [
+      "start",
+      appHelperService,
+    ].join(" ");
+
+    if (status == WindowsHelperServiceStatus.presence) {
+      return runas("sc", startCommand);
+    }
+
+    final createCommand = [
+      'create',
+      appHelperService,
+      'binPath= "${appPath.helperPath}"',
+      'start= auto',
+    ].join(" ");
+
+    final createdRes = runas("sc", createCommand);
+    final startRes = runas("sc", startCommand);
+
+    await Future.delayed(
+      Duration(milliseconds: 300),
+    );
+
+    return createdRes && startRes;
   }
 
   Future<bool> registerTask(String appName) async {
