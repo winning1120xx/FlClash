@@ -259,6 +259,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordTip": MessageLookupByLibrary.simpleMessage("密码不能为空"),
         "paste": MessageLookupByLibrary.simpleMessage("粘贴"),
         "pleaseBindWebDAV": MessageLookupByLibrary.simpleMessage("请绑定WebDAV"),
+        "pleaseInputAdminPassword":
+            MessageLookupByLibrary.simpleMessage("请输入管理员密码"),
         "pleaseUploadFile": MessageLookupByLibrary.simpleMessage("请上传文件"),
         "pleaseUploadValidQrcode":
             MessageLookupByLibrary.simpleMessage("请上传有效的二维码"),

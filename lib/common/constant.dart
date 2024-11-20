@@ -5,11 +5,15 @@ import 'package:collection/collection.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:flutter/material.dart';
+
 import 'system.dart';
 
 const appName = "FlClash";
+const appHelperService = "FlClashHelperService";
 const coreName = "clash.meta";
 const packageName = "com.follow.clash";
+const unixSocketPath = "/tmp/FlClashSocket.sock";
+const helperPort = 47890;
 const httpTimeoutDuration = Duration(milliseconds: 5000);
 const moreDuration = Duration(milliseconds: 100);
 const animateDuration = Duration(milliseconds: 100);

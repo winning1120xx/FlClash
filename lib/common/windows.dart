@@ -1,7 +1,10 @@
 import 'dart:ffi';
 import 'dart:io';
+
 import 'package:ffi/ffi.dart';
 import 'package:fl_clash/common/common.dart';
+import 'package:fl_clash/enum/enum.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
 
 class Windows {
@@ -51,10 +54,52 @@ class Windows {
     calloc.free(argumentsPtr);
     calloc.free(operationPtr);
 
-    if (result <= 32) {
+    debugPrint("[Windows] runas: $command $arguments resultCode:$result");
+
+    if (result <= 42) {
       return false;
     }
     return true;
+  }
+
+  Future<WindowsHelperServiceStatus> checkService() async {
+    final result = await Process.run('sc', ['query', appHelperService]);
+    if(result.exitCode != 0){
+      return WindowsHelperServiceStatus.none;
+    }
+    final isRunning = await request.pingHelper();
+    if (isRunning) {
+      return WindowsHelperServiceStatus.running;
+    }
+    return WindowsHelperServiceStatus.presence;
+  }
+
+  Future<bool> registerService() async {
+    final status = await checkService();
+
+    if (status == WindowsHelperServiceStatus.running) {
+      return true;
+    }
+
+    final startCommand = [
+      "start",
+      appHelperService,
+    ].join(" ");
+
+    if (status == WindowsHelperServiceStatus.presence) {
+      return runas("sc", startCommand);
+    }
+
+    final createCommand = [
+      'create',
+      appHelperService,
+      'binPath= "${appPath.helperPath}"',
+      'start= auto',
+    ].join(" ");
+
+    final createdRes = runas("sc", createCommand);
+    final startRes = runas("sc", startCommand);
+    return createdRes && startRes;
   }
 
   Future<bool> registerTask(String appName) async {
