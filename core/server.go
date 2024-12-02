@@ -73,7 +73,9 @@ func handleAction(action *Action) {
 		return
 	case changeProxyMethod:
 		data := action.Data.(string)
-		action.callback(handleChangeProxy(data))
+		handleChangeProxy(data, func(value string) {
+			action.callback(value)
+		})
 		return
 	case getTrafficMethod:
 		data := action.Data.(bool)

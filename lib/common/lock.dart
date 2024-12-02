@@ -14,12 +14,12 @@ class SingleInstanceLock {
   }
 
   Future<bool> acquire() async {
-    final lockFilePath = await appPath.getLockFilePath();
-    final lockFile = File(lockFilePath);
-    await lockFile.create();
     try {
+      final lockFilePath = await appPath.getLockFilePath();
+      final lockFile = File(lockFilePath);
+      await lockFile.create();
       _accessFile = await lockFile.open(mode: FileMode.write);
-      _accessFile?.lock();
+      await _accessFile?.lock();
       return true;
     } catch (_) {
       return false;

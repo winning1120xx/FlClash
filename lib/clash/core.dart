@@ -113,7 +113,7 @@ class ClashCore {
     });
   }
 
-  FutureOr<bool> changeProxy(ChangeProxyParams changeProxyParams) async {
+  FutureOr<String> changeProxy(ChangeProxyParams changeProxyParams) async {
     return await clashInterface.changeProxy(changeProxyParams);
   }
 

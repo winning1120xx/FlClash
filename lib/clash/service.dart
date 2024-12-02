@@ -123,10 +123,10 @@ class ClashService with ClashInterface {
       case ActionMethod.resetTraffic:
       case ActionMethod.closeConnections:
       case ActionMethod.closeConnection:
-      case ActionMethod.changeProxy:
       case ActionMethod.stopListener:
         completer?.complete(action.data as bool);
         return;
+      case ActionMethod.changeProxy:
       case ActionMethod.getProxies:
       case ActionMethod.getTraffic:
       case ActionMethod.getTotalTraffic:
@@ -255,8 +255,8 @@ class ClashService with ClashInterface {
   }
 
   @override
-  FutureOr<bool> changeProxy(ChangeProxyParams changeProxyParams) {
-    return _invoke<bool>(
+  FutureOr<String> changeProxy(ChangeProxyParams changeProxyParams) {
+    return _invoke<String>(
       method: ActionMethod.changeProxy,
       data: json.encode(changeProxyParams),
     );
@@ -284,10 +284,12 @@ class ClashService with ClashInterface {
   }) {
     return _invoke<String>(
       method: ActionMethod.updateGeoData,
-      data: {
-        "geoType": geoType,
-        "geoName": geoName,
-      },
+      data: json.encode(
+        {
+          "geoType": geoType,
+          "geoName": geoName,
+        },
+      ),
     );
   }
 
@@ -298,10 +300,10 @@ class ClashService with ClashInterface {
   }) {
     return _invoke<String>(
       method: ActionMethod.sideLoadExternalProvider,
-      data: {
+      data: json.encode({
         "providerName": providerName,
         "data": data,
-      },
+      }),
     );
   }
 

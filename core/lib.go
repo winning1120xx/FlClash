@@ -79,9 +79,12 @@ func getProxies() *C.char {
 }
 
 //export changeProxy
-func changeProxy(s *C.char) bool {
+func changeProxy(s *C.char, port C.longlong) {
+	i := int64(port)
 	paramsString := C.GoString(s)
-	return handleChangeProxy(paramsString)
+	handleChangeProxy(paramsString, func(value string) {
+		bridge.SendToPort(i, value)
+	})
 }
 
 //export getTraffic

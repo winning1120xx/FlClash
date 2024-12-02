@@ -2501,19 +2501,22 @@ class ClashFFI {
   late final _getProxies =
       _getProxiesPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
 
-  int changeProxy(
+  void changeProxy(
     ffi.Pointer<ffi.Char> s,
+    int port,
   ) {
     return _changeProxy(
       s,
+      port,
     );
   }
 
-  late final _changeProxyPtr =
-      _lookup<ffi.NativeFunction<GoUint8 Function(ffi.Pointer<ffi.Char>)>>(
-          'changeProxy');
+  late final _changeProxyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Pointer<ffi.Char>, ffi.LongLong)>>('changeProxy');
   late final _changeProxy =
-      _changeProxyPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
+      _changeProxyPtr.asFunction<void Function(ffi.Pointer<ffi.Char>, int)>();
 
   ffi.Pointer<ffi.Char> getTraffic(
     int port,

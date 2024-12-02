@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/metacubex/mihomo/adapter"
 	"github.com/metacubex/mihomo/adapter/outboundgroup"
-	"github.com/metacubex/mihomo/adapter/provider"
 	"github.com/metacubex/mihomo/common/observable"
 	"github.com/metacubex/mihomo/common/utils"
 	"github.com/metacubex/mihomo/component/updater"
@@ -108,36 +107,43 @@ func handleGetProxies() string {
 	return string(data)
 }
 
-func handleChangeProxy(data string) bool {
+func handleChangeProxy(data string, fn func(string string)) {
 	runLock.Lock()
-	defer runLock.Unlock()
-	var params = &ChangeProxyParams{}
-	err := json.Unmarshal([]byte(data), params)
-	if err != nil {
-		log.Infoln("Unmarshal ChangeProxyParams %v", err)
-	}
-	groupName := *params.GroupName
-	proxyName := *params.ProxyName
-	proxies := tunnel.ProxiesWithProviders()
-	group, ok := proxies[groupName]
-	if !ok {
-		return false
-	}
-	adapterProxy := group.(*adapter.Proxy)
-	selector, ok := adapterProxy.ProxyAdapter.(outboundgroup.SelectAble)
-	if !ok {
-		return false
-	}
-	if proxyName == "" {
-		selector.ForceSet(proxyName)
-	} else {
-		err = selector.Set(proxyName)
-	}
-	if err == nil {
-		log.Infoln("[SelectAble] %s selected %s", groupName, proxyName)
-		return false
-	}
-	return true
+	go func() {
+		defer runLock.Unlock()
+		var params = &ChangeProxyParams{}
+		err := json.Unmarshal([]byte(data), params)
+		if err != nil {
+			fn(err.Error())
+			return
+		}
+		groupName := *params.GroupName
+		proxyName := *params.ProxyName
+		proxies := tunnel.ProxiesWithProviders()
+		group, ok := proxies[groupName]
+		if !ok {
+			fn("Not found group")
+			return
+		}
+		adapterProxy := group.(*adapter.Proxy)
+		selector, ok := adapterProxy.ProxyAdapter.(outboundgroup.SelectAble)
+		if !ok {
+			fn("Group is not selectable")
+			return
+		}
+		if proxyName == "" {
+			selector.ForceSet(proxyName)
+		} else {
+			err = selector.Set(proxyName)
+		}
+		if err != nil {
+			fn(err.Error())
+			return
+		}
+
+		fn("")
+		return
+	}()
 }
 
 func handleGetTraffic(onlyProxy bool) string {
@@ -339,8 +345,6 @@ func handleUpdateGeoData(geoType string, geoName string, fn func(value string)) 
 
 func handleUpdateExternalProvider(providerName string, fn func(value string)) {
 	go func() {
-		runLock.Lock()
-		defer runLock.Unlock()
 		externalProvider, exist := externalProviders[providerName]
 		if !exist {
 			fn("external provider is not exist")
@@ -401,7 +405,7 @@ func handleStopLog() {
 }
 
 func init() {
-	provider.HealthcheckHook = func(name string, delay uint16) {
+	adapter.UrlTestHook = func(name string, delay uint16) {
 		delayData := &Delay{
 			Name: name,
 		}

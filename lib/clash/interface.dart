@@ -19,7 +19,7 @@ mixin ClashInterface {
 
   FutureOr<String> getProxies();
 
-  FutureOr<bool> changeProxy(ChangeProxyParams changeProxyParams);
+  FutureOr<String> changeProxy(ChangeProxyParams changeProxyParams);
 
   Future<bool> startListener();
 

@@ -78,12 +78,17 @@ class Windows {
   }
 
   Future<WindowsHelperServiceStatus> checkService() async {
+    // final qcResult = await Process.run('sc', ['qc', appHelperService]);
+    // final qcOutput = qcResult.stdout.toString();
+    // if (qcResult.exitCode != 0 || !qcOutput.contains(appPath.helperPath)) {
+    //   return WindowsHelperServiceStatus.none;
+    // }
     final result = await Process.run('sc', ['query', appHelperService]);
-    if (result.exitCode != 0) {
+    if(result.exitCode != 0){
       return WindowsHelperServiceStatus.none;
     }
-    final isRunning = await request.pingHelper();
-    if (isRunning) {
+    final output = result.stdout.toString();
+    if (output.contains("RUNNING") && await request.pingHelper()) {
       return WindowsHelperServiceStatus.running;
     }
     return WindowsHelperServiceStatus.presence;
@@ -98,30 +103,33 @@ class Windows {
 
     await _killProcess(helperPort);
 
-    final startCommand = [
+    final command = [
+      "/c",
+      if (status == WindowsHelperServiceStatus.presence) ...[
+        "sc",
+        "delete",
+        appHelperService,
+        "/force",
+        "&&",
+      ],
+      "sc",
+      "create",
+      appHelperService,
+      'binPath= "${appPath.helperPath}"',
+      'start= auto',
+      "&&",
+      "sc",
       "start",
       appHelperService,
     ].join(" ");
 
-    if (status == WindowsHelperServiceStatus.presence) {
-      return runas("sc", startCommand);
-    }
-
-    final createCommand = [
-      'create',
-      appHelperService,
-      'binPath= "${appPath.helperPath}"',
-      'start= auto',
-    ].join(" ");
-
-    final createdRes = runas("sc", createCommand);
-    final startRes = runas("sc", startCommand);
+    final res = runas("cmd.exe", command);
 
     await Future.delayed(
       Duration(milliseconds: 300),
     );
 
-    return createdRes && startRes;
+    return res;
   }
 
   Future<bool> registerTask(String appName) async {

@@ -194,12 +194,23 @@ class ClashLib with ClashInterface {
   }
 
   @override
-  changeProxy(ChangeProxyParams changeProxyParams) {
+  Future<String> changeProxy(ChangeProxyParams changeProxyParams) {
+    final completer = Completer<String>();
+    final receiver = ReceivePort();
+    receiver.listen((message) {
+      if (!completer.isCompleted) {
+        completer.complete(message);
+        receiver.close();
+      }
+    });
     final params = json.encode(changeProxyParams);
     final paramsChar = params.toNativeUtf8().cast<Char>();
-    final res = clashFFI.changeProxy(paramsChar);
+    clashFFI.changeProxy(
+      paramsChar,
+      receiver.sendPort.nativePort,
+    );
     malloc.free(paramsChar);
-    return res == 1;
+    return completer.future;
   }
 
   @override

@@ -28,6 +28,7 @@ class AppController {
   late Function addCheckIpNumDebounce;
   late Function applyProfileDebounce;
   late Function savePreferencesDebounce;
+  late Function changeProxyDebounce;
 
   AppController(this.context) {
     appState = context.read<AppState>();
@@ -42,6 +43,13 @@ class AppController {
     });
     applyProfileDebounce = debounce<Function()>(() async {
       await applyProfile(isPrue: true);
+    });
+    changeProxyDebounce = debounce((String groupName, String proxyName) async {
+      await changeProxy(
+        groupName: groupName,
+        proxyName: proxyName,
+      );
+      await updateGroups();
     });
     addCheckIpNumDebounce = debounce(() {
       appState.checkIpNum++;
