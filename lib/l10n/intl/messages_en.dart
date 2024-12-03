@@ -21,6 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
+
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
         "accessControl": MessageLookupByLibrary.simpleMessage("AccessControl"),
@@ -121,6 +122,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "View current connections data"),
         "connectivity": MessageLookupByLibrary.simpleMessage("Connectivity："),
         "copy": MessageLookupByLibrary.simpleMessage("Copy"),
+        "copyEnvVar": MessageLookupByLibrary.simpleMessage(
+            "Copying environment variables"),
         "core": MessageLookupByLibrary.simpleMessage("Core"),
         "coreInfo": MessageLookupByLibrary.simpleMessage("Core info"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
@@ -326,6 +329,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "paste": MessageLookupByLibrary.simpleMessage("Paste"),
         "pleaseBindWebDAV":
             MessageLookupByLibrary.simpleMessage("Please bind WebDAV"),
+        "pleaseInputAdminPassword": MessageLookupByLibrary.simpleMessage(
+            "Please enter the admin password"),
         "pleaseUploadFile":
             MessageLookupByLibrary.simpleMessage("Please upload file"),
         "pleaseUploadValidQrcode": MessageLookupByLibrary.simpleMessage(
