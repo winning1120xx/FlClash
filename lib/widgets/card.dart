@@ -133,12 +133,12 @@ class CommonCard extends StatelessWidget {
             ?.resolve(states);
       case CommonCardType.filled:
         if (isSelected) {
-          return colorScheme.secondaryContainer;
+          return colorScheme.surfaceContainer.toLight();
         }
         if (states.isEmpty) {
-          return colorScheme.surfaceContainerLow;
+          return colorScheme.surfaceContainerHigh.darken(0.005);
         }
-        return colorScheme.surfaceContainer;
+        return colorScheme.surfaceContainer.toLight();
     }
   }
 

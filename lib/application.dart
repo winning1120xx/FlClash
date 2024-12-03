@@ -1,8 +1,10 @@
 import 'dart:async';
+
 import 'package:animations/animations.dart';
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:fl_clash/l10n/l10n.dart';
+import 'package:fl_clash/clash/clash.dart';
 import 'package:fl_clash/common/common.dart';
+import 'package:fl_clash/l10n/l10n.dart';
 import 'package:fl_clash/manager/hotkey_manager.dart';
 import 'package:fl_clash/manager/manager.dart';
 import 'package:fl_clash/plugins/app.dart';
@@ -63,15 +65,19 @@ class ApplicationState extends State<Application> {
     builders: <TargetPlatform, PageTransitionsBuilder>{
       TargetPlatform.android: SharedAxisPageTransitionsBuilder(
         transitionType: SharedAxisTransitionType.horizontal,
+        fillColor: Colors.transparent,
       ),
       TargetPlatform.windows: SharedAxisPageTransitionsBuilder(
         transitionType: SharedAxisTransitionType.horizontal,
+        fillColor: Colors.transparent,
       ),
       TargetPlatform.linux: SharedAxisPageTransitionsBuilder(
         transitionType: SharedAxisTransitionType.horizontal,
+        fillColor: Colors.transparent,
       ),
       TargetPlatform.macOS: SharedAxisPageTransitionsBuilder(
         transitionType: SharedAxisTransitionType.horizontal,
+        fillColor: Colors.transparent,
       ),
     },
   );
@@ -245,8 +251,10 @@ class ApplicationState extends State<Application> {
   @override
   Future<void> dispose() async {
     linkManager.destroy();
-    await globalState.appController.savePreferences();
-    super.dispose();
     _cancelTimer();
+    await clashService?.destroy();
+    await globalState.appController.savePreferences();
+    await globalState.appController.handleExit();
+    super.dispose();
   }
 }
