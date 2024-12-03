@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -76,27 +78,98 @@ class Request {
   };
 
   Future<IpInfo?> checkIp({CancelToken? cancelToken}) async {
-    for (final source in _ipInfoSources.entries) {
-      try {
+    try {
+      for (final source in _ipInfoSources.entries) {
         final response = await _dio
-            .get<Map<String, dynamic>>(
-              source.key,
-              cancelToken: cancelToken,
-            )
-            .timeout(
-              httpTimeoutDuration,
-            );
-        if (response.statusCode == 200 && response.data != null) {
-          return source.value(response.data!);
+            .get<Map<String, dynamic>>(source.key, cancelToken: cancelToken)
+            .timeout(httpTimeoutDuration);
+        if (response.statusCode != 200 || response.data == null) {
+          continue;
         }
-      } catch (e) {
-        if (cancelToken?.isCancelled == true) {
-          throw "cancelled";
-        }
-        continue;
+        return source.value(response.data!);
+      }
+    } catch (e) {
+      debugPrint("checkIp error ===> $e");
+      if (cancelToken?.isCancelled == true) {
+        throw "cancelled";
       }
     }
     return null;
+  }
+
+  Future<bool> pingHelper() async {
+    try {
+      final response = await _dio
+          .get(
+            "http://$localhost:$helperPort/ping",
+            options: Options(
+              responseType: ResponseType.plain,
+            ),
+          )
+          .timeout(
+            const Duration(
+              milliseconds: 2000,
+            ),
+          );
+      if (response.statusCode != HttpStatus.ok) {
+        return false;
+      }
+      return (response.data as String) == helperTag;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  Future<bool> startCoreByHelper(String arg) async {
+    try {
+      final response = await _dio
+          .post(
+            "http://$localhost:$helperPort/start",
+            data: json.encode({
+              "path": appPath.corePath,
+              "arg": arg,
+            }),
+            options: Options(
+              responseType: ResponseType.plain,
+            ),
+          )
+          .timeout(
+            const Duration(
+              milliseconds: 2000,
+            ),
+          );
+      if (response.statusCode != HttpStatus.ok) {
+        return false;
+      }
+      final data = response.data as String;
+      return data.isEmpty;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  Future<bool> stopCoreByHelper() async {
+    try {
+      final response = await _dio
+          .post(
+            "http://$localhost:$helperPort/stop",
+            options: Options(
+              responseType: ResponseType.plain,
+            ),
+          )
+          .timeout(
+            const Duration(
+              milliseconds: 2000,
+            ),
+          );
+      if (response.statusCode != HttpStatus.ok) {
+        return false;
+      }
+      final data = response.data as String;
+      return data.isEmpty;
+    } catch (_) {
+      return false;
+    }
   }
 }
 
