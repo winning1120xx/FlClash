@@ -76,12 +76,23 @@ class Build {
   static List<BuildItem> get buildItems => [
         BuildItem(
           target: Target.macos,
+          arch: Arch.arm64,
         ),
         BuildItem(
-          target: Target.windows,
+          target: Target.macos,
+          arch: Arch.amd64,
         ),
         BuildItem(
           target: Target.linux,
+          arch: Arch.arm64,
+        ),
+        BuildItem(
+          target: Target.linux,
+          arch: Arch.amd64,
+        ),
+        BuildItem(
+          target: Target.windows,
+          arch: Arch.amd64,
         ),
         BuildItem(
           target: Target.android,
@@ -200,11 +211,10 @@ class Build {
 
       final Map<String, String> env = {};
       env["GOOS"] = item.target.os;
-
+      if (item.arch != null) {
+        env["GOARCH"] = item.arch!.name;
+      }
       if (isLib) {
-        if (item.arch != null) {
-          env["GOARCH"] = item.arch!.name;
-        }
         env["CGO_ENABLED"] = "1";
         env["CC"] = _getCc(item);
         env["CFLAGS"] = "-O3 -Werror";
@@ -303,7 +313,7 @@ class BuildCommand extends Command {
   BuildCommand({
     required this.target,
   }) {
-    if (target == Target.android) {
+    if (target == Target.android || target == Target.linux) {
       argParser.addOption(
         "arch",
         valueHelp: arches.map((e) => e.name).join(','),
@@ -351,7 +361,7 @@ class BuildCommand extends Command {
       Build.getExecutable("sudo apt install -y rpm patchelf"),
     );
     await Build.exec(
-      Build.getExecutable("sudo apt-get install -y libkeybinder-3.0"),
+      Build.getExecutable("sudo apt-get install -y keybinder-3.0"),
     );
     await Build.exec(
       Build.getExecutable("sudo apt install -y locate"),
@@ -410,14 +420,10 @@ class BuildCommand extends Command {
   Future<void> run() async {
     final mode = target == Target.android ? Mode.lib : Mode.core;
     final String out = argResults?['out'] ?? 'app';
-    Arch? arch;
-    var archName = argResults?['arch'];
-
-    if (target == Target.android) {
-      final currentArches =
-          arches.where((element) => element.name == archName).toList();
-      arch = currentArches.isEmpty ? null : currentArches.first;
-    }
+    final archName = argResults?['arch'];
+    final currentArches =
+        arches.where((element) => element.name == archName).toList();
+    final arch = currentArches.isEmpty ? null : currentArches.first;
 
     await Build.buildCore(
       target: target,
@@ -440,13 +446,25 @@ class BuildCommand extends Command {
           targets: "exe,zip",
           args: "--description $archName",
         );
+        return;
       case Target.linux:
+        final targetMap = {
+          Arch.arm64: "linux-arm64",
+          Arch.amd64: "linux-x64",
+        };
+        final defaultArches = [Arch.arm64, Arch.amd64];
+        final defaultTargets = defaultArches
+            .where((element) => arch == null ? true : element == arch)
+            .map((e) => targetMap[e])
+            .toList();
         await _getLinuxDependencies();
         _buildDistributor(
           target: target,
           targets: "appimage,deb,rpm",
-          args: "--description $archName",
+          args:
+              "--description $archName --build-target-platform ${defaultTargets.join(",")}",
         );
+        return;
       case Target.android:
         final targetMap = {
           Arch.arm: "android-arm",
@@ -464,6 +482,7 @@ class BuildCommand extends Command {
           args:
               "--flutter-build-args split-per-abi --build-target-platform ${defaultTargets.join(",")}",
         );
+        return;
       case Target.macos:
         await _getMacosDependencies();
         _buildDistributor(
@@ -471,6 +490,7 @@ class BuildCommand extends Command {
           targets: "dmg",
           args: "--description $archName",
         );
+        return;
     }
   }
 }
