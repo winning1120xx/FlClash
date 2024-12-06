@@ -425,6 +425,10 @@ class BuildCommand extends Command {
         arches.where((element) => element.name == archName).toList();
     final arch = currentArches.isEmpty ? null : currentArches.first;
 
+    if (arch == null && !Platform.isAndroid) {
+      throw "Invalid arch parameter";
+    }
+
     await Build.buildCore(
       target: target,
       arch: arch,
@@ -452,17 +456,13 @@ class BuildCommand extends Command {
           Arch.arm64: "linux-arm64",
           Arch.amd64: "linux-x64",
         };
-        final defaultArches = [Arch.arm64, Arch.amd64];
-        final defaultTargets = defaultArches
-            .where((element) => arch == null ? true : element == arch)
-            .map((e) => targetMap[e])
-            .toList();
+        final defaultTarget = targetMap[arch];
         await _getLinuxDependencies();
         _buildDistributor(
           target: target,
           targets: "appimage,deb,rpm",
           args:
-              "--description $archName --build-target-platform ${defaultTargets.join(",")}",
+              "--description $archName --build-target-platform $defaultTarget",
         );
         return;
       case Target.android:
