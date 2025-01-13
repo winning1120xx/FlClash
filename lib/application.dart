@@ -252,7 +252,7 @@ class ApplicationState extends State<Application> {
     linkManager.destroy();
     _autoUpdateGroupTaskTimer?.cancel();
     _autoUpdateProfilesTaskTimer?.cancel();
-    await clashService?.destroy();
+    await clashCore.destroy();
     await globalState.appController.savePreferences();
     await globalState.appController.handleExit();
     super.dispose();

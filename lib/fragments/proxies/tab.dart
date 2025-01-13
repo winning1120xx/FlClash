@@ -12,6 +12,7 @@ import 'card.dart';
 import 'common.dart';
 
 List<Proxy> currentProxies = [];
+String? currentTestUrl;
 
 typedef GroupNameKeyMap = Map<String, GlobalObjectKey<ProxyGroupViewState>>;
 
@@ -114,6 +115,7 @@ class ProxiesTabFragmentState extends State<ProxiesTabFragment>
     }
     final currentGroup = currentGroups[index ?? _tabController!.index];
     currentProxies = currentGroup.all;
+    currentTestUrl = currentGroup.testUrl;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       appController.config.updateCurrentGroupName(
         currentGroup.name,
@@ -273,7 +275,10 @@ class ProxyGroupViewState extends State<ProxyGroupView> {
   _delayTest() async {
     if (isLock) return;
     isLock = true;
-    await delayTest(currentProxies);
+    await delayTest(
+      currentProxies,
+      currentTestUrl,
+    );
     isLock = false;
   }
 
@@ -289,6 +294,7 @@ class ProxyGroupViewState extends State<ProxyGroupView> {
     }
     final sortedProxies = globalState.appController.getSortProxies(
       currentProxies,
+      currentTestUrl,
     );
     _controller.animateTo(
       min(
@@ -334,6 +340,7 @@ class ProxyGroupViewState extends State<ProxyGroupView> {
           sortNum: appState.sortNum,
           proxies: group.all,
           groupType: group.type,
+          testUrl: group.testUrl,
         );
       },
       builder: (_, state, __) {
@@ -342,6 +349,7 @@ class ProxyGroupViewState extends State<ProxyGroupView> {
         final proxyCardType = state.proxyCardType;
         final sortedProxies = globalState.appController.getSortProxies(
           proxies,
+          state.testUrl,
         );
         return ActiveBuilder(
           label: "proxies",
@@ -369,6 +377,7 @@ class ProxyGroupViewState extends State<ProxyGroupView> {
               itemBuilder: (_, index) {
                 final proxy = sortedProxies[index];
                 return ProxyCard(
+                  testUrl: state.testUrl,
                   groupType: state.groupType,
                   type: proxyCardType,
                   key: ValueKey('$groupName.${proxy.name}'),

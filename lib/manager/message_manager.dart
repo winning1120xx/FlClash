@@ -133,16 +133,16 @@ class MessageManagerState extends State<MessageManager>
 
   Widget _wrapMessage(CommonMessage message) {
     return Material(
-      elevation: 2,
+      elevation: 6,
       borderRadius: BorderRadius.circular(8),
-      color: context.colorScheme.secondaryFixedDim,
+      color: context.colorScheme.surfaceContainer,
       clipBehavior: Clip.antiAlias,
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
         child: Text(
           message.text,
           style: context.textTheme.bodyMedium?.copyWith(
-            color: context.colorScheme.onSecondaryFixedVariant,
+            color: context.colorScheme.onSurfaceVariant,
           ),
           maxLines: 5,
           overflow: TextOverflow.ellipsis,
@@ -234,7 +234,7 @@ class MessageManagerState extends State<MessageManager>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 for (final message in messages) ...[
-                                  if (message != messages.last)
+                                  if (message != messages.first)
                                     SizedBox(
                                       height: 8,
                                     ),

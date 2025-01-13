@@ -13,7 +13,7 @@ import 'package:path/path.dart';
 
 class ClashCore {
   static ClashCore? _instance;
-  late ClashInterface clashInterface;
+  late ClashHandlerInterface clashInterface;
 
   ClashCore._internal() {
     if (Platform.isAndroid) {
@@ -28,7 +28,7 @@ class ClashCore {
     return _instance!;
   }
 
-  Future<void> _initGeo() async {
+  static Future<void> initGeo() async {
     final homePath = await appPath.getHomeDirPath();
     final homeDir = Directory(homePath);
     final isExists = await homeDir.exists();
@@ -63,7 +63,7 @@ class ClashCore {
     required ClashConfig clashConfig,
     required Config config,
   }) async {
-    await _initGeo();
+    await initGeo();
     final homeDirPath = await appPath.getHomeDirPath();
     return await clashInterface.init(homeDirPath);
   }
@@ -84,6 +84,7 @@ class ClashCore {
 
   Future<List<Group>> getProxiesGroups() async {
     final proxiesRawString = await clashInterface.getProxies();
+    print(proxiesRawString);
     return Isolate.run<List<Group>>(() {
       if (proxiesRawString.isEmpty) return [];
       final proxies = (json.decode(proxiesRawString) ?? {}) as Map;
@@ -135,6 +136,9 @@ class ClashCore {
   Future<List<ExternalProvider>> getExternalProviders() async {
     final externalProvidersRawString =
         await clashInterface.getExternalProviders();
+    if (externalProvidersRawString.isEmpty) {
+      return [];
+    }
     return Isolate.run<List<ExternalProvider>>(
       () {
         final externalProviders =
@@ -152,7 +156,7 @@ class ClashCore {
       String externalProviderName) async {
     final externalProvidersRawString =
         await clashInterface.getExternalProvider(externalProviderName);
-    if (externalProvidersRawString == null) {
+    if (externalProvidersRawString.isEmpty) {
       return null;
     }
     if (externalProvidersRawString.isEmpty) {
@@ -161,11 +165,8 @@ class ClashCore {
     return ExternalProvider.fromJson(json.decode(externalProvidersRawString));
   }
 
-  Future<String> updateGeoData({
-    required String geoType,
-    required String geoName,
-  }) {
-    return clashInterface.updateGeoData(geoType: geoType, geoName: geoName);
+  Future<String> updateGeoData(UpdateGeoDataParams params) {
+    return clashInterface.updateGeoData(params);
   }
 
   Future<String> sideLoadExternalProvider({
@@ -190,13 +191,16 @@ class ClashCore {
     await clashInterface.stopListener();
   }
 
-  Future<Delay> getDelay(String proxyName) async {
-    final data = await clashInterface.asyncTestDelay(proxyName);
+  Future<Delay> getDelay(String url, String proxyName) async {
+    final data = await clashInterface.asyncTestDelay(url,proxyName);
     return Delay.fromJson(json.decode(data));
   }
 
-  Future<Traffic> getTraffic(bool value) async {
-    final trafficString = await clashInterface.getTraffic(value);
+  Future<Traffic> getTraffic() async {
+    final trafficString = await clashInterface.getTraffic();
+    if (trafficString.isEmpty) {
+      return Traffic();
+    }
     return Traffic.fromMap(json.decode(trafficString));
   }
 
@@ -211,13 +215,19 @@ class ClashCore {
     );
   }
 
-  Future<Traffic> getTotalTraffic(bool value) async {
-    final totalTrafficString = await clashInterface.getTotalTraffic(value);
+  Future<Traffic> getTotalTraffic() async {
+    final totalTrafficString = await clashInterface.getTotalTraffic();
+    if (totalTrafficString.isEmpty) {
+      return Traffic();
+    }
     return Traffic.fromMap(json.decode(totalTrafficString));
   }
 
   Future<int> getMemory() async {
     final value = await clashInterface.getMemory();
+    if (value.isEmpty) {
+      return 0;
+    }
     return int.parse(value);
   }
 
@@ -235,6 +245,10 @@ class ClashCore {
 
   requestGc() {
     clashInterface.forceGc();
+  }
+
+  destroy() async {
+    await clashInterface.destroy();
   }
 }
 

@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'dart:math';
 
 import 'package:fl_clash/common/common.dart';
@@ -291,6 +293,7 @@ class Group with _$Group {
     @Default([]) List<Proxy> all,
     String? now,
     bool? hidden,
+    String? testUrl,
     @Default("") String icon,
     required String name,
   }) = _Group;

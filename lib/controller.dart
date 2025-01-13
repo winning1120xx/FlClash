@@ -76,13 +76,10 @@ class AppController {
 
   updateStatus(bool isStart) async {
     if (isStart) {
-      await globalState.handleStart();
-      updateRunTime();
-      updateTraffic();
-      globalState.updateFunctionLists = [
+      await globalState.handleStart([
         updateRunTime,
         updateTraffic,
-      ];
+      ]);
       final currentLastModified =
           await config.getCurrentProfile()?.profileLastModified;
       if (currentLastModified == null ||
@@ -355,7 +352,7 @@ class AppController {
 
   _initStatus() async {
     if (Platform.isAndroid) {
-      globalState.updateStartTime();
+      await globalState.updateStartTime();
     }
     final status =
         globalState.isStart == true ? true : config.appSetting.autoRun;
@@ -522,6 +519,18 @@ class AppController {
     });
   }
 
+  int? getDelay(String proxyName, [String? url]) {
+    final currentDelayMap = appState.delayMap[getRealTestUrl(url)];
+    return currentDelayMap?[appState.getRealProxyName(proxyName)];
+  }
+
+  String getRealTestUrl(String? url) {
+    if (url == null || url.isEmpty) {
+      return config.appSetting.testUrl;
+    }
+    return url;
+  }
+
   List<Proxy> _sortOfName(List<Proxy> proxies) {
     return List.of(proxies)
       ..sort(
@@ -532,12 +541,12 @@ class AppController {
       );
   }
 
-  List<Proxy> _sortOfDelay(List<Proxy> proxies) {
-    return proxies = List.of(proxies)
+  List<Proxy> _sortOfDelay(String url, List<Proxy> proxies) {
+    return List.of(proxies)
       ..sort(
         (a, b) {
-          final aDelay = appState.getDelay(a.name);
-          final bDelay = appState.getDelay(b.name);
+          final aDelay = getDelay(url, a.name);
+          final bDelay = getDelay(url, b.name);
           if (aDelay == null && bDelay == null) {
             return 0;
           }
@@ -552,10 +561,10 @@ class AppController {
       );
   }
 
-  List<Proxy> getSortProxies(List<Proxy> proxies) {
+  List<Proxy> getSortProxies(List<Proxy> proxies, [String? url]) {
     return switch (config.proxiesStyle.sortType) {
       ProxiesSortType.none => proxies,
-      ProxiesSortType.delay => _sortOfDelay(proxies),
+      ProxiesSortType.delay => _sortOfDelay(getRealTestUrl(url), proxies),
       ProxiesSortType.name => _sortOfName(proxies),
     };
   }
