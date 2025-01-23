@@ -84,7 +84,6 @@ class ClashCore {
 
   Future<List<Group>> getProxiesGroups() async {
     final proxiesRawString = await clashInterface.getProxies();
-    print(proxiesRawString);
     return Isolate.run<List<Group>>(() {
       if (proxiesRawString.isEmpty) return [];
       final proxies = (json.decode(proxiesRawString) ?? {}) as Map;

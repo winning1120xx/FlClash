@@ -80,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blacklistMode": MessageLookupByLibrary.simpleMessage("黑名单模式"),
         "bypassDomain": MessageLookupByLibrary.simpleMessage("排除域名"),
         "bypassDomainDesc": MessageLookupByLibrary.simpleMessage("仅在系统代理启用时生效"),
+        "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "cancelFilterSystemApp":
             MessageLookupByLibrary.simpleMessage("取消过滤系统应用"),
         "cancelSelectAll": MessageLookupByLibrary.simpleMessage("取消全选"),
@@ -152,6 +153,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fallbackFilter": MessageLookupByLibrary.simpleMessage("Fallback过滤"),
         "file": MessageLookupByLibrary.simpleMessage("文件"),
         "fileDesc": MessageLookupByLibrary.simpleMessage("直接上传配置文件"),
+        "fileIsUpdate": MessageLookupByLibrary.simpleMessage("文件有修改，是否保存修改"),
         "filterSystemApp": MessageLookupByLibrary.simpleMessage("过滤系统应用"),
         "findProcessMode": MessageLookupByLibrary.simpleMessage("查找进程"),
         "findProcessModeDesc":
@@ -168,6 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "global": MessageLookupByLibrary.simpleMessage("全局"),
         "go": MessageLookupByLibrary.simpleMessage("前往"),
         "goDownload": MessageLookupByLibrary.simpleMessage("前往下载"),
+        "hasCacheChange": MessageLookupByLibrary.simpleMessage("是否缓存修改"),
         "hostsDesc": MessageLookupByLibrary.simpleMessage("追加Hosts"),
         "hotkeyConflict": MessageLookupByLibrary.simpleMessage("快捷键冲突"),
         "hotkeyManagement": MessageLookupByLibrary.simpleMessage("快捷键管理"),
@@ -275,6 +278,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("请输入有效间隔时间格式"),
         "profileAutoUpdateIntervalNullValidationDesc":
             MessageLookupByLibrary.simpleMessage("请输入自动更新间隔时间"),
+        "profileHasUpdate":
+            MessageLookupByLibrary.simpleMessage("配置文件已经修改,是否关闭自动更新 "),
         "profileNameNullValidationDesc":
             MessageLookupByLibrary.simpleMessage("请输入配置名称"),
         "profileParseErrorDesc":

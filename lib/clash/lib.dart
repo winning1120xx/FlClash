@@ -253,7 +253,7 @@ class ClashLibHandler {
 
   setProcessMap(ProcessMapItem processMapItem) {
     final processMapItemChar =
-    json.encode(processMapItem).toNativeUtf8().cast<Char>();
+        json.encode(processMapItem).toNativeUtf8().cast<Char>();
     clashFFI.setProcessMap(processMapItemChar);
     malloc.free(processMapItemChar);
   }
@@ -308,7 +308,6 @@ class ClashLibHandler {
     return true;
   }
 
-
   setFdMap(String id) {
     final idChar = id.toNativeUtf8().cast<Char>();
     clashFFI.setFdMap(idChar);
@@ -316,10 +315,10 @@ class ClashLibHandler {
   }
 
   Future<String> quickStart(
-      String homeDir,
-      UpdateConfigParams updateConfigParams,
-      CoreState state,
-      ) {
+    String homeDir,
+    UpdateConfigParams updateConfigParams,
+    CoreState state,
+  ) {
     final completer = Completer<String>();
     final receiver = ReceivePort();
     receiver.listen((message) {

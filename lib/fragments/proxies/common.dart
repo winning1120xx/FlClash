@@ -101,7 +101,7 @@ double getScrollToSelectedOffset({
   final proxyCardType = appController.config.proxiesStyle.cardType;
   final selectedName = appController.getCurrentSelectedName(groupName);
   final findSelectedIndex = proxies.indexWhere(
-    (proxy) => proxy.name == selectedName,
+        (proxy) => proxy.name == selectedName,
   );
   final selectedIndex = findSelectedIndex != -1 ? findSelectedIndex : 0;
   final rows = (selectedIndex / columns).floor();

@@ -3399,6 +3399,46 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The file has been modified. Do you want to save the changes?`
+  String get fileIsUpdate {
+    return Intl.message(
+      'The file has been modified. Do you want to save the changes?',
+      name: 'fileIsUpdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The profile has been modified. Do you want to disable auto update?`
+  String get profileHasUpdate {
+    return Intl.message(
+      'The profile has been modified. Do you want to disable auto update?',
+      name: 'profileHasUpdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to cache the changes?`
+  String get hasCacheChange {
+    return Intl.message(
+      'Do you want to cache the changes?',
+      name: 'hasCacheChange',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

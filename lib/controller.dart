@@ -160,6 +160,13 @@ class AppController {
     }
   }
 
+  setProfile(Profile profile) {
+    config.setProfile(profile);
+    if (profile.id == config.currentProfile?.id) {
+      applyProfileDebounce();
+    }
+  }
+
   Future<void> updateClashConfig({bool isPatch = true}) async {
     final commonScaffoldState = globalState.homeScaffoldKey.currentState;
     if (commonScaffoldState?.mounted != true) return;
@@ -276,8 +283,9 @@ class AppController {
       await clashService?.destroy();
       await proxy?.stopProxy();
       await savePreferences();
-    } catch (_) {}
-    system.exit();
+    } finally {
+      system.exit();
+    }
   }
 
   autoCheckUpdate() async {
@@ -295,7 +303,7 @@ class AppController {
       final body = data['body'];
       final submits = other.parseReleaseBody(body);
       final textTheme = context.textTheme;
-      globalState.showMessage(
+      final res = await globalState.showMessage(
         title: appLocalizations.discoverNewVersion,
         message: TextSpan(
           text: "$tagName \n",
@@ -312,13 +320,15 @@ class AppController {
               ),
           ],
         ),
-        onTab: () {
-          launchUrl(
-            Uri.parse("https://github.com/$repository/releases/latest"),
-          );
-        },
         confirmText: appLocalizations.goDownload,
       );
+      if (res != true) {
+        return;
+      }
+      launchUrl(
+        Uri.parse("https://github.com/$repository/releases/latest"),
+      );
+      ;
     } else if (handleError) {
       globalState.showMessage(
         title: appLocalizations.checkUpdate,
@@ -394,8 +404,8 @@ class AppController {
 
   initLink() {
     linkManager.initAppLinksListen(
-      (url) {
-        globalState.showMessage(
+      (url) async {
+        final res = await globalState.showMessage(
           title: "${appLocalizations.add}${appLocalizations.profile}",
           message: TextSpan(
             children: [
@@ -413,10 +423,12 @@ class AppController {
                       "${appLocalizations.create}${appLocalizations.profile}"),
             ],
           ),
-          onTab: () {
-            addProfileFormURL(url);
-          },
         );
+
+        if (res != true) {
+          return;
+        }
+        addProfileFormURL(url);
       },
     );
   }
@@ -545,8 +557,8 @@ class AppController {
     return List.of(proxies)
       ..sort(
         (a, b) {
-          final aDelay = getDelay(url, a.name);
-          final bDelay = getDelay(url, b.name);
+          final aDelay = getDelay(a.name, url);
+          final bDelay = getDelay(b.name, url);
           if (aDelay == null && bDelay == null) {
             return 0;
           }
@@ -587,6 +599,10 @@ class AppController {
         await File(providersPath).delete(recursive: true);
       }
     });
+  }
+
+  bool get isMobileView {
+    return appState.viewMode == ViewMode.mobile;
   }
 
   updateTun() {

@@ -24,6 +24,7 @@ class MessageManagerState extends State<MessageManager>
   final _messagesNotifier = ValueNotifier<List<CommonMessage>>([]);
   final _floatMessageNotifier = ValueNotifier<CommonMessage?>(null);
   double maxWidth = 0;
+  Offset offset = Offset.zero;
 
   late AnimationController _animationController;
 
@@ -49,7 +50,7 @@ class MessageManagerState extends State<MessageManager>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 200),
+      duration: Duration(milliseconds: 400),
     );
     _initTransformState();
   }
@@ -75,7 +76,7 @@ class MessageManagerState extends State<MessageManager>
   _showMessage() {
     final commonMessage = bufferMessages.removeAt(0);
     _floatOffsetAnimation = Tween(
-      begin: Offset(-maxWidth, 0),
+      begin: Offset(-maxWidth - offset.dx, 0),
       end: Offset.zero,
     ).animate(
       CurvedAnimation(
@@ -133,12 +134,12 @@ class MessageManagerState extends State<MessageManager>
 
   Widget _wrapMessage(CommonMessage message) {
     return Material(
-      elevation: 6,
+      elevation: 0,
       borderRadius: BorderRadius.circular(8),
       color: context.colorScheme.surfaceContainer,
       clipBehavior: Clip.antiAlias,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         child: Text(
           message.text,
           style: context.textTheme.bodyMedium?.copyWith(
@@ -185,7 +186,7 @@ class MessageManagerState extends State<MessageManager>
     final itemWrapState = GlobalObjectKey(commonMessage.id).currentState
         as _MessageItemWrapState?;
     await itemWrapState?.transform(
-      Offset(-maxWidth, 0),
+      Offset(-maxWidth  - offset.dx, 0),
     );
     _messagesNotifier.value = List<CommonMessage>.from(_messagesNotifier.value)
       ..remove(commonMessage);
@@ -204,6 +205,7 @@ class MessageManagerState extends State<MessageManager>
               child: ValueListenableBuilder(
                 valueListenable: globalState.safeMessageOffsetNotifier,
                 builder: (_, offset, child) {
+                  this.offset = offset;
                   if (offset == Offset.zero) {
                     return SizedBox();
                   }
@@ -236,7 +238,7 @@ class MessageManagerState extends State<MessageManager>
                                 for (final message in messages) ...[
                                   if (message != messages.first)
                                     SizedBox(
-                                      height: 8,
+                                      height: 12,
                                     ),
                                   _MessageItemWrap(
                                     key: GlobalObjectKey(message.id),

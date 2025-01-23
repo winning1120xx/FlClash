@@ -185,18 +185,16 @@ class ProfileItem extends StatelessWidget {
   });
 
   _handleDeleteProfile(BuildContext context) async {
-    globalState.showMessage(
+    final res = await globalState.showMessage(
       title: appLocalizations.tip,
       message: TextSpan(
         text: appLocalizations.deleteProfileTip,
       ),
-      onTab: () async {
-        await globalState.appController.deleteProfile(profile.id);
-        if (context.mounted) {
-          Navigator.of(context).pop();
-        }
-      },
     );
+    if (res != true) {
+      return;
+    }
+    await globalState.appController.deleteProfile(profile.id);
   }
 
   _handleUpdateProfile() async {

@@ -41,12 +41,13 @@ class GlobalState {
       this.tasks = tasks;
     }
     await executorUpdateTask();
-    Timer(const Duration(seconds: 1), () async {
+    timer = Timer(const Duration(seconds: 1), () async {
       startUpdateTasks();
     });
   }
 
   executorUpdateTask() async {
+    if (timer != null && timer!.isActive == true) return;
     for (final task in tasks) {
       await task();
     }
@@ -224,13 +225,12 @@ class GlobalState {
     appState.groups = await clashCore.getProxiesGroups();
   }
 
-  showMessage({
+  Future<bool?> showMessage<bool>({
     required String title,
     required InlineSpan message,
-    Function()? onTab,
     String? confirmText,
-  }) {
-    showCommonDialog(
+  }) async {
+    return await showCommonDialog<bool>(
       child: Builder(
         builder: (context) {
           return AlertDialog(
@@ -252,10 +252,15 @@ class GlobalState {
             ),
             actions: [
               TextButton(
-                onPressed: onTab ??
-                    () {
-                      Navigator.of(context).pop();
-                    },
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+                child: Text(appLocalizations.cancel),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
                 child: Text(confirmText ?? appLocalizations.confirm),
               )
             ],
@@ -337,15 +342,16 @@ class GlobalState {
     navigatorKey.currentContext?.showNotifier(text);
   }
 
-  openUrl(String url) {
-    showMessage(
+  openUrl(String url) async {
+    final res = await showMessage(
       message: TextSpan(text: url),
       title: appLocalizations.externalLink,
       confirmText: appLocalizations.go,
-      onTab: () {
-        launchUrl(Uri.parse(url));
-      },
     );
+    if (res != true) {
+      return;
+    }
+    launchUrl(Uri.parse(url));
   }
 }
 

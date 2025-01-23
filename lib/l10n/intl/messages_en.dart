@@ -96,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bypassDomain": MessageLookupByLibrary.simpleMessage("Bypass domain"),
         "bypassDomainDesc": MessageLookupByLibrary.simpleMessage(
             "Only takes effect when the system proxy is enabled"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelFilterSystemApp":
             MessageLookupByLibrary.simpleMessage("Cancel filter system app"),
         "cancelSelectAll":
@@ -189,6 +190,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "file": MessageLookupByLibrary.simpleMessage("File"),
         "fileDesc":
             MessageLookupByLibrary.simpleMessage("Directly upload profile"),
+        "fileIsUpdate": MessageLookupByLibrary.simpleMessage(
+            "The file has been modified. Do you want to save the changes?"),
         "filterSystemApp":
             MessageLookupByLibrary.simpleMessage("Filter system app"),
         "findProcessMode": MessageLookupByLibrary.simpleMessage("Find process"),
@@ -208,6 +211,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "global": MessageLookupByLibrary.simpleMessage("Global"),
         "go": MessageLookupByLibrary.simpleMessage("Go"),
         "goDownload": MessageLookupByLibrary.simpleMessage("Go to download"),
+        "hasCacheChange": MessageLookupByLibrary.simpleMessage(
+            "Do you want to cache the changes?"),
         "hostsDesc": MessageLookupByLibrary.simpleMessage("Add Hosts"),
         "hotkeyConflict":
             MessageLookupByLibrary.simpleMessage("Hotkey conflict"),
@@ -348,6 +353,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "profileAutoUpdateIntervalNullValidationDesc":
             MessageLookupByLibrary.simpleMessage(
                 "Please enter the auto update interval time"),
+        "profileHasUpdate": MessageLookupByLibrary.simpleMessage(
+            "The profile has been modified. Do you want to disable auto update?"),
         "profileNameNullValidationDesc": MessageLookupByLibrary.simpleMessage(
             "Please input the profile name"),
         "profileParseErrorDesc":
