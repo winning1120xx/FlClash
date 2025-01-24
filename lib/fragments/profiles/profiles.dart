@@ -284,41 +284,16 @@ class ProfileItem extends StatelessWidget {
                     padding: EdgeInsets.all(8),
                     child: CircularProgressIndicator(),
                   )
-                : CommonPopupMenu<ProfileActions>(
-                    icon: Icon(Icons.more_vert),
-                    items: [
-                      CommonPopupMenuItem(
-                        action: ProfileActions.edit,
-                        label: appLocalizations.edit,
-                        iconData: Icons.edit,
-                      ),
-                      if (profile.type == ProfileType.url)
-                        CommonPopupMenuItem(
-                          action: ProfileActions.update,
-                          label: appLocalizations.update,
-                          iconData: Icons.sync,
-                        ),
-                      CommonPopupMenuItem(
-                        action: ProfileActions.delete,
-                        label: appLocalizations.delete,
-                        iconData: Icons.delete,
-                      ),
-                    ],
-                    onSelected: (ProfileActions? action) async {
-                      switch (action) {
-                        case ProfileActions.edit:
-                          _handleShowEditExtendPage(context);
-                          break;
-                        case ProfileActions.delete:
-                          _handleDeleteProfile(context);
-                          break;
-                        case ProfileActions.update:
-                          _handleUpdateProfile();
-                          break;
-                        case null:
-                          break;
-                      }
-                    },
+                : CommonPopupBox(
+                    popup: Container(
+                      width: 200,
+                      height: 200,
+                      color: Colors.red,
+                    ),
+                    target: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.more_vert),
+                    ),
                   ),
           ),
         ),
