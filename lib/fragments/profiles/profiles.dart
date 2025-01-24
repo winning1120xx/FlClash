@@ -264,6 +264,28 @@ class ProfileItem extends StatelessWidget {
     ];
   }
 
+  Widget _popupButton(
+    BuildContext context, {
+    required void Function() onTap,
+    required String text,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 16,
+        ),
+        child: Text(
+          text,
+          style: context.textTheme.titleMedium
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return CommonCard(
@@ -285,10 +307,48 @@ class ProfileItem extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   )
                 : CommonPopupBox(
-                    popup: Container(
-                      width: 200,
-                      height: 200,
-                      color: Colors.red,
+                    popup: IntrinsicHeight(
+                      child: IntrinsicWidth(
+                        child: Card(
+                          color: context.colorScheme.surfaceContainer,
+                          clipBehavior: Clip.antiAlias,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Container(
+                            constraints: BoxConstraints(
+                              minWidth: 160,
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _popupButton(
+                                  context,
+                                  onTap: () {
+                                    _handleShowEditExtendPage(context);
+                                  },
+                                  text: appLocalizations.edit,
+                                ),
+                                _popupButton(
+                                  context,
+                                  onTap: () {
+                                    _handleUpdateProfile();
+                                  },
+                                  text: appLocalizations.sync,
+                                ),
+                                _popupButton(
+                                  context,
+                                  onTap: () {
+                                    _handleDeleteProfile(context);
+                                  },
+                                  text: appLocalizations.delete,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                     target: IconButton(
                       onPressed: () {},

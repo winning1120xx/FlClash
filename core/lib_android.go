@@ -104,6 +104,7 @@ var (
 )
 
 func handleStartTun(fd int) string {
+	handleStopTun()
 	tunLock.Lock()
 	defer tunLock.Unlock()
 	if fd == 0 {

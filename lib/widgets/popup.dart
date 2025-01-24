@@ -39,6 +39,7 @@ class CommonPopupRoute<T> extends PopupRoute<T> {
       parent: animation,
       curve: Curves.easeIn,
     ).value;
+    final double animateOffsetY = 20;
     return ValueListenableBuilder(
       valueListenable: offsetNotifier,
       builder: (_, value, child) {
@@ -46,9 +47,13 @@ class CommonPopupRoute<T> extends PopupRoute<T> {
           alignment: align,
           child: CustomSingleChildLayout(
             delegate: OverflowAwareLayoutDelegate(
-              offset: value.translate(20, -20),
+              animateOffsetY: animateOffsetY,
+              offset: value.translate(
+                60,
+                -animateOffsetY + 20,
+              ),
             ),
-            child: child!,
+            child: child,
           ),
         );
       },
@@ -61,7 +66,7 @@ class CommonPopupRoute<T> extends PopupRoute<T> {
               alignment: align,
               scale: 0.8 + 0.2 * animationValue,
               child: Transform.translate(
-                offset: Offset(0, 20) * animationValue,
+                offset: Offset(0, animateOffsetY) * animationValue,
                 child: child!,
               ),
             ),
@@ -94,7 +99,6 @@ class CommonPopupBox extends StatefulWidget {
 
 class _CommonPopupBoxState extends State<CommonPopupBox> {
   final _targetKey = GlobalKey();
-  Offset pointerOffset = Offset.zero;
   final _targetOffsetValueNotifier = ValueNotifier(Offset.zero);
 
   _handleTargetOffset() {
@@ -103,21 +107,24 @@ class _CommonPopupBoxState extends State<CommonPopupBox> {
     if (renderBox == null) {
       return;
     }
-    _targetOffsetValueNotifier.value =
-        renderBox.localToGlobal(Offset.zero) + pointerOffset;
+    _targetOffsetValueNotifier.value = renderBox.localToGlobal(Offset.zero);
   }
 
   @override
   Widget build(BuildContext context) {
     return Listener(
       onPointerDown: (details) {
-        pointerOffset = details.localPosition;
         _handleTargetOffset();
         Navigator.of(context).push(
           CommonPopupRoute(
             barrierLabel: other.id,
             builder: (BuildContext context) {
-              return widget.popup;
+              return Listener(
+                onPointerDown: (_) {
+                  Navigator.of(context).pop();
+                },
+                child: widget.popup,
+              );
             },
             offsetNotifier: _targetOffsetValueNotifier,
           ),
@@ -141,7 +148,12 @@ class _CommonPopupBoxState extends State<CommonPopupBox> {
 class OverflowAwareLayoutDelegate extends SingleChildLayoutDelegate {
   final Offset offset;
 
-  OverflowAwareLayoutDelegate({required this.offset});
+  final double animateOffsetY;
+
+  OverflowAwareLayoutDelegate({
+    required this.offset,
+    required this.animateOffsetY,
+  });
 
   @override
   Size getSize(BoxConstraints constraints) {
@@ -150,13 +162,17 @@ class OverflowAwareLayoutDelegate extends SingleChildLayoutDelegate {
 
   @override
   Offset getPositionForChild(Size size, Size childSize) {
+    final saveOffset = Offset(
+      16,
+      16,
+    );
     double x = (offset.dx - childSize.width).clamp(
       0,
-      size.width - childSize.width,
+      size.width - saveOffset.dx - childSize.width,
     );
     double y = (offset.dy).clamp(
       0,
-      size.height - childSize.height - 40,
+      size.height - saveOffset.dy - animateOffsetY - childSize.height,
     );
     return Offset(x, y);
   }
@@ -164,69 +180,5 @@ class OverflowAwareLayoutDelegate extends SingleChildLayoutDelegate {
   @override
   bool shouldRelayout(covariant OverflowAwareLayoutDelegate oldDelegate) {
     return oldDelegate.offset != offset;
-  }
-}
-
-void main() => runApp(const PopupMenuApp());
-
-class PopupMenuApp extends StatelessWidget {
-  const PopupMenuApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: PopupMenuExample(),
-    );
-  }
-}
-
-class PopupMenuExample extends StatefulWidget {
-  const PopupMenuExample({super.key});
-
-  @override
-  State<PopupMenuExample> createState() => _PopupMenuExampleState();
-}
-
-class _PopupMenuExampleState extends State<PopupMenuExample> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('PopupMenuButton')),
-      body: Center(
-        child: CommonPopupBox(
-          target: FilledButton(
-            onPressed: () {},
-            child: Text("点击我"),
-          ),
-          popup: Card(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(
-                    onTap: () {},
-                    child: Padding(
-                      padding: EdgeInsets.all(12),
-                      child: Text("编辑"),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(12),
-                    child: Text("更新"),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(12),
-                    child: Text("删除"),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
