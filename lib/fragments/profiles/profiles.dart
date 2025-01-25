@@ -314,6 +314,7 @@ class ProfileItem extends StatelessWidget {
                     popup: IntrinsicHeight(
                       child: IntrinsicWidth(
                         child: Card(
+                          elevation: 4,
                           color: context.colorScheme.surfaceContainer,
                           clipBehavior: Clip.antiAlias,
                           shape: RoundedRectangleBorder(
