@@ -39,7 +39,6 @@ class CommonPopupRoute<T> extends PopupRoute<T> {
       parent: animation,
       curve: Curves.easeIn,
     ).value;
-    final double animateOffsetY = 20;
     return ValueListenableBuilder(
       valueListenable: offsetNotifier,
       builder: (_, value, child) {
@@ -47,10 +46,9 @@ class CommonPopupRoute<T> extends PopupRoute<T> {
           alignment: align,
           child: CustomSingleChildLayout(
             delegate: OverflowAwareLayoutDelegate(
-              animateOffsetY: animateOffsetY,
               offset: value.translate(
-                60,
-                -animateOffsetY + 20,
+                48,
+                12,
               ),
             ),
             child: child,
@@ -66,7 +64,7 @@ class CommonPopupRoute<T> extends PopupRoute<T> {
               alignment: align,
               scale: 0.8 + 0.2 * animationValue,
               child: Transform.translate(
-                offset: Offset(0, animateOffsetY) * animationValue,
+                offset: Offset(0, -10) * (1 - animationValue),
                 child: child!,
               ),
             ),
@@ -119,12 +117,7 @@ class _CommonPopupBoxState extends State<CommonPopupBox> {
           CommonPopupRoute(
             barrierLabel: other.id,
             builder: (BuildContext context) {
-              return Listener(
-                onPointerDown: (_) {
-                  Navigator.of(context).pop();
-                },
-                child: widget.popup,
-              );
+              return widget.popup;
             },
             offsetNotifier: _targetOffsetValueNotifier,
           ),
@@ -148,11 +141,8 @@ class _CommonPopupBoxState extends State<CommonPopupBox> {
 class OverflowAwareLayoutDelegate extends SingleChildLayoutDelegate {
   final Offset offset;
 
-  final double animateOffsetY;
-
   OverflowAwareLayoutDelegate({
     required this.offset,
-    required this.animateOffsetY,
   });
 
   @override
@@ -172,7 +162,7 @@ class OverflowAwareLayoutDelegate extends SingleChildLayoutDelegate {
     );
     double y = (offset.dy).clamp(
       0,
-      size.height - saveOffset.dy - animateOffsetY - childSize.height,
+      size.height - saveOffset.dy - childSize.height,
     );
     return Offset(x, y);
   }

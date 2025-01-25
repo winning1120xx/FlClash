@@ -244,6 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "nullLogsDesc": MessageLookupByLibrary.simpleMessage("暂无日志"),
         "nullProfileDesc":
             MessageLookupByLibrary.simpleMessage("没有配置文件,请先添加配置文件"),
+        "nullProxies": MessageLookupByLibrary.simpleMessage("暂无代理"),
         "nullRequestsDesc": MessageLookupByLibrary.simpleMessage("暂无请求"),
         "oneColumn": MessageLookupByLibrary.simpleMessage("一列"),
         "onlyIcon": MessageLookupByLibrary.simpleMessage("仅图标"),

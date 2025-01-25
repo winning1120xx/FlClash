@@ -337,5 +337,6 @@
   "cancel": "取消",
   "fileIsUpdate": "文件有修改，是否保存修改",
   "profileHasUpdate": "配置文件已经修改,是否关闭自动更新 ",
-  "hasCacheChange": "是否缓存修改"
+  "hasCacheChange": "是否缓存修改",
+  "nullProxies": "暂无代理"
 }

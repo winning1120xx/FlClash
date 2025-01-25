@@ -21,11 +21,10 @@ class _AppStateManagerState extends State<AppStateManager>
   _updateNavigationsContainer(Widget child) {
     return Selector2<AppState, Config, UpdateNavigationsSelector>(
       selector: (_, appState, config) {
-        final group = appState.currentGroups;
         final hasProfile = config.profiles.isNotEmpty;
         return UpdateNavigationsSelector(
           openLogs: config.appSetting.openLogs,
-          hasProxies: group.isNotEmpty && hasProfile,
+          hasProxies: hasProfile && config.currentProfileId != null,
         );
       },
       builder: (context, state, child) {

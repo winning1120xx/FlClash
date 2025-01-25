@@ -163,6 +163,11 @@ class ProxiesTabFragmentState extends State<ProxiesTabFragment>
         return false;
       },
       builder: (_, state, __) {
+        if (state.groupNames.isEmpty) {
+          return NullStatus(
+            label: appLocalizations.nullProxies,
+          );
+        }
         final index = state.groupNames.indexWhere(
           (item) => item == state.currentGroupName,
         );

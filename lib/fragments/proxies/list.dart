@@ -261,6 +261,11 @@ class _ProxiesListFragmentState extends State<ProxiesListFragment> {
         return prev != next;
       },
       builder: (_, state, __) {
+        if (state.groupNames.isEmpty) {
+          return NullStatus(
+            label: appLocalizations.nullProxies,
+          );
+        }
         final items = _buildItems(
           groupNames: state.groupNames,
           currentUnfoldSet: state.currentUnfoldSet,

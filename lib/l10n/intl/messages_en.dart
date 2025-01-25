@@ -308,6 +308,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "nullLogsDesc": MessageLookupByLibrary.simpleMessage("No logs"),
         "nullProfileDesc": MessageLookupByLibrary.simpleMessage(
             "No profile, Please add a profile"),
+        "nullProxies": MessageLookupByLibrary.simpleMessage("No proxies"),
         "nullRequestsDesc": MessageLookupByLibrary.simpleMessage("No requests"),
         "oneColumn": MessageLookupByLibrary.simpleMessage("One column"),
         "onlyIcon": MessageLookupByLibrary.simpleMessage("Icon"),

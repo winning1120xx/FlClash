@@ -3439,6 +3439,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `No proxies`
+  String get nullProxies {
+    return Intl.message(
+      'No proxies',
+      name: 'nullProxies',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

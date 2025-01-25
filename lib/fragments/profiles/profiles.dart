@@ -270,17 +270,21 @@ class ProfileItem extends StatelessWidget {
     required String text,
   }) {
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        Navigator.of(context).pop();
+        onTap();
+      },
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 16,
+          horizontal: 16,
+          vertical: 8,
         ),
         child: Text(
           text,
-          style: context.textTheme.titleMedium
-              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
+          style: context.textTheme.bodyLarge?.copyWith(
+            color: context.colorScheme.onSurfaceVariant,
+          ),
         ),
       ),
     );
@@ -317,7 +321,7 @@ class ProfileItem extends StatelessWidget {
                           ),
                           child: Container(
                             constraints: BoxConstraints(
-                              minWidth: 160,
+                              minWidth: 120,
                             ),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -358,7 +362,7 @@ class ProfileItem extends StatelessWidget {
           ),
         ),
         title: Container(
-          padding: const EdgeInsets.symmetric(vertical: 4),
+          padding: const EdgeInsets.symmetric(vertical: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
